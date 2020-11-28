@@ -1,4 +1,4 @@
-package com.react_native_starter_kit;
+package io.newplanet.reactnativestarterkit;
 
 import com.facebook.react.ReactActivity;
 
