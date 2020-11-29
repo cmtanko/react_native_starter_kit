@@ -1,9 +1,11 @@
 import * as React from 'react';
+import {Provider} from 'react-redux';
 import {Root, StyleProvider} from 'native-base';
+import configureStore from './src/store/configureStore';
 
-import expenseManagerTheme from './src/theme/variables/expenseManager';
-import getTheme from './src/theme/components';
-import { Container, Button, Text } from 'native-base';
+import getTheme from './native-base-theme/components';
+import { Container, Header, Content, Spinner } from 'native-base';
+const store = configureStore();
 
 if (__DEV__) {
   console.disableYellowBox = true;
@@ -13,14 +15,18 @@ if (__DEV__) {
 
 export default function App() {
   return (
-    <StyleProvider style={getTheme(expenseManagerTheme)}>
+    <StyleProvider style={getTheme()}>
+      <Provider store={store}>
       <Container>
-        <Button>
-          <Text>
-            Button
-          </Text>
-        </Button>
+        <Header />
+        <Content>
+          <Spinner />
+          <Spinner color='red' />
+          <Spinner color='green' />
+          <Spinner color='blue' />
+        </Content>
       </Container>
+      </Provider>
     </StyleProvider>
   );
 }
