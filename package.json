@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "alpha-release": "cd android && bundle exec fastlane alpha",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
