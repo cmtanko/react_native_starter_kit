@@ -11,8 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write '*.js'",
-    "format-code": "yarn run prettier && yarn run lint:fix",
-    "precommit": "lint-staged"
+    "format-code": "yarn run prettier && yarn run lint:fix"
   },
   "husky": {
     "hooks": {
@@ -20,7 +19,7 @@
     }
   },
   "lint-staged": {
-    "App.js": [
+    "*.js": [
       "yarn run format-code"
     ]
   },
