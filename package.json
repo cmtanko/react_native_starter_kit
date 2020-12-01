@@ -20,7 +20,7 @@
     }
   },
   "lint-staged": {
-    "src/*.js": [
+    "*.js": [
       "yarn run format-code",
       "git add"
     ]
