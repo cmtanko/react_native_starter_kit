@@ -15,7 +15,10 @@
     "precommit": "echo 'hello world'"
   },
   "lint-staged": {
-    "*.js" : ["yarn run format-code", "git add"]
+    "*.js": [
+      "yarn run format-code",
+      "git add"
+    ]
   },
   "dependencies": {
     "axios": "^0.21.0",
