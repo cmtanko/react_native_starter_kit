@@ -19,7 +19,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,css}": [
+    "src/**/*.{js,jsx,css}": [
       "yarn run format-code"
     ]
   },
