@@ -20,10 +20,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css}": [
-      "prettier --write",
-      "eslint --fix src/",
-      "tslint --fix --project .",
+    "src/*.js": [
+      "yarn run format-code",
       "git add"
     ]
   },
