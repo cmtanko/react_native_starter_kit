@@ -8,10 +8,17 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --write '*.js'",
+    "format-code": "yarn run prettier && yarn run lint:fix"
+  },
+  "lint-staged": {
+    "*.js" : ["yarn run format-code", "git add"]
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-native": "0.63.3",
@@ -27,8 +34,16 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
     "jest": "^26.6.3",
+    "lint-staged": "^10.5.2",
     "metro-react-native-babel-preset": "^0.64.0",
+    "prettier": "2.2.1",
     "react-test-renderer": "16.13.1"
   },
   "jest": {
