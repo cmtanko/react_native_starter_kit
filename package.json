@@ -12,7 +12,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write '*.js'",
     "format-code": "yarn run prettier && yarn run lint:fix",
-    "precommit": "echo 'hello world'"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
