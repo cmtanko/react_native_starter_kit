@@ -20,7 +20,8 @@
   },
   "lint-staged": {
     "*.+(js|jsx|css)": [
-      "yarn run format-code"
+      "yarn run format-code",
+      "git add"
     ]
   },
   "dependencies": {
