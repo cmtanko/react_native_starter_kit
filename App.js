@@ -14,7 +14,7 @@ export default function App() {
         <Container>
           <Header />
           <Content>
-          <Spinner />
+            <Spinner />
             <Spinner color="red" />
             <Spinner color="green" />
             <Spinner color="blue" />
