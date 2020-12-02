@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {StyleProvider} from 'native-base';
 import configureStore from './src/store/configureStore';
 
-import getTheme from "./native-base-theme/components";
+import getTheme from './native-base-theme/components';
 import {Container, Header, Content, Spinner} from 'native-base';
 const store = configureStore();
 
@@ -13,8 +13,8 @@ export default function App() {
       <Provider store={store}>
         <Container>
           <Header />
-           <Content>
-               <Spinner />
+          <Content>
+          <Spinner />
             <Spinner color="red" />
             <Spinner color="green" />
             <Spinner color="blue" />
