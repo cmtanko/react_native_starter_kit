@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Provider} from 'react-redux';
-import {StyleProvider} from 'native-base';
+import {Root, StyleProvider} from 'native-base';
 import configureStore from './store/configureStore';
+import AppNavigation from './navigation';
 
 import getTheme from '../native-base-theme/components';
 import {Container, Header, Content, Spinner} from 'native-base';
@@ -11,15 +12,9 @@ export default function App() {
   return (
     <StyleProvider style={getTheme()}>
       <Provider store={store}>
-        <Container>
-          <Header />
-          <Content>
-            <Spinner />
-            <Spinner color="red" />
-            <Spinner color="green" />
-            <Spinner color="blue" />
-          </Content>
-        </Container>
+        <Root>
+          <AppNavigation />
+        </Root>
       </Provider>
     </StyleProvider>
   );
