@@ -22,12 +22,3 @@ target 'react_native_starter_kit' do
     flipper_post_install(installer)
   end
 end
-
-target 'react_native_starter_kit-tvOS' do
-  # Pods for react_native_starter_kit-tvOS
-
-  target 'react_native_starter_kit-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
