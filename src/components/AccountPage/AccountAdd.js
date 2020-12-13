@@ -15,7 +15,7 @@ class AccountAdd extends Component {
     super(props);
     this.state = {
       id: null,
-      name: '',
+      title: '',
       openingBalance: '0',
       balance: '0',
       type: 'BANK',
@@ -35,12 +35,12 @@ class AccountAdd extends Component {
 
     if (params) {
       const {account} = params;
-      const {id, icon, type, name, balance, openingBalance} = account;
+      const {id, icon, type, title, balance, openingBalance} = account;
 
       this.onStateChange('id', id);
       this.onStateChange('icon', icon);
       this.onStateChange('type', type);
-      this.onStateChange('name', name);
+      this.onStateChange('title', title);
       this.onStateChange('openingBalance', balance);
       this.onStateChange('openingBalance', openingBalance.toString());
     } else {
@@ -55,9 +55,10 @@ class AccountAdd extends Component {
   }
 
   addAccount() {
-    const {name, openingBalance, type, icon} = this.state;
+    debugger;
+    const {title, openingBalance, type, icon} = this.state;
     this.props.addAccount({
-      name,
+      title,
       openingBalance,
       type,
       icon,
@@ -66,10 +67,10 @@ class AccountAdd extends Component {
   }
 
   editAccount() {
-    const {id, name, openingBalance, balance, type, icon} = this.state;
+    const {id, title, openingBalance, balance, type, icon} = this.state;
     this.props.editAccount({
       id,
-      name,
+      title,
       openingBalance,
       balance,
       type,
@@ -105,7 +106,7 @@ class AccountAdd extends Component {
   }
 
   render() {
-    const {id, name, type, icon, openingBalance, error} = this.state;
+    const {id, title, type, icon, openingBalance, error} = this.state;
 
     return (
       <Container style={cs.bg_dark_lightblue}>
@@ -115,9 +116,9 @@ class AccountAdd extends Component {
               title="Account Name"
               placeholder="Bank / Cash"
               icon="ios-clipboard"
-              value={name}
+              value={title}
               focus
-              onChange={(value) => this.onStateChange('name', value)}
+              onChange={(value) => this.onStateChange('title', value)}
             />
             <InputBox
               title="Opening Balance"

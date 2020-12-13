@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Text, Icon, Left, Button, ListItem, Body, Right} from 'native-base';
 
@@ -6,7 +7,7 @@ import cs from '../../styles/common';
 const AccountRow = (props) => {
   const {
     account,
-    account: {id, name, icon, balance, openingBalance},
+    account: {id, title, icon, balance, openingBalance},
   } = props;
   const totalBalance = parseFloat(balance + openingBalance)
     .toFixed(2)
@@ -31,7 +32,7 @@ const AccountRow = (props) => {
         </Button>
       </Left>
       <Body>
-        <Text style={cs.color_white}>{name}</Text>
+        <Text style={cs.color_white}>{title}</Text>
       </Body>
       <Right>
         <Text style={cs.color_white}>{totalBalance}</Text>

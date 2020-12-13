@@ -2,8 +2,6 @@ import {
   ACCOUNT_FETCH_SUCCESS,
   ACCOUNT_FETCH_ROLLBACK,
   ACCOUNT_CREATE,
-  ACCOUNT_CREATE_ROLLBACK,
-  ACCOUNT_CREATE_SUCCESS,
   ACCOUNT_DELETE,
   ACCOUNT_UPDATE,
   ACCOUNT_UPDATE_ROLLBACK,
@@ -46,10 +44,8 @@ export default function (state = initialState, action) {
         loading: false,
         error: null,
       };
-    case ACCOUNT_CREATE_SUCCESS:
     case ACCOUNT_UPDATE_SUCCESS:
       return {...state, error: '', loading: false};
-    case ACCOUNT_CREATE_ROLLBACK:
     case ACCOUNT_FETCH_ROLLBACK:
     case ACCOUNT_UPDATE_ROLLBACK:
       return {...state, error: action.payload};
