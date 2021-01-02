@@ -5,7 +5,7 @@ class Category {
     const options = {
       method: 'GET',
       timeout: 600000,
-      url: `http://localhost:3000/categories`,
+      url: 'http://localhost:3000/categories',
       headers: {
         Accept: 'application/json',
         'Cache-Control': 'no-cache',

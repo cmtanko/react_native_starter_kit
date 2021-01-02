@@ -1,5 +1,6 @@
 // import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
+import {fetchCategory, updateCategory, removeCategory} from '../../helpers/db';
+
 import Category from '../../services/Category';
 
 import {
@@ -15,22 +16,19 @@ import {
 } from '../types';
 
 import {DEV_URL} from '../../config';
+import {insertCategory} from '../../helpers/db';
 
 export const getCategories = () => {
-  return (dispatch) => {
-    return Category.get()
-      .then((categories) => {
-        dispatch({
-          type: CATEGORY_FETCH_SUCCESS,
-          payload: categories,
-        });
-      })
-      .catch((e) => {
-        dispatch({
-          type: CATEGORY_FETCH_ROLLBACK,
-          payload: e,
-        });
+  return async (dispatch) => {
+    try {
+      const dbResult = await fetchCategory();
+      dispatch({
+        type: CATEGORY_FETCH_SUCCESS,
+        payload: dbResult,
       });
+    } catch (error) {
+      throw error;
+    }
   };
 };
 
@@ -41,86 +39,66 @@ export const selectCategoryType = (value) => {
   };
 };
 
-export const addCategory = ({name, type, icon, callback}) => {
-  let categoryId = uuidv4();
-  const categoryData = {
-    id: categoryId,
-    name: name,
-    type: type,
-    icon: icon,
-  };
-  return (dispatch) => {
-    dispatch({
-      type: CATEGORY_CREATE,
-      payload: categoryData,
-      meta: {
-        offline: {
-          effect: {
-            url: `${DEV_URL}/categories`,
-            method: 'POST',
-            data: categoryData,
-          },
-          commit: {type: CATEGORY_CREATE_SUCCESS, meta: {categoryId}},
-          rollback: {type: CATEGORY_CREATE_ROLLBACK, meta: {categoryId}},
-        },
-      },
-    });
-    callback();
+export const addCategory = ({title, type, icon, callback}) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await insertCategory(title, type, icon);
+      const categoryData = {
+        id: dbResult.insertId.toString(),
+        title: title,
+        type: type,
+        icon: icon,
+      };
+      dispatch({type: CATEGORY_CREATE, payload: categoryData});
+      callback();
+    } catch (error) {
+      throw error;
+    }
   };
 };
 
-export const editCategory = ({name, type, icon, id, callback}) => {
-  var categoryData = {
-    id: id,
-    icon: icon,
-    name: name,
-    type: type,
-  };
+export const editCategory = ({title, type, icon, id, callback}) => {
+  return async (dispatch) => {
+    try {
+      let categoryData = {
+        id: id,
+        icon: icon,
+        title: title,
+        type: type,
+      };
 
-  if (name === '') {
-    return (dispatch) => {
-      dispatch({
-        type: CATEGORY_UPDATE_ROLLBACK,
-        payload: 'Category title is required!',
-      });
-    };
-  }
-  return (dispatch) => {
-    dispatch({
-      type: CATEGORY_UPDATE,
-      payload: categoryData,
-      meta: {
-        offline: {
-          effect: {
-            url: `${DEV_URL}/categories/${id}`,
-            method: 'PUT',
-            data: categoryData,
-          },
-          commit: {type: CATEGORY_UPDATE_SUCCESS, meta: {id}},
-          rollback: {type: CATEGORY_UPDATE_ROLLBACK, meta: {id}},
-        },
-      },
-    });
-    callback();
+      if (title === '') {
+        dispatch({
+          type: CATEGORY_UPDATE_ROLLBACK,
+          payload: 'Category title is required!',
+        });
+      } else {
+        const dbResult = await updateCategory(id, title, type, icon, callback);
+
+        dispatch({
+          type: CATEGORY_UPDATE,
+          payload: categoryData,
+        });
+        callback();
+      }
+    } catch (error) {
+      throw error;
+    }
   };
 };
 
 export const deleteCategory = ({id, callback}) => {
-  return (dispatch) => {
-    dispatch({
-      type: CATEGORY_DELETE,
-      payload: id,
-      meta: {
-        offline: {
-          effect: {
-            url: `${DEV_URL}/categories/${id}`,
-            method: 'DELETE',
-          },
-          commit: {},
-          rollback: {},
-        },
-      },
-    });
-    callback();
+  return async (dispatch) => {
+    try {
+      await removeCategory(id);
+
+      dispatch({
+        type: CATEGORY_DELETE,
+        payload: id,
+      });
+      callback();
+    } catch (error) {
+      throw error;
+    }
   };
 };

@@ -13,7 +13,7 @@ const RecordPage = () => {
         placeholder="Ammount"
         leftIcon={{type: 'font-awesome', name: 'calculator', size: 18}}
       />
-       <Input
+      <Input
         placeholder="Date"
         leftIcon={{type: 'font-awesome', name: 'calendar', size: 18}}
       />

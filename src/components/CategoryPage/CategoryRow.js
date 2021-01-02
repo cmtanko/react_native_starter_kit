@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Icon, Left, Button, ListItem, Body} from 'native-base';
 
 const CategoryRow = ({category, navigate}) => {
-  const {id, name, icon} = category;
+  const {id, title, icon} = category;
   return (
     <ListItem
       key={id}
@@ -21,7 +21,7 @@ const CategoryRow = ({category, navigate}) => {
         </Button>
       </Left>
       <Body style={{borderWidth: 0}}>
-        <Text style={{color: 'white'}}>{name}</Text>
+        <Text style={{color: 'white'}}>{title}</Text>
       </Body>
     </ListItem>
   );

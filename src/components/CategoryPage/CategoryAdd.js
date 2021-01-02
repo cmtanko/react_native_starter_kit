@@ -22,7 +22,7 @@ class CategoryAdd extends Component {
     super(props);
     this.state = {
       id: null,
-      name: '',
+      title: '',
       icon: 'home',
       type: CATEGORY_TYPE.INCOME,
     };
@@ -41,11 +41,11 @@ class CategoryAdd extends Component {
 
     if (params) {
       const {category} = params;
-      const {name, type, id, icon} = category;
+      const {title, type, id, icon} = category;
 
       this.onStateChange('id', id);
       this.onStateChange('icon', icon);
-      this.onStateChange('name', name);
+      this.onStateChange('title', title);
       this.onStateChange('type', type);
     } else {
       this.onStateChange('type', categoryType);
@@ -59,9 +59,9 @@ class CategoryAdd extends Component {
   }
 
   addCategory() {
-    const {name, type, icon} = this.state;
+    const {title, type, icon} = this.state;
     this.props.addCategory({
-      name,
+      title,
       type,
       icon,
       callback,
@@ -69,9 +69,9 @@ class CategoryAdd extends Component {
   }
 
   editCategory() {
-    const {name, type, icon, id} = this.state;
+    const {title, type, icon, id} = this.state;
     this.props.editCategory({
-      name,
+      title,
       type,
       icon,
       id,
@@ -106,7 +106,7 @@ class CategoryAdd extends Component {
   }
 
   render() {
-    const {id, name, type, icon, error} = this.state;
+    const {id, title, type, icon, error} = this.state;
 
     return (
       <Container style={cs.bg_dark_lightblue}>
@@ -115,9 +115,9 @@ class CategoryAdd extends Component {
             <InputBox
               title="Title"
               icon="ios-clipboard"
-              value={name}
+              value={title}
               focus
-              onChange={(value) => this.onStateChange('name', value)}
+              onChange={(value) => this.onStateChange('title', value)}
             />
             <PickerBox
               title="Type"

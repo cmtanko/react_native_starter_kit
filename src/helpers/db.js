@@ -9,10 +9,25 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, type TEXT NOT NULL, openingBalance TEXT, icon TEXT NOT NULL)',
         [],
         () => {
+          console.warn('Table accounts created');
           resolve();
         },
-        (_, err) => {
-          reject();
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, type TEXT NOT NULL, icon TEXT NOT NULL)',
+        [],
+        () => {
+          console.warn('Table categories created');
+          resolve();
+        },
+        (err) => {
+          reject(err);
         },
       );
     });
@@ -30,7 +45,7 @@ export const insertAccount = (title, type, openingBalance, icon) => {
         (_, result) => {
           resolve(result);
         },
-        (_, err) => {
+        (err) => {
           reject(err);
         },
       );
@@ -54,7 +69,7 @@ export const fetchAccount = () => {
           }
           resolve(accounts);
         },
-        (_, err) => {
+        (err) => {
           reject(err);
         },
       );
@@ -73,7 +88,7 @@ export const removeAccount = (id) => {
         (_, result) => {
           resolve(result);
         },
-        (_, err) => {
+        (err) => {
           reject(err);
         },
       );
@@ -92,7 +107,88 @@ export const updateAccount = (id, title, type, openingBalance, icon) => {
         (_, result) => {
           resolve(result);
         },
-        (_, err) => {
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const insertCategory = (title, type, icon) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO categories (title, type, icon) VALUES (?,?,?)',
+        [title, type, icon],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const fetchCategory = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM categories',
+        [],
+        (_, result) => {
+          let category = [];
+          for (let i = 0; i < result.rows.length; i++) {
+            const row = result.rows.item(i);
+            category.push(row);
+          }
+          resolve(category);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const removeCategory = (id) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'DELETE FROM accounts where id = (?)',
+        [id],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const updateCategory = (id, title, type, icon) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'UPDATE categories SET title=?, type=?, icon=? WHERE id=?',
+        [title, type, icon, id],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
           reject(err);
         },
       );
