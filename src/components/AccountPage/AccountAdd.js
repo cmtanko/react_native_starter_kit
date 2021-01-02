@@ -123,7 +123,7 @@ class AccountAdd extends Component {
             <InputBox
               title="Opening Balance"
               placeholder=""
-              numberic
+              numeric={true}
               icon="ios-calculator"
               value={openingBalance}
               onChange={(value) => this.onStateChange('openingBalance', value)}

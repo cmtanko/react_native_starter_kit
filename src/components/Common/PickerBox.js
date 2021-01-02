@@ -1,8 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Label, InputGroup, Icon, Item} from 'native-base';
+import {Dimensions} from 'react-native';
 import {Picker} from '@react-native-community/picker';
+
 import cs from '../../styles/common';
+
+const {width: WIDTH} = Dimensions.get('window');
 
 const PickerBox = ({title, type, options, onChange}) => {
   return (
@@ -18,19 +22,11 @@ const PickerBox = ({title, type, options, onChange}) => {
         <Picker
           note
           mode="dropdown"
-          style={{width: 200}}
-          headerStyle={{
-            backgroundColor: '#262637',
-          }}
-          headerTitleStyle={{
-            color: 'white',
-          }}
+          style={[cs.color_light_blue, {width: WIDTH * 0.9}]}
           iosHeader="Select category type"
           placeholder="Select category type"
           placeholderIconColor={cs.color_light_blue}
           selectedValue={type}
-          textStyle={cs.color_light_blue}
-          itemTextStyle={cs.color_light_blue}
           itemStyle={[
             cs.bg_dark_blue,
             {

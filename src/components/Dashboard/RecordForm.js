@@ -40,7 +40,7 @@ const RecordForm = ({
         placeholder=""
         icon="ios-calculator"
         value={amount}
-        numeric
+        numeric={true}
         focus
         onChange={(value) => onStateChange('amount', value)}
       />
