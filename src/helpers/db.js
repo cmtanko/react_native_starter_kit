@@ -31,6 +31,20 @@ export const init = () => {
         },
       );
     });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY NOT NULL, amount INTEGER NOT NULL, date TEXT NOT NULL, categoryId INTEGER NOT NULL, payFrom INTEGER, payTo INTEGER, description TEXT, place TEXT, camera TEXT)',
+        [],
+        () => {
+          console.warn('Table records created');
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
   });
 
   return promise;
@@ -185,6 +199,105 @@ export const updateCategory = (id, title, type, icon) => {
       tx.executeSql(
         'UPDATE categories SET title=?, type=?, icon=? WHERE id=?',
         [title, type, icon, id],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const insertRecord = (
+  amount,
+  date,
+  categoryId,
+  payFrom,
+  payTo,
+  description,
+  place,
+  camera,
+) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO records (amount,date,categoryId,payFrom,payTo,description,place,camera) VALUES (?,?,?,?,?,?,?,?)',
+        [amount, date, categoryId, payFrom, payTo, description, place, camera],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const fetchRecord = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM records',
+        [],
+        (_, result) => {
+          let records = [];
+          for (let i = 0; i < result.rows.length; i++) {
+            const row = result.rows.item(i);
+            records.push(row);
+          }
+          resolve(records);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const removeRecord = (id) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'DELETE FROM records where id = (?)',
+        [id],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const updateRecord = (
+  title,
+  date,
+  amount,
+  description,
+  payTo,
+  payFrom,
+  categoryId,
+  camera,
+) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'UPDATE categories SET title=?, date=?, amount=?, description=?, payTo=?, payFrom=?, categoryId=?, camera=? WHERE id=?',
+        [title, date, amount, description, payTo, payFrom, categoryId, camera],
         (_, result) => {
           resolve(result);
         },

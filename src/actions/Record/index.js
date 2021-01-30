@@ -1,6 +1,10 @@
 // import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
-import Record from '../../services/Record';
+import {
+  fetchRecord,
+  updateRecord,
+  removeCategory,
+  insertRecord,
+} from '../../helpers/db';
 
 import {
   RECORD_FETCH_SUCCESS,
@@ -17,64 +21,58 @@ import {
 import {DEV_URL} from '../../config';
 
 export const getRecords = () => {
-  return (dispatch) => {
-    return Record.get()
-      .then((records) => {
-        dispatch({
-          type: RECORD_FETCH_SUCCESS,
-          payload: records,
-        });
-      })
-      .catch((e) => {
-        dispatch({
-          type: RECORD_FETCH_ROLLBACK,
-          payload: e,
-        });
+  return async (dispatch) => {
+    try {
+      const dbResult = await fetchRecord();
+      dispatch({
+        type: RECORD_FETCH_SUCCESS,
+        payload: dbResult,
       });
+    } catch (error) {
+      throw error;
+    }
   };
 };
 
-export const addRecord = (props) => {
-  let {
-    amount,
-    date,
-    categoryId,
-    payFrom,
-    payTo,
-    description,
-    place,
-    attachment,
-    callback,
-  } = props;
-  let recordId = uuidv4();
-  const recordData = {
-    id: recordId,
-    amount: amount,
-    date: date,
-    categoryId: categoryId,
-    payFrom: payFrom,
-    payTo: payTo,
-    description: description,
-    place: place,
-    attachment: attachment,
-  };
-  return (dispatch) => {
-    dispatch({
-      type: RECORD_CREATE,
-      payload: recordData,
-      meta: {
-        offline: {
-          effect: {
-            url: `${DEV_URL}/records`,
-            method: 'POST',
-            data: recordData,
-          },
-          commit: {type: RECORD_CREATE_SUCCESS, meta: {recordId}},
-          rollback: {type: RECORD_CREATE_ROLLBACK, meta: {recordId}},
-        },
-      },
-    });
-    callback();
+export const addRecord = ({
+  amount,
+  date,
+  categoryId,
+  payFrom,
+  payTo,
+  description,
+  place,
+  attachment,
+  callback,
+}) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await insertRecord(
+        amount,
+        date,
+        categoryId,
+        payFrom,
+        payTo,
+        description,
+        place,
+        attachment,
+      );
+      const recordData = {
+        id: dbResult.insertId.toString(),
+        amount,
+        date,
+        categoryId,
+        payFrom,
+        payTo,
+        description,
+        place,
+        attachment,
+      };
+      dispatch({type: RECORD_CREATE, payload: recordData});
+      callback();
+    } catch (error) {
+      throw error;
+    }
   };
 };
 

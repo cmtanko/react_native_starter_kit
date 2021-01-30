@@ -16,13 +16,16 @@ class RecordAddIncome extends Component {
   constructor(props) {
     super(props);
 
+    let firstAccount =
+      !!props.accounts && props.accounts[0] && props.accounts[0].id;
+
     this.state = {
       id: '',
       amount: '',
       date: new Date(),
       categoryId: '',
-      payFrom: '',
-      payTo: '',
+      payFrom: firstAccount || '',
+      payTo: firstAccount || '',
       description: '',
       place: '',
       attachment: '',
@@ -33,7 +36,7 @@ class RecordAddIncome extends Component {
 
     callback = () => this.props.navigation.navigate('Home');
 
-    this.addAccount = this.addAccount.bind(this);
+    this.addMyRecord = this.addMyRecord.bind(this);
     this.deleteRecord = this.deleteRecord.bind(this);
     this.onStateChange = this.onStateChange.bind(this);
   }
@@ -76,7 +79,7 @@ class RecordAddIncome extends Component {
     });
   }
 
-  addAccount() {
+  addMyRecord() {
     let {
       id,
       amount,
@@ -88,8 +91,8 @@ class RecordAddIncome extends Component {
       place,
       attachment,
     } = this.state;
-    amount = parseInt(amount, 10);
-    if (amount <= 0 && !categoryId && !payFrom) {
+    amount = parseInt(amount, 10) || -1;
+    if (amount <= 0 || !categoryId || !payFrom) {
       this.onStateChange('error', 'All fields are required!');
     } else {
       if (id) {
@@ -140,12 +143,12 @@ class RecordAddIncome extends Component {
     if (id) {
       return (
         <View>
-          <ButtonBox title="Edit" onChange={this.addAccount} />
+          <ButtonBox title="Edit" onChange={this.addMyRecord} />
           <ButtonBox title="Delete" btnDelete onChange={this.deleteRecord} />
         </View>
       );
     }
-    return <ButtonBox title="Add" onChange={this.addAccount} />;
+    return <ButtonBox title="Add" onChange={this.addMyRecord} />;
   }
 
   render() {

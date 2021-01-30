@@ -55,7 +55,6 @@ class AccountAdd extends Component {
   }
 
   addAccount() {
-    debugger;
     const {title, openingBalance, type, icon} = this.state;
     this.props.addAccount({
       title,
