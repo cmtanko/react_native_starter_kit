@@ -110,7 +110,7 @@ class RecordList extends PureComponent {
         if (category || val.categoryId === 'transfer_') {
           return {
             ...val,
-            title: category && category.name,
+            title: category && category.title,
             type: category && category.type,
             time: moment(val.date).format('Do'),
           };

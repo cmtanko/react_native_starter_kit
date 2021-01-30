@@ -56,7 +56,9 @@ export default class Dashboard extends Component {
           {listTabs}
         </Tabs>
         <Fab
-          onPress={() => navigate('RecordAddIncome')}
+          onPress={() => {
+            navigate('RecordAddIncome');
+          }}
           direction="up"
           style={cs.bg_light_green}
           position="bottomRight">

@@ -263,7 +263,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Report"
+        initialRouteName="Home"
         overlayColor="transparent"
         drawerType="slide"
         drawerStyle={{width: '50%'}}>

@@ -44,7 +44,7 @@ const ReportPage = (props) => {
 
     mySum > 0 &&
       finalResult.push({
-        label: category.name + '\n $' + mySum + '',
+        label: category.title + '\n $' + mySum + '',
         y: mySum,
       });
   });
@@ -75,7 +75,7 @@ const ReportPage = (props) => {
 
     mySum > 0 &&
       finalResult2.push({
-        label: category.name + '\n $' + mySum + '',
+        label: category.title + '\n $' + mySum + '',
         x: 20,
         y: mySum,
       });

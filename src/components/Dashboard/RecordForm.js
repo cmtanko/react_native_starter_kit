@@ -24,7 +24,7 @@ const RecordForm = ({
   selectedCategoryType,
 }) => {
   const accountOptions = _.map(accounts, (val) => {
-    return {label: val.name, value: val.id};
+    return {label: val.title, value: val.id};
   });
 
   return (
@@ -116,7 +116,7 @@ const RecordForm = ({
                     style={
                       categoryId === item.id ? cs.activeText : cs.inactiveText
                     }>
-                    {item.name}
+                    {item.title}
                   </Text>
                 </View>
               </TouchableOpacity>
