@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
 import {Container, Content, Button, Segment, Text} from 'native-base';
 import cs from '../../styles/common';
 import {selectReportType} from '../../actions';
@@ -16,7 +15,7 @@ const WEEK_TO_DATE = {
 };
 
 const ReportPage = (props) => {
-  const {selectReportType, selectedReportType} = props;
+  const {selectedReportType} = props;
 
   let myCatgories = props.categories.filter((obj) => {
     return obj.type === 'INCOME';
@@ -24,7 +23,7 @@ const ReportPage = (props) => {
 
   let finalResult = [];
 
-  let myRecords = myCatgories.map((category) => {
+  myCatgories.map((category) => {
     let recordByCategory = props.records.filter((record) => {
       let a = moment();
       let b = moment(record.date);
@@ -55,7 +54,7 @@ const ReportPage = (props) => {
 
   let finalResult2 = [];
 
-  let myRecords2 = myCatgories2.map((category) => {
+  myCatgories2.map((category) => {
     let recordByCategory = props.records.filter((record) => {
       let a = moment();
       let b = moment(record.date);
@@ -161,11 +160,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {selectReportType})(ReportPage);
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

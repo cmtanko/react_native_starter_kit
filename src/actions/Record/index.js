@@ -1,17 +1,9 @@
 // import 'react-native-get-random-values';
-import {
-  fetchRecord,
-  updateRecord,
-  removeCategory,
-  insertRecord,
-} from '../../helpers/db';
+import {fetchRecord, insertRecord} from '../../helpers/db';
 
 import {
   RECORD_FETCH_SUCCESS,
-  RECORD_FETCH_ROLLBACK,
   RECORD_CREATE,
-  RECORD_CREATE_ROLLBACK,
-  RECORD_CREATE_SUCCESS,
   RECORD_DELETE,
   RECORD_UPDATE,
   RECORD_UPDATE_ROLLBACK,

@@ -1,14 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, View} from 'react-native';
-import {
-  VictoryPie,
-  VictoryBar,
-  VictoryChart,
-  VictoryLine,
-  VictoryTheme,
-} from 'victory-native';
+import {Text, View} from 'react-native';
+import {VictoryPie, VictoryTheme} from 'victory-native';
 import {Dimensions} from 'react-native';
 import cs from '../../styles/common';
 
