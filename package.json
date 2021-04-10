@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install-deps-android": "cd android && bundle update && bundle install",
+    "install-deps-ios": "cd ios && pod update && pod install && bundle update && bundle install",
+    "install-deps": "npm run install-deps-android && npm run install-deps-ios",
     "android": "react-native run-android",
     "alpha-release": "cd android && bundle exec fastlane alpha",
     "ios": "react-native run-ios",
@@ -11,7 +14,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write '*.js'",
-    "format-code": "yarn run prettier && yarn run lint:fix"
+    "format-code": "yarn run prettier && yarn run lint:fix",
+    "clear-cache": "rm -rf $TMPDIR/metro-cache-* && watchman watch-del-all && cd android && ./gradlew clean && cd ../ && echo 'DONE.'",
+    "reinstall": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && npm cache clean --force && npm cache verify && rm -rf ios/build && rm -rf node_modules/ && npm i"
   },
   "husky": {
     "hooks": {

@@ -5,7 +5,7 @@ import configureStore from './store/configureStore';
 import AppNavigation from './navigation';
 
 import getTheme from '../native-base-theme/components';
-import {Container, Header, Content, Spinner} from 'native-base';
+
 const store = configureStore();
 
 export default function App() {

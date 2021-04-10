@@ -87,14 +87,7 @@ export const editAccount = ({
           payload: 'Account title is required!',
         });
       } else {
-        const dbResult = await updateAccount(
-          id,
-          title,
-          type,
-          openingBalance,
-          icon,
-          callback,
-        );
+        await updateAccount(id, title, type, openingBalance, icon, callback);
         dispatch({
           type: ACCOUNT_UPDATE,
           payload: accountData,

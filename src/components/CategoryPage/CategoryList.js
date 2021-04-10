@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {Text, Spinner, Content} from 'native-base';
 import CategoryRow from './CategoryRow';

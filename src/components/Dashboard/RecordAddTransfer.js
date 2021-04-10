@@ -10,5 +10,3 @@ const RecordAddTransfer = () => {
 };
 
 export default RecordAddTransfer;
-
-const styles = StyleSheet.create({});

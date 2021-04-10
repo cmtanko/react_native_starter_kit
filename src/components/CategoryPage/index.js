@@ -1,23 +1,14 @@
 import React from 'react';
-import {
-  Container,
-  Button,
-  Segment,
-  Content,
-  Text,
-  Fab,
-  Icon,
-} from 'native-base';
+import {Container, Content, Fab, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 
 import cs from '../../styles/common';
 import SectionHeader from '../Dashboard/SectionHeader';
-import {CATEGORY_TYPE} from '../../constants';
 import {selectCategoryType} from '../../actions';
 
 const CategoryPage = (props) => {
-  const {selectCategoryType, navigation, selectedCategoryType} = props;
+  const {navigation} = props;
 
   return (
     <Container style={cs.bg_dark_lightblue}>

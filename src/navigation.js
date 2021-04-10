@@ -5,14 +5,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Dashboard from './components/Dashboard';
 
 import SettingPage from './components/SettingPage';
 import ReportPage from './components/ReportPage';
-import RecordPage from './components/RecordPage';
 
 import RecordAddExpense from './components/Dashboard/RecordAddExpense';
 import RecordAddIncome from './components/Dashboard/RecordAddIncome';
@@ -30,7 +28,6 @@ import CategoryList from './components/CategoryPage/CategoryList';
 import {COLOR_DARK_BLUE} from './styles/common';
 
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const HomeStack = ({navigation}) => {
@@ -131,77 +128,6 @@ const CategoryStack = ({navigation}) => {
       <Stack.Screen name="CategoryAdd" component={CategoryAdd} />
       <Stack.Screen name="CategoryList" component={CategoryList} />
     </Stack.Navigator>
-  );
-};
-
-const RecordStack = ({navigation}) => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTitle: 'Record',
-        headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerLeft: ({color, size}) => (
-          <MaterialCommunityIcons
-            name="menu"
-            color="#fff"
-            size={23}
-            style={{paddingLeft: 8}}
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}>
-      <Stack.Screen name="RecordPage" component={RecordAddIncome} />
-      <Stack.Screen name="RecordAddIncome" component={RecordAddIncome} />
-      <Stack.Screen name="RecordAddExpense" component={RecordAddExpense} />
-      <Stack.Screen name="RecordAddTransfer" component={RecordAddTransfer} />
-    </Stack.Navigator>
-  );
-};
-
-const DashboardStack = () => {
-  return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen
-        name="Home"
-        component={HomeStack}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Activity"
-        component={RecordAddIncome}
-        options={{
-          tabBarLabel: 'Activity',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="plus-circle"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingPage}
-        options={{
-          tabBarLabel: 'Settings',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="cog" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
   );
 };
 

@@ -1,21 +1,14 @@
 // import 'react-native-get-random-values';
 import {fetchCategory, updateCategory, removeCategory} from '../../helpers/db';
 
-import Category from '../../services/Category';
-
 import {
   CATEGORY_FETCH_SUCCESS,
-  CATEGORY_FETCH_ROLLBACK,
   CATEGORY_CREATE,
-  CATEGORY_CREATE_ROLLBACK,
-  CATEGORY_CREATE_SUCCESS,
   CATEGORY_DELETE,
   CATEGORY_UPDATE,
   CATEGORY_UPDATE_ROLLBACK,
-  CATEGORY_UPDATE_SUCCESS,
 } from '../types';
 
-import {DEV_URL} from '../../config';
 import {insertCategory} from '../../helpers/db';
 
 export const getCategories = () => {
@@ -73,7 +66,7 @@ export const editCategory = ({title, type, icon, id, callback}) => {
           payload: 'Category title is required!',
         });
       } else {
-        const dbResult = await updateCategory(id, title, type, icon, callback);
+        await updateCategory(id, title, type, icon, callback);
 
         dispatch({
           type: CATEGORY_UPDATE,
