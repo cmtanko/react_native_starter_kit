@@ -1,14 +1,12 @@
 import React from 'react';
-import {Text, View} from 'native-base';
+import {View} from 'native-base';
 
-import cs from '../../styles/common';
+import {Text} from '../Typography/Text.component';
 
 const RecordEmpty = () => {
   return (
     <View>
-      <Text style={[cs.color_grey, {padding: 10, textAlign: 'center'}]}>
-        No records found, Add by clicking plus button
-      </Text>
+      <Text variant="hint">No records found, Add by clicking plus button</Text>
     </View>
   );
 };

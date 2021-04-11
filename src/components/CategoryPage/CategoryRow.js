@@ -1,5 +1,9 @@
 import React from 'react';
-import {Text, Icon, Left, Button, ListItem, Body} from 'native-base';
+import {Left, Button, ListItem, Body} from 'native-base';
+
+import {Text} from '../Typography/Text.component';
+
+import {CategoryIcon} from './CategoryRow.styles';
 
 const CategoryRow = ({category, navigate}) => {
   const {id, title, icon} = category;
@@ -12,16 +16,11 @@ const CategoryRow = ({category, navigate}) => {
       }}>
       <Left>
         <Button disabled info transparent>
-          <Icon
-            active
-            type="FontAwesome"
-            name={icon}
-            style={{fontSize: 25, color: '#10cf9e'}}
-          />
+          <CategoryIcon active type="FontAwesome" name={icon} />
         </Button>
       </Left>
-      <Body style={{borderWidth: 0}}>
-        <Text style={{color: 'white'}}>{title}</Text>
+      <Body>
+        <Text>{title}</Text>
       </Body>
     </ListItem>
   );

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {Container, Content, Form, View} from 'native-base';
+import {Content, View} from 'native-base';
 
 import {CATEGORY_TYPE} from '../../constants';
 import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
@@ -13,7 +13,7 @@ import {
 
 import icons from '../../iconList';
 
-import cs from '../../styles/common';
+import {CategoryAddContainer, CategoryForm} from './CategoryAdd.styles';
 
 let callback = null;
 
@@ -109,9 +109,9 @@ class CategoryAdd extends Component {
     const {id, title, type, icon, error} = this.state;
 
     return (
-      <Container style={cs.bg_dark_lightblue}>
+      <CategoryAddContainer>
         <Content>
-          <Form style={{marginLeft: 20, marginRight: 20}}>
+          <CategoryForm>
             <InputBox
               title="Title"
               icon="ios-clipboard"
@@ -145,11 +145,11 @@ class CategoryAdd extends Component {
               icon={icon}
               onChange={(value) => this.onStateChange('icon', value)}
             />
-          </Form>
+          </CategoryForm>
           {this.showError(error)}
           {this.showButton(id)}
         </Content>
-      </Container>
+      </CategoryAddContainer>
     );
   }
 }

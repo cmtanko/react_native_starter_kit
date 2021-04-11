@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {View} from 'react-native';
+
+import {Text} from '../Typography/Text.component';
 
 const RecordAddTransfer = () => {
   return (

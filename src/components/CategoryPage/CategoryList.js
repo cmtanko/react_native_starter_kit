@@ -2,9 +2,11 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {Text, Spinner, Content} from 'native-base';
+import {Spinner, Content} from 'native-base';
 import CategoryRow from './CategoryRow';
 import {getCategories} from '../../actions';
+
+import {Text} from '../Typography/Text.component';
 
 class CategoryList extends Component {
   componentDidMount() {
@@ -31,9 +33,7 @@ class CategoryList extends Component {
       );
     }
     return (
-      <Text style={{color: 'gray', textAlign: 'center'}}>
-        No category found, Add by clicking plus button
-      </Text>
+      <Text variant="hint">No account found, Add by clicking plus button</Text>
     );
   }
 

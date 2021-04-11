@@ -1,29 +1,29 @@
 import React from 'react';
-import {Container, Content, Fab, Icon} from 'native-base';
+import {Content, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 
-import cs from '../../styles/common';
 import SectionHeader from '../Dashboard/SectionHeader';
 import {selectCategoryType} from '../../actions';
+
+import {CategoryPageContainer, CategoryPageFab} from './index.styles';
 
 const CategoryPage = (props) => {
   const {navigation} = props;
 
   return (
-    <Container style={cs.bg_dark_lightblue}>
+    <CategoryPageContainer>
       <SectionHeader />
       <Content style={{}}>
         <CategoryList navigate={navigation.navigate} />
       </Content>
-      <Fab
+      <CategoryPageFab
         onPress={() => navigation.navigate('CategoryAdd')}
         direction="up"
-        style={cs.bg_light_green}
         position="bottomRight">
         <Icon name="add" />
-      </Fab>
-    </Container>
+      </CategoryPageFab>
+    </CategoryPageContainer>
   );
 };
 

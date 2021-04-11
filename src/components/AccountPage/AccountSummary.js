@@ -1,22 +1,27 @@
-import React from 'react';
 import _ from 'lodash';
+import React from 'react';
 import {connect} from 'react-redux';
-import {Text, Card, CardItem, Content, Body} from 'native-base';
+import {Text} from '../Typography/Text.component';
 
-import cs from '../../styles/common';
+import {
+  AccountSummaryContent,
+  SummaryCard,
+  SummaryBody,
+  SummaryCardItem,
+} from './AccountSummary.styles';
 
 const AccountSummary = ({currentBalance}) => {
   return (
-    <Content style={[cs.bg_dark_lightblue, {margin: 10}]}>
-      <Card>
-        <CardItem style={cs.bg_dark_blue}>
-          <Body style={cs.card_body}>
-            <Text style={[cs.color_light_blue, cs.h2]}>Curent Balance</Text>
-            <Text style={cs.color_light_blue}>AUD {currentBalance}</Text>
-          </Body>
-        </CardItem>
-      </Card>
-    </Content>
+    <AccountSummaryContent>
+      <SummaryCard>
+        <SummaryCardItem>
+          <SummaryBody>
+            <Text variant="heading">Curent Balance</Text>
+            <Text>AUD {currentBalance}</Text>
+          </SummaryBody>
+        </SummaryCardItem>
+      </SummaryCard>
+    </AccountSummaryContent>
   );
 };
 
