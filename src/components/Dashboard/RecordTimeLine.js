@@ -1,10 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist';
 
-import cs, {COLOR_LIGHT_BLUE, COLOR_LIGHT_YELLOW} from '../../styles/common';
+import {colors, COLOR_LIGHT_BLUE, COLOR_LIGHT_YELLOW} from '../../theme/colors';
 import {CATEGORY_TYPE} from '../../constants';
+
+import {Text} from '../Typography/Text.component';
 
 const RecordTimeLine = ({records, navigate}) => {
   return (
@@ -14,7 +16,7 @@ const RecordTimeLine = ({records, navigate}) => {
       circleColor={COLOR_LIGHT_BLUE}
       lineColor={COLOR_LIGHT_YELLOW}
       descriptionStyle={{color: COLOR_LIGHT_YELLOW}}
-      titleStyle={cs.color_light_blue}
+      titleStyle={colors.text.primary}
       options={{
         style: {paddingTop: 10},
       }}
@@ -32,18 +34,18 @@ const RecordTimeLine = ({records, navigate}) => {
                 flexDirection: 'row',
               }}>
               <View style={{flex: 1}}>
-                <Text style={cs.color_light_blue}>{title}</Text>
-                <Text style={cs.timeline_description}>{description}</Text>
+                <Text>{title}</Text>
+                <Text variant="subtitle">{description}</Text>
               </View>
               <View style={{flex: 1}}>
                 {type === CATEGORY_TYPE.INCOME && (
-                  <Text style={cs.timeline_amount_income}>{amount}</Text>
+                  <Text variant="typeIncome">{amount}</Text>
                 )}
                 {type === CATEGORY_TYPE.EXPENSE && (
-                  <Text style={cs.timeline_amount_expense}>- {amount}</Text>
+                  <Text variant="typeExpense">- {amount}</Text>
                 )}
                 {type === CATEGORY_TYPE.TRANSFER && (
-                  <Text style={cs.timeline_amount_transfer}>- {amount}</Text>
+                  <Text variant="typeTransfer">- {amount}</Text>
                 )}
               </View>
             </View>

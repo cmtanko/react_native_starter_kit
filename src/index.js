@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {Provider} from 'react-redux';
-import {Root, StyleProvider} from 'native-base';
+import {Root} from 'native-base';
 import configureStore from './store/configureStore';
 import AppNavigation from './navigation';
+import {ThemeProvider} from 'styled-components/native';
 
-import getTheme from '../native-base-theme/components';
+import {theme} from './theme';
 
 const store = configureStore();
 
 export default function App() {
   return (
-    <StyleProvider style={getTheme()}>
+    <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Root>
           <AppNavigation />
         </Root>
       </Provider>
-    </StyleProvider>
+    </ThemeProvider>
   );
 }

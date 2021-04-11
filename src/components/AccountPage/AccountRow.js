@@ -1,8 +1,9 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, Icon, Left, Button, ListItem, Body, Right} from 'native-base';
+import {Left, Button, ListItem, Body, Right} from 'native-base';
 
-import cs from '../../styles/common';
+import {Text} from '../Typography/Text.component';
+
+import {AccountIcon} from './AccountRow.styles';
 
 const AccountRow = (props) => {
   const {
@@ -23,19 +24,14 @@ const AccountRow = (props) => {
       }}>
       <Left>
         <Button disabled info transparent>
-          <Icon
-            active
-            type="FontAwesome"
-            name={icon}
-            style={[cs.color_light_blue, {fontSize: 25}]}
-          />
+          <AccountIcon active type="FontAwesome" name={icon} />
         </Button>
       </Left>
       <Body>
-        <Text style={cs.color_white}>{title}</Text>
+        <Text>{title}</Text>
       </Body>
       <Right>
-        <Text style={cs.color_white}>{totalBalance}</Text>
+        <Text>{totalBalance}</Text>
       </Right>
     </ListItem>
   );

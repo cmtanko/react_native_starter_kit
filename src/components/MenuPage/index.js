@@ -1,20 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+
+import {Text} from '../Typography/Text.component';
+import {MenuContainer} from './index.styles';
 
 const MenuPage = () => {
   return (
-    <View style={styles.wrapper}>
+    <MenuContainer>
       <Text>Menu Page</Text>
-    </View>
+    </MenuContainer>
   );
 };
 
 export default MenuPage;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

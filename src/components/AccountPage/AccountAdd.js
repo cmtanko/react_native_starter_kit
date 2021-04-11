@@ -1,15 +1,14 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {Container, Content, Form, View} from 'native-base';
+import {Content, View} from 'native-base';
 
 import icons from '../../iconList';
 import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
 import {addAccount, editAccount, deleteAccount} from '../../actions';
 
-import cs from '../../styles/common';
+import {AccountAddContainer, AccountForm} from './AccountAdd.styles';
 
 let callback = null;
-
 class AccountAdd extends Component {
   constructor(props) {
     super(props);
@@ -108,9 +107,9 @@ class AccountAdd extends Component {
     const {id, title, type, icon, openingBalance, error} = this.state;
 
     return (
-      <Container style={cs.bg_dark_lightblue}>
+      <AccountAddContainer>
         <Content>
-          <Form style={{marginLeft: 20, marginRight: 20}}>
+          <AccountForm>
             <InputBox
               title="Account Name"
               placeholder="Bank / Cash"
@@ -145,12 +144,12 @@ class AccountAdd extends Component {
               icon={icon}
               onChange={(value) => this.onStateChange('icon', value)}
             />
-          </Form>
+          </AccountForm>
 
           {this.showError(error)}
           {this.showButton(id)}
         </Content>
-      </Container>
+      </AccountAddContainer>
     );
   }
 }

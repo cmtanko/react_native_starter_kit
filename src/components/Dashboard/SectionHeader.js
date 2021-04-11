@@ -1,17 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Segment, Text} from 'native-base';
+import {Button, Text} from 'native-base';
 
 import {selectCategoryType} from '../../actions';
 import {CATEGORY_TYPE} from '../../constants';
 
-import cs from '../../styles/common';
+import {SegmentContainer} from './SectionHeader.styles';
 
 const SectionHeader = (props) => {
   const {selectCategoryType, selectedCategoryType} = props;
 
   return (
-    <Segment style={cs.bg_dark_lightblue}>
+    <SegmentContainer>
       <Button
         first
         active={selectedCategoryType === CATEGORY_TYPE.INCOME}
@@ -37,7 +37,7 @@ const SectionHeader = (props) => {
         }}>
         <Text>TRANSFER</Text>
       </Button>
-    </Segment>
+    </SegmentContainer>
   );
 };
 

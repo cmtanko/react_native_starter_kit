@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import {connect} from 'react-redux';
-import React, {PureComponent} from 'react';
 import {FlatList} from 'react-native';
-
-import {Text, View, Spinner} from 'native-base';
+import {View, Spinner} from 'native-base';
+import React, {PureComponent} from 'react';
 
 import AccountRow from './AccountRow';
 import {getAccounts} from '../../actions';
+import {Text} from '../Typography/Text.component';
 
 class AccountList extends PureComponent {
   componentDidMount() {
@@ -29,9 +29,7 @@ class AccountList extends PureComponent {
       );
     }
     return (
-      <Text style={{color: 'gray', textAlign: 'center'}}>
-        No account found, Add by clicking plus button
-      </Text>
+      <Text variant="hint">No account found, Add by clicking plus button</Text>
     );
   }
 
