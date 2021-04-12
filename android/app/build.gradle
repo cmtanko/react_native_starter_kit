@@ -133,7 +133,7 @@ android {
         applicationId "io.newplanet.reactnativestarterkit"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 19
+        versionCode 21
         versionName "0.1.0"
     }
     signingConfigs {
