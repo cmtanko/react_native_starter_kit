@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Label, InputGroup, Icon, Item} from 'native-base';
+import {Label, InputGroup, Icon, Picker, Item} from 'native-base';
 import {Dimensions} from 'react-native';
-import {Picker} from '@react-native-community/picker';
+// import {Picker} from '@react-native-community/picker';
 
 import cs from '../../styles/common';
 
@@ -11,7 +11,7 @@ const {width: WIDTH} = Dimensions.get('window');
 const PickerBox = ({title, type, options, onChange}) => {
   return (
     <InputGroup>
-      <Icon name="ios-card" style={[cs.color_light_blue, cs.h2, {width: 25}]} />
+      <Icon name="ios-card" style={[cs.color_light_blue, cs.h2, {width: 35}]} />
       <Item
         stackedLabel
         style={{

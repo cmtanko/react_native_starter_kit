@@ -24,7 +24,7 @@ export const AccountForm = styled(Form)`
 `;
 
 export const AccountIcon = styled(Icon)`
-  font-size: ${(props) => props.theme.fontSizes.title};
+  font-size: ${(props) => props.theme.fontSizes.h1};
   color: ${(props) => props.theme.colors.ui.secondary};
 `;
 

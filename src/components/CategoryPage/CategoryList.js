@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {Spinner, Content} from 'native-base';
+import {Spinner, View} from 'native-base';
 import CategoryRow from './CategoryRow';
 import {getCategories} from '../../actions';
 
@@ -48,7 +48,7 @@ class CategoryList extends Component {
   }
 
   render() {
-    return <Content>{this.showList()}</Content>;
+    return <View>{this.showList()}</View>;
   }
 }
 

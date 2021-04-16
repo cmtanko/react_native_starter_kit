@@ -9,7 +9,7 @@ import cs from '../../styles/common';
 
 const IconBox = ({title, icons, icon, onChange}) => {
   return (
-    <InputGroup style={{flex: 1, height: 250}}>
+    <InputGroup style={{flex: 1, height: 340}}>
       <ItemIcon name="ios-globe" />
       <Item
         stackedLabel
@@ -18,7 +18,7 @@ const IconBox = ({title, icons, icon, onChange}) => {
           width: '100%',
           alignItems: 'flex-end',
         }}>
-        <Label style={cs.label}>{title}</Label>
+        <Label style={{paddingLeft: 16}}>{title}</Label>
         <FlatGrid
           style={{
             marginRight: 16,
