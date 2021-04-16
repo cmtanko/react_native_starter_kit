@@ -1,17 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 import {Label, InputGroup, Icon, Item} from 'native-base';
 
+import {IconContainer, ItemIcon} from './IconBox.styles';
 import cs from '../../styles/common';
 
 const IconBox = ({title, icons, icon, onChange}) => {
   return (
     <InputGroup style={{flex: 1, height: 250}}>
-      <Icon
-        name="ios-globe"
-        style={[cs.color_light_blue, cs.h2, {width: 25}]}
-      />
+      <ItemIcon name="ios-globe" />
       <Item
         stackedLabel
         style={{
@@ -21,7 +20,10 @@ const IconBox = ({title, icons, icon, onChange}) => {
         }}>
         <Label style={cs.label}>{title}</Label>
         <FlatGrid
-          itemDimension={40}
+          style={{
+            marginRight: 16,
+          }}
+          itemDimension={68}
           data={icons}
           renderItem={(item) => renderItem(item, icon, onChange)}
         />
@@ -32,12 +34,15 @@ const IconBox = ({title, icons, icon, onChange}) => {
 
 const renderItem = (item, icon, onChange) => {
   return (
-    <Icon
-      type="FontAwesome"
-      name={item.item}
-      style={icon === item.item ? cs.active_icon : cs.inactive_icon}
-      onPress={() => onChange(item.item)}
-    />
+    <TouchableOpacity activeOpacity={0.7} onPress={() => onChange(item.item)}>
+      <IconContainer>
+        <Icon
+          type="FontAwesome"
+          name={item.item}
+          style={icon === item.item ? cs.active_icon : cs.inactive_icon}
+        />
+      </IconContainer>
+    </TouchableOpacity>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Content, Icon} from 'native-base';
+import {Icon} from 'native-base';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 
@@ -14,9 +14,7 @@ const CategoryPage = (props) => {
   return (
     <CategoryPageContainer>
       <SectionHeader />
-      <Content style={{}}>
-        <CategoryList navigate={navigation.navigate} />
-      </Content>
+      <CategoryList navigate={navigation.navigate} />
       <CategoryPageFab
         onPress={() => navigation.navigate('CategoryAdd')}
         direction="up"

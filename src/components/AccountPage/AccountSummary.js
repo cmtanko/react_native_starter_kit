@@ -8,7 +8,7 @@ import {
   SummaryCard,
   SummaryBody,
   SummaryCardItem,
-} from './AccountSummary.styles';
+} from './index.styles';
 
 const AccountSummary = ({currentBalance}) => {
   return (

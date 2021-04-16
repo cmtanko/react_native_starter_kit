@@ -6,7 +6,7 @@ import icons from '../../iconList';
 import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
 import {addAccount, editAccount, deleteAccount} from '../../actions';
 
-import {AccountAddContainer, AccountForm} from './AccountAdd.styles';
+import {AccountAddContainer, AccountForm} from './index.styles';
 
 let callback = null;
 class AccountAdd extends Component {

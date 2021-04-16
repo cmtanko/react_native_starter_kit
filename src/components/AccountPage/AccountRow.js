@@ -3,7 +3,7 @@ import {Left, Button, ListItem, Body, Right} from 'native-base';
 
 import {Text} from '../Typography/Text.component';
 
-import {AccountIcon} from './AccountRow.styles';
+import {AccountIcon} from './index.styles';
 
 const AccountRow = (props) => {
   const {

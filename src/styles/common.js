@@ -116,19 +116,21 @@ export default StyleSheet.create({
 
   // Icons
   active_icon: {
-    fontSize: 25,
+    fontSize: 35,
+    alignSelf: 'center',
     color: '#22e3c4',
   },
 
   inactive_icon: {
-    fontSize: 25,
+    fontSize: 35,
+    alignSelf: 'center',
     color: 'gray',
   },
 
   // Label
   label: {
     color: COLOR_GRAY,
-    paddingLeft: 10,
+    paddingLeft: 8,
   },
 
   // Drawer
