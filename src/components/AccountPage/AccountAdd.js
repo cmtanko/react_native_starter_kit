@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {Content, View} from 'native-base';
+import {Content, View, Form} from 'native-base';
 
 import icons from '../../iconList';
 import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
 import {addAccount, editAccount, deleteAccount} from '../../actions';
 
-import {AccountAddContainer, AccountForm} from './AccountAdd.styles';
+import {AccountAddContainer, AccountForm} from './index.styles';
 
 let callback = null;
 class AccountAdd extends Component {
@@ -15,7 +15,7 @@ class AccountAdd extends Component {
     this.state = {
       id: null,
       title: '',
-      openingBalance: '0',
+      openingBalance: '',
       balance: '0',
       type: 'BANK',
       icon: 'bank',
@@ -109,45 +109,49 @@ class AccountAdd extends Component {
     return (
       <AccountAddContainer>
         <Content>
-          <AccountForm>
-            <InputBox
-              title="Account Name"
-              placeholder="Bank / Cash"
-              icon="ios-clipboard"
-              value={title}
-              focus
-              onChange={(value) => this.onStateChange('title', value)}
-            />
-            <InputBox
-              title="Opening Balance"
-              placeholder=""
-              numeric={true}
-              icon="ios-calculator"
-              value={openingBalance}
-              onChange={(value) => this.onStateChange('openingBalance', value)}
-            />
+          <Form>
+            <AccountForm>
+              <InputBox
+                title="Account Name"
+                placeholder="Bank / Cash"
+                icon="ios-clipboard"
+                value={title}
+                focus
+                onChange={(value) => this.onStateChange('title', value)}
+              />
+              <InputBox
+                title="Opening Balance"
+                placeholder=""
+                numeric={true}
+                icon="ios-calculator"
+                value={openingBalance}
+                onChange={(value) =>
+                  this.onStateChange('openingBalance', value)
+                }
+              />
 
-            <PickerBox
-              title="Account Type"
-              type={type}
-              options={[
-                {label: 'Cash', value: 'CASH'},
-                {label: 'Bank', value: 'BANK'},
-                {label: 'Others', value: 'OTHERS'},
-              ]}
-              onChange={(value) => this.onStateChange('type', value)}
-            />
+              <PickerBox
+                title="Account Type"
+                type={type}
+                options={[
+                  {label: 'Cash', value: 'CASH'},
+                  {label: 'Bank', value: 'BANK'},
+                  {label: 'Others', value: 'OTHERS'},
+                ]}
+                onChange={(value) => this.onStateChange('type', value)}
+              />
 
-            <IconBox
-              title="Icon"
-              icons={icons}
-              icon={icon}
-              onChange={(value) => this.onStateChange('icon', value)}
-            />
-          </AccountForm>
+              <IconBox
+                title="Icon"
+                icons={icons}
+                icon={icon}
+                onChange={(value) => this.onStateChange('icon', value)}
+              />
+            </AccountForm>
 
-          {this.showError(error)}
-          {this.showButton(id)}
+            {this.showError(error)}
+            {this.showButton(id)}
+          </Form>
         </Content>
       </AccountAddContainer>
     );

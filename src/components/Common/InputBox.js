@@ -17,7 +17,7 @@ export class InputBox extends PureComponent {
 
     return (
       <InputGroup>
-        <Icon name={icon} style={[cs.color_light_blue, cs.h2, {width: 25}]} />
+        <Icon name={icon} style={[cs.color_light_blue, cs.h2, {width: 35}]} />
         <Item stackedLabel style={{borderColor: '#00000000', width: '100%'}}>
           <Label style={cs.label}>{title}</Label>
           <Input

@@ -24,7 +24,7 @@ class AccountList extends PureComponent {
         <FlatList
           data={filteredList}
           renderItem={this.renderItem.bind(this)}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
         />
       );
     }

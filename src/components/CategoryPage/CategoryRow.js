@@ -3,7 +3,7 @@ import {Left, Button, ListItem, Body} from 'native-base';
 
 import {Text} from '../Typography/Text.component';
 
-import {CategoryIcon} from './CategoryRow.styles';
+import {CategoryIcon} from './index.styles';
 
 const CategoryRow = ({category, navigate}) => {
   const {id, title, icon} = category;

@@ -13,7 +13,7 @@ import {
 
 import icons from '../../iconList';
 
-import {CategoryAddContainer, CategoryForm} from './CategoryAdd.styles';
+import {CategoryAddContainer, CategoryForm} from './index.styles';
 
 let callback = null;
 

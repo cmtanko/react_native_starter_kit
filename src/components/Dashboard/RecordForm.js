@@ -4,7 +4,7 @@ import {Text, Form, Item, Label, Icon, View, InputGroup} from 'native-base';
 import {FlatList, TouchableOpacity} from 'react-native';
 
 import cs from '../../styles/common';
-import {InputBox, PickerBox, DatePickerBox} from '../Common';
+import {InputBox, ImageBox, PickerBox, DatePickerBox} from '../Common';
 
 import {CATEGORY_TYPE} from '../../constants';
 
@@ -125,12 +125,13 @@ const RecordForm = ({
         </Item>
       </InputGroup>
 
-      <InputBox
+      <ImageBox
         title="Camera"
         placeholder="Receipt"
+        type="camera"
         icon="ios-camera"
         value={attachment}
-        onChange={(value) => onStateChange('attachment', value)}
+        onChange={(value) => onStateChange('attachment', value.base64)}
       />
     </Form>
   );

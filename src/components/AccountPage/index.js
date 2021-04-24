@@ -1,23 +1,26 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Content, List, View, Icon} from 'native-base';
+import {View} from 'react-native';
+import {Icon} from 'native-base';
 
 import AccountList from './AccountList';
 import AccountSummary from './AccountSummary';
 
-import {AccountPageContainer, AccountPageFab} from './index.styles';
+import {
+  AccountPageContainer,
+  AccountPageContent,
+  AccountPageFab,
+} from './index.styles';
 
 const AccountPage = (props) => {
   const {navigation} = props;
 
   return (
     <AccountPageContainer>
-      <Content>
+      <AccountPageContent>
         <AccountSummary />
-        <List>
-          <AccountList navigate={navigation.navigate} />
-        </List>
-      </Content>
+        <AccountList navigate={navigation.navigate} />
+      </AccountPageContent>
       <View>
         <AccountPageFab
           direction="up"
