@@ -2,6 +2,8 @@
 
 Simple react native kit, working as an expense manager for android/ios devices.
 
+<img src="screenshots/screenshot.png">
+
 ## Environment Versions
 - Node: 10.15.3
 - React Native : 0.63.3
