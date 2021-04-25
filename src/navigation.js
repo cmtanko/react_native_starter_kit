@@ -192,7 +192,7 @@ export default function App() {
         initialRouteName="Home"
         overlayColor="transparent"
         drawerType="slide"
-        drawerStyle={{width: '50%'}}>
+        drawerStyle={{width: '56%'}}>
         <Drawer.Screen
           name="Home"
           component={HomeStack}
