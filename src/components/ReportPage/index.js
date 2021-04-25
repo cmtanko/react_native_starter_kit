@@ -3,6 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {Container, Content, Button, Segment, Text} from 'native-base';
+
 import cs from '../../styles/common';
 import {selectReportType} from '../../actions';
 
@@ -10,74 +11,18 @@ import ReportDetail from './ReportDetail';
 
 const WEEK_TO_DATE = {
   WEEKLY: 7,
-  MONTHLY: 12,
+  MONTHLY: 30,
   YEARLY: 365,
 };
 
 const ReportPage = (props) => {
-  const {selectedReportType} = props;
-
-  let myCatgories = props.categories.filter((obj) => {
+  const {records, selectReportType, selectedReportType} = props;
+  const incomeCatgories = props.categories.filter((obj) => {
     return obj.type === 'INCOME';
   });
 
-  let finalResult = [];
-
-  myCatgories.map((category) => {
-    let recordByCategory = props.records.filter((record) => {
-      let a = moment();
-      let b = moment(record.date);
-      let dateDiff = a.diff(b, 'days');
-
-      return (
-        record.categoryId === category.id &&
-        dateDiff < WEEK_TO_DATE[selectedReportType]
-      );
-    });
-
-    let mySum = 0;
-
-    _.each(recordByCategory, (record) => {
-      mySum += parseFloat(record.amount);
-    });
-
-    mySum > 0 &&
-      finalResult.push({
-        label: category.title + '\n $' + mySum + '',
-        y: mySum,
-      });
-  });
-
-  let myCatgories2 = props.categories.filter((obj) => {
+  const expenseCategories = props.categories.filter((obj) => {
     return obj.type === 'EXPENSE';
-  });
-
-  let finalResult2 = [];
-
-  myCatgories2.map((category) => {
-    let recordByCategory = props.records.filter((record) => {
-      let a = moment();
-      let b = moment(record.date);
-      let dateDiff = a.diff(b, 'days');
-
-      return (
-        record.categoryId === category.id &&
-        dateDiff < WEEK_TO_DATE[selectedReportType]
-      );
-    });
-
-    let mySum = 0;
-
-    _.each(recordByCategory, (record) => {
-      mySum += parseFloat(record.amount);
-    });
-
-    mySum > 0 &&
-      finalResult2.push({
-        label: category.title + '\n $' + mySum + '',
-        x: 20,
-        y: mySum,
-      });
   });
 
   let yearWiseData = [
@@ -94,6 +39,32 @@ const ReportPage = (props) => {
     {x: 'Nov', y: 7},
     {x: 'Dec', y: 7},
   ];
+
+  const getData = (categories, allRecords) => {
+    return categories.map((category) => {
+      let recordByCategory = allRecords.filter((record) => {
+        const todayDate = moment();
+        const recordDate = moment(record.date);
+        const dateDiff = todayDate.diff(recordDate, 'days');
+
+        return (
+          record.categoryId === category.id &&
+          dateDiff < WEEK_TO_DATE[selectedReportType]
+        );
+      });
+
+      let sumOfIncome = 0;
+
+      _.each(recordByCategory, (record) => {
+        sumOfIncome += parseFloat(record.amount);
+      });
+
+      return {
+        label: sumOfIncome > 0 ? category.title + '\n $' + sumOfIncome : ' ',
+        y: sumOfIncome > 0 ? parseInt(sumOfIncome, 10) : 0,
+      };
+    });
+  };
 
   return (
     <Container style={cs.bg_dark_lightblue}>
@@ -127,8 +98,8 @@ const ReportPage = (props) => {
 
       <Content>
         <ReportDetail
-          data={finalResult}
-          expenseData={finalResult2}
+          data={getData(incomeCatgories, records)}
+          expenseData={getData(expenseCategories, records)}
           yearWiseData={yearWiseData}
         />
       </Content>

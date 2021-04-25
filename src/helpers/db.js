@@ -284,20 +284,21 @@ export const removeRecord = (id) => {
 };
 
 export const updateRecord = (
-  title,
-  date,
   amount,
-  description,
-  payTo,
-  payFrom,
+  date,
   categoryId,
+  payFrom,
+  payTo,
+  description,
+  place,
   camera,
+  id,
 ) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'UPDATE categories SET title=?, date=?, amount=?, description=?, payTo=?, payFrom=?, categoryId=?, camera=? WHERE id=?',
-        [title, date, amount, description, payTo, payFrom, categoryId, camera],
+        'UPDATE records SET date=?, amount=?, description=?, payTo=?, payFrom=?, categoryId=?, camera=? WHERE id=?',
+        [date, amount, description, payTo, payFrom, categoryId, camera, id],
         (_, result) => {
           resolve(result);
         },
