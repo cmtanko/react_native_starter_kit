@@ -10,7 +10,7 @@ export default {
     width: deviceWidth,
   },
   labels: {
-    fontSize: '12',
+    fontSize: '10',
     fill: 'white',
   },
 };
