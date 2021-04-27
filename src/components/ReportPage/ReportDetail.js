@@ -1,12 +1,7 @@
 import {connect} from 'react-redux';
 import React, {useState, useEffect} from 'react';
 import Carousel from 'react-native-carousel-view';
-import {
-  VictoryPie,
-  VictoryBar,
-  VictoryLabel,
-  VictoryTheme,
-} from 'victory-native';
+import {VictoryPie, VictoryBar, VictoryTheme} from 'victory-native';
 import {Text, View, Dimensions, Platform} from 'react-native';
 
 import {} from 'react-native';
@@ -83,7 +78,6 @@ const ReportDetail = (props) => {
               Cash Flow
             </Text>
             <VictoryBar
-              domainPadding={{x: [10, -10], y: 5}}
               theme={VictoryTheme.material}
               colorScale={colorScale}
               width={deviceWidth - 40}

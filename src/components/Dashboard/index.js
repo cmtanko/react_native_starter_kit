@@ -1,18 +1,17 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {
+  Fab,
   Tab,
   Tabs,
-  Content,
-  Fab,
+  View,
   Icon,
   Container,
   ScrollableTab,
 } from 'native-base';
 
-// import ActionButtonView from './ActionButtonView';
-import RecordList from './RecordList';
 import {MONTHS} from '../../config';
+import RecordList from './RecordList';
 
 import cs from '../../styles/common';
 
@@ -36,11 +35,12 @@ export default class Dashboard extends Component {
         <Tab
           key={id}
           heading={val}
+          style={cs.bg_dark_lightblue}
           tabStyle={cs.bg_dark_blue}
           activeTabStyle={cs.bg_dark_lightblue}>
-          <Content style={cs.bg_dark_lightblue}>
+          <View style={cs.bg_dark_lightblue}>
             <RecordList selectedMonth={id} navigate={navigate} />
-          </Content>
+          </View>
         </Tab>
       );
     });
