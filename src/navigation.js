@@ -60,6 +60,7 @@ const HomeStack = ({navigation}) => {
       <Stack.Screen name="RecordAddIncome" component={RecordAddIncome} />
       <Stack.Screen name="RecordAddExpense" component={RecordAddExpense} />
       <Stack.Screen name="RecordAddTransfer" component={RecordAddTransfer} />
+      <Stack.Screen name="CategoryAdd" component={CategoryAdd} />
     </Stack.Navigator>
   );
 };
@@ -164,7 +165,7 @@ const SettingStack = ({navigation}) => {
       screenOptions={{
         headerTitle: 'Settings',
         headerStyle: {
-          backgroundColor: '#f4511e',
+          backgroundColor: COLOR_DARK_BLUE,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

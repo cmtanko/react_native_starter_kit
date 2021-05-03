@@ -74,6 +74,11 @@ class RecordAddIncome extends Component {
   }
 
   onStateChange(key, value) {
+    if (key === 'categoryId' && value === 0) {
+      this.props.navigation.navigate('CategoryAdd', {
+        navigateBackTo: 'RecordAddIncome',
+      });
+    }
     this.setState({
       [key]: value,
     });
@@ -171,7 +176,10 @@ class RecordAddIncome extends Component {
             accountFrom={this.state.accountFrom}
             accountTo={this.state.accountTo}
             attachment={this.state.attachment}
-            categories={categories}
+            categories={[
+              ...categories,
+              {id: 0, title: 'Add Category', icon: 'plus', type: ''},
+            ]}
             categoryId={categoryId}
           />
           {this.showError(error)}

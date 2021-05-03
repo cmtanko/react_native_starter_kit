@@ -40,6 +40,13 @@ class CategoryAdd extends Component {
     const {categoryType} = this.props;
 
     if (params) {
+      const {navigateBackTo} = params;
+      if (navigateBackTo) {
+        callback = () => this.props.navigation.navigate(navigateBackTo);
+        this.onStateChange('type', categoryType);
+        return;
+      }
+
       const {category} = params;
       const {title, type, id, icon} = category;
 
