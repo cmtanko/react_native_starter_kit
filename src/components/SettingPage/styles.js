@@ -22,3 +22,9 @@ export const SettingsContent = styled(View)`
 `;
 
 export const SettingsButton = styled(Button)``;
+
+export const SettingsSubTitle = styled(Text)`
+  font-size: ${(props) => props.theme.fontSizes.subtitle};
+  color: ${(props) => props.theme.colors.ui.white};
+  padding-left: 16;
+`;

@@ -3,6 +3,7 @@ import {
   insertAccount,
   removeAccount,
   updateAccount,
+  insertAccounts,
 } from '../../helpers/db';
 
 import {
@@ -110,6 +111,17 @@ export const deleteAccount = ({id, callback}) => {
         payload: id,
       });
       callback();
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const addAccounts = (sqlQuery) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await insertAccounts(sqlQuery);
+      dispatch({type: ACCOUNT_CREATE, payload: {}});
     } catch (error) {
       throw error;
     }
