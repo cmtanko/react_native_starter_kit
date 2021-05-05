@@ -1,1 +1,1 @@
-React Native Starter Kit
+A personal expense manager app to manage all your income and expenses, It help budget your finance and get easy reports.

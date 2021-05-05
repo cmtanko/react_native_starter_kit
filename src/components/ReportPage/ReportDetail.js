@@ -20,10 +20,9 @@ const ReportDetail = (props) => {
 
   let myData = props.data;
   let expenseData = props.expenseData;
-
   const colorScale = ['tomato', 'orange', 'gold', 'cyan', 'navy'];
   return (
-    myData && (
+    myData.length > 0 && (
       <View>
         <Carousel
           height={deviceHeight}
@@ -40,7 +39,7 @@ const ReportDetail = (props) => {
               theme={VictoryTheme.material}
               colorScale={colorScale}
               innerRadius={70}
-              labelRadius={150}
+              labelRadius={120}
               width={deviceWidth - 40}
               data={myData}
               events={[]}
@@ -60,7 +59,7 @@ const ReportDetail = (props) => {
               theme={VictoryTheme.material}
               colorScale={colorScale}
               innerRadius={70}
-              labelRadius={150}
+              labelRadius={120}
               width={deviceWidth - 40}
               data={expenseData}
               events={[]}

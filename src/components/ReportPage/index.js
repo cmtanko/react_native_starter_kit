@@ -115,15 +115,15 @@ const mapStateToProps = (state) => {
     selectedReportType,
   } = state;
 
-  const records = _.map(recordList, (val, id) => {
+  const records = recordList.map((val, id) => {
     return val;
   });
 
-  const accounts = _.map(accountList, (val, id) => {
+  const accounts = accountList.map((val, id) => {
     return val;
   });
 
-  const categories = _.map(categoryList, (val, id) => {
+  const categories = categoryList.map((val, id) => {
     return val;
   });
 
