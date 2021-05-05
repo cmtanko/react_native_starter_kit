@@ -85,7 +85,6 @@ export const insertAccount = (title, type, openingBalance, icon) => {
 };
 
 export const insertAccounts = (accounts) => {
-  debugger;
   console.warn(
     'INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES ' +
       accounts,
