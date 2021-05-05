@@ -1,7 +1,36 @@
 import RNFetchBlob from 'rn-fetch-blob';
+import {PermissionsAndroid} from 'react-native';
+
 import csvToJson from '../utils/csvToJson';
 
+const requestCameraPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        title: 'Warning',
+        message: 'Allow Permissions to write to a file ?',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
 const writetoFile = (allRecordDataForExport) => {
+  const isPermitted = requestCameraPermission();
+  if (!isPermitted) {
+    alert('You need to enable permission to read/write to a file');
+  }
+
   // construct csvString
   const headerString =
     'RecordId, Date, Description, Amount, Place, Camera, CategoryId, CategoryTitle, CategoryIcon, CategoryType, PayFromId, PayFromTitle, PayFromIcon, PayFromType, PayFromOpeningBalance,  PayToId, PayToTitle, PayToIcon, PayToType, PayToOpeningBalance,  \n';
@@ -14,7 +43,7 @@ const writetoFile = (allRecordDataForExport) => {
   const csvString = `${headerString}${rowString}`;
 
   // write the current list of answers to a local csv file
-  const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/personal_expense_manager.csv`;
+  const pathToWrite = `${RNFetchBlob.fs.dirs.DocumentDir}/personal_expense_manager.csv`;
 
   return new Promise((resolve, reject) => {
     RNFetchBlob.fs
@@ -28,8 +57,12 @@ const writetoFile = (allRecordDataForExport) => {
 };
 
 const readFromFile = () => {
-  const pathToRead = `${RNFetchBlob.fs.dirs.DownloadDir}/personal_expense_manager.csv`;
-
+  const isPermitted = requestCameraPermission();
+  if (!isPermitted) {
+    alert('You need to enable permission to read/write to a file');
+  }
+  const pathToRead = `${RNFetchBlob.fs.dirs.DocumentDir}/personal_expense_manager.csv`;
+  console.warn(JSON.stringify(RNFetchBlob.fs.dirs));
   return new Promise((resolve, reject) => {
     RNFetchBlob.fs
       .readFile(pathToRead, 'utf8')

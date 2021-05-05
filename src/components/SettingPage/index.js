@@ -2,11 +2,11 @@
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
-import RNFetchBlob from 'rn-fetch-blob';
-import {addBackup, resetDatabase, addAccounts} from '../../actions';
-import csvToJson from '../../utils/csvToJson';
-import {readFromFile, writetoFile} from '../../utils/fileManager';
 
+import {readFromFile, writetoFile} from '../../utils/fileManager';
+import {addBackup, resetDatabase, addAccounts} from '../../actions';
+
+const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
 import {
   SettingsContainer,
   SettingsContent,
@@ -36,6 +36,7 @@ const SettingPage = (props) => {
         );
       })
       .catch((error) => {
+        console.warn('erroror==>');
         alert(error);
       });
   };
@@ -90,6 +91,25 @@ const SettingPage = (props) => {
       .catch((error) => {
         alert(error);
       });
+  };
+
+  const loadSampleData = () => {
+    try {
+      let accountSqlQuery = getAccountSqlQuery(sampelData);
+      let categorySqlQuery = getCategorySqlQuery(sampelData);
+      let recordSqlQuery = getRecordSqlQuery(sampelData);
+
+      props.resetDatabase(
+        accountSqlQuery,
+        categorySqlQuery,
+        recordSqlQuery,
+        () => {
+          alert('Database Imported Successfully');
+        },
+      );
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const getAccountSqlQuery = (result) => {
@@ -174,6 +194,11 @@ const SettingPage = (props) => {
   return (
     <SettingsContainer>
       <SettingsContent>
+        <SettingsButton iconLeft transparent onPress={() => loadSampleData()}>
+          <SettingsIcon name="download" />
+          <SettingsTitle>Load Sample Data</SettingsTitle>
+        </SettingsButton>
+
         <SettingsButton iconLeft transparent onPress={() => importDatabase()}>
           <SettingsIcon name="md-cloud-download-sharp" />
           <SettingsTitle>Import Database</SettingsTitle>
