@@ -395,76 +395,54 @@ export const fetchBackup = () => {
 
 export const resetData = (accounts, categories, records) => {
   const promise = new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        'DELETE FROM accounts',
-        [],
-        () => {
-          tx.executeSql(
-            'DELETE FROM categories',
-            [],
-            () => {
-              tx.executeSql(
-                'DELETE FROM records',
-                [],
-                () => {
-                  tx.executeSql(
-                    'DELETE FROM backups',
-                    [],
-                    () => {
-                      tx.executeSql(
-                        `INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES ${accounts}`,
-                        (_, result) => {
-                          resolve();
+    db.transaction(
+      (tx) => {
+        tx.executeSql('DELETE FROM accounts');
+        tx.executeSql('DELETE FROM categories');
+        tx.executeSql('DELETE FROM records');
 
-                          tx.executeSql(
-                            `INSERT INTO categories (id, title, type, icon) VALUES ${categories}`,
-                            (_, result) => {
-                              debugger;
-                              tx.executeSql(
-                                `INSERT INTO records (id, amount,date,categoryId,payFrom,payTo,description,place,camera) VALUES ${records}`,
-                                (_, result) => {
-                                  resolve();
-                                },
-                                (err) => {
-                                  reject(err);
-                                },
-                              );
-                            },
-                            (err) => {
-                              debugger;
+        tx.executeSql(
+          `INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES ${accounts}`,
+          (tx, resultSet) => {
+            console.log('resultSet.insertId: ' + resultSet.insertId);
+            console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
+          },
+          (tx, error) => {
+            console.log('ACCOUNTS INSERT error: ' + JSON.stringify(error));
+          },
+        );
 
-                              reject(err);
-                            },
-                          );
-                        },
-                        (err) => {
-                          reject(err);
-                        },
-                      );
-                    },
-                    (err) => {
-                      reject(err);
-                    },
-                  );
-                },
-                (err) => {
-                  reject(err);
-                },
-              );
-            },
-            (err) => {
-              reject(err);
-            },
-          );
-        },
-        (err) => {
-          console.warn('Error');
+        tx.executeSql(
+          `INSERT INTO categories (id, title, type, icon) VALUES ${categories}`,
+          (tx, resultSet) => {
+            console.log('resultSet.insertId: ' + resultSet.insertId);
+            console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
+          },
+          (tx, error) => {
+            console.log('CATEGORIES INSERT error: ' + JSON.stringify(error));
+          },
+        );
 
-          reject(err);
-        },
-      );
-    });
+        tx.executeSql(
+          `INSERT INTO records (id, amount,date,categoryId,payFrom,payTo,description,place,camera) VALUES ${records}`,
+          (tx, resultSet) => {
+            console.log('resultSet.insertId: ' + resultSet.insertId);
+            console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
+          },
+          (tx, error) => {
+            console.log('RECORDS INSERT error: ' + JSON.stringify(error));
+          },
+        );
+      },
+      (error) => {
+        console.log('transaction error: ' + error.message);
+        reject(error.message);
+      },
+      () => {
+        console.log('transaction ok');
+        resolve();
+      },
+    );
   });
 
   return promise;

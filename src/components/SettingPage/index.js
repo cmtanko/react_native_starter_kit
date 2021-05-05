@@ -4,6 +4,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import RNFetchBlob from 'rn-fetch-blob';
 import {addBackup, resetDatabase, addAccounts} from '../../actions';
+import csvToJson from '../../utils/csvToJson';
+import {readFromFile, writetoFile} from '../../utils/fileManager';
 
 import {
   SettingsContainer,
@@ -18,11 +20,27 @@ const SettingPage = (props) => {
   const {latestBackup} = props;
 
   const importDatabase = () => {
-    const pathToRead = `${RNFetchBlob.fs.dirs.DownloadDir}/personal_expense_manager.csv`;
-    readFromFile(pathToRead);
+    readFromFile()
+      .then((result) => {
+        let accountSqlQuery = getAccountSqlQuery(result);
+        let categorySqlQuery = getCategorySqlQuery(result);
+        let recordSqlQuery = getRecordSqlQuery(result);
+
+        props.resetDatabase(
+          accountSqlQuery,
+          categorySqlQuery,
+          recordSqlQuery,
+          () => {
+            alert('Database Imported Successfully');
+          },
+        );
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
-  const exportDatabase = (props) => {
+  const exportDatabase = () => {
     const {records, accounts, categories} = props;
 
     const allRecordDataForExport = records.map((record) => {
@@ -45,51 +63,33 @@ const SettingPage = (props) => {
         categoryIcon: category.icon,
         categoryType: category.type,
 
-        payFromId: accountFrom.id,
-        payFromTitle: accountFrom.title,
-        payFromIcon: accountFrom.icon,
-        payFromType: accountFrom.type,
-        payFromOpeningBalance: accountFrom.openingBalance,
+        payFromId: (accountFrom && accountFrom.id) || null,
+        payFromTitle: (accountFrom && accountFrom.title) || '',
+        payFromIcon: (accountFrom && accountFrom.icon) || '',
+        payFromType: (accountFrom && accountFrom.type) || '',
+        payFromOpeningBalance: (accountFrom && accountFrom.openingBalance) || 0,
 
-        payToId: accountTo.id,
-        payToTitle: accountTo.title,
-        payToIcon: accountTo.icon,
-        payToType: accountTo.type,
-        payToOpeningBalance: accountTo.openingBalance,
+        payToId: (accountTo && accountTo.id) || null,
+        payToTitle: (accountTo && accountTo.title) || '',
+        payToIcon: (accountTo && accountTo.icon) || '',
+        payToType: (accountTo && accountTo.type) || '',
+        payToOpeningBalance: (accountTo && accountTo.openingBalance) || 0,
       };
     });
 
-    // construct csvString
-    const headerString =
-      'RecordId, Date, Description, Amount, Place, Camera, CategoryId, CategoryTitle, CategoryIcon, CategoryType, PayFromId, PayFromTitle, PayFromIcon, PayFromType, PayFromOpeningBalance,  PayToId, PayToTitle, PayToIcon, PayToType, PayToOpeningBalance,  \n';
-    const rowString = allRecordDataForExport
-      .map(
-        (r) =>
-          `${r.id},${r.date},${r.description},${r.amount},${r.place},${r.camera},${r.categoryId},${r.categoryTitle},${r.categoryIcon},${r.categoryType},${r.payFromId},${r.payFromTitle},${r.payFromIcon},${r.payFromType},${r.payFromOpeningBalance},${r.payToId},${r.payToTitle},${r.payToIcon},${r.payToType},${r.payToOpeningBalance},\n`,
-      )
-      .join('');
-    const csvString = `${headerString}${rowString}`;
-
-    // write the current list of answers to a local csv file
-    const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/personal_expense_manager.csv`;
-    console.log('pathToWrite', pathToWrite);
-    writetoFile(pathToWrite, csvString);
-  };
-
-  const writetoFile = (pathToWrite, csvString) => {
-    RNFetchBlob.fs
-      .writeFile(pathToWrite, csvString, 'utf8')
+    writetoFile(allRecordDataForExport)
       .then(() => {
-        console.log(`wrote file ${pathToWrite}`);
         props.addBackup({
           title: 'personal_expense_manager.csv',
           date: new Date().toISOString(),
           callback: function () {
-            console.warn('1');
+            alert('Database Exported Successfully');
           },
         });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const getAccountSqlQuery = (result) => {
@@ -171,51 +171,6 @@ const SettingPage = (props) => {
     return recordsSqlQuery.slice(0, recordsSqlQuery.length - 1);
   };
 
-  const readFromFile = (pathToRead) => {
-    RNFetchBlob.fs
-      .readFile(pathToRead, 'utf8')
-      .then((file) => {
-        try {
-          console.log(`read from file ${pathToRead}`);
-          let lines = file.split('\n');
-
-          let result = [];
-
-          let headers = lines[0].split(',');
-
-          for (let i = 1; i < lines.length; i++) {
-            let obj = {};
-            let currentline = lines[i].split(',');
-
-            for (let j = 0; j < headers.length; j++) {
-              if (headers[j].trim() && currentline[0]) {
-                obj[headers[j].trim()] = currentline[j];
-              }
-            }
-            result.push(obj);
-          }
-
-          console.warn(result);
-
-          let finalValue = getAccountSqlQuery(result);
-          let categorySqlQuery = getCategorySqlQuery(result);
-          let recordSqlQuery = getRecordSqlQuery(result);
-          console.warn(finalValue);
-          console.warn(categorySqlQuery);
-          console.warn(recordSqlQuery);
-
-          props.resetDatabase(finalValue, categorySqlQuery);
-
-          //return result; //JavaScript object
-          return JSON.stringify(result); //JSON
-        } catch (error) {
-          console.error(error);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
   return (
     <SettingsContainer>
       <SettingsContent>
@@ -223,7 +178,6 @@ const SettingPage = (props) => {
           <SettingsIcon name="md-cloud-download-sharp" />
           <SettingsTitle>Import Database</SettingsTitle>
         </SettingsButton>
-        <SettingsSubTitle>Last exported at: </SettingsSubTitle>
 
         <SettingsButton
           iconLeft
@@ -233,7 +187,7 @@ const SettingPage = (props) => {
           <SettingsTitle>Export Database</SettingsTitle>
         </SettingsButton>
         <SettingsSubTitle>
-          Last exported at:
+          Last exported at:{' '}
           {latestBackup && new Date(latestBackup.date).toDateString()}
         </SettingsSubTitle>
       </SettingsContent>

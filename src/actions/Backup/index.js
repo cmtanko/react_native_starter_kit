@@ -31,11 +31,12 @@ export const addBackup = ({title, date, callback}) => {
   };
 };
 
-export const resetDatabase = (accounts, categories, records) => {
+export const resetDatabase = (accounts, categories, records, callback) => {
   return async (dispatch) => {
     try {
       const dbResult = await resetData(accounts, categories, records);
       dispatch({type: 'database_reset_success', payload: {}});
+      callback();
     } catch (error) {
       throw error;
     }
