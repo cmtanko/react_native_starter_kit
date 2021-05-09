@@ -74,7 +74,6 @@ export const insertAccount = (title, type, openingBalance, icon) => {
           resolve(result);
         },
         (err) => {
-          console.warn(err);
           reject(err);
         },
       );

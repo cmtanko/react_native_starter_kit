@@ -9,7 +9,9 @@ target 'react_native_starter_kit' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-
+  pod 'GoogleSignIn', '~> 5.0.2'
+  pod 'Firebase/Analytics'
+  
   target 'react_native_starter_kitTests' do
     inherit! :complete
     # Pods for testing

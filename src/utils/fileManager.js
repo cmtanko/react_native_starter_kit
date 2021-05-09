@@ -3,6 +3,9 @@ import {PermissionsAndroid} from 'react-native';
 
 import csvToJson from '../utils/csvToJson';
 
+const DATABASE_FILENAME = 'personal_expense_manager.csv';
+const DATABASE_PATH = RNFetchBlob.fs.dirs.DocumentDir;
+
 const requestCameraPermission = async () => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -43,7 +46,7 @@ const writetoFile = (allRecordDataForExport) => {
   const csvString = `${headerString}${rowString}`;
 
   // write the current list of answers to a local csv file
-  const pathToWrite = `${RNFetchBlob.fs.dirs.DocumentDir}/personal_expense_manager.csv`;
+  const pathToWrite = `${RNFetchBlob.fs.dirs.DocumentDir}/${DATABASE_FILENAME}`;
 
   return new Promise((resolve, reject) => {
     RNFetchBlob.fs
@@ -61,8 +64,7 @@ const readFromFile = () => {
   if (!isPermitted) {
     alert('You need to enable permission to read/write to a file');
   }
-  const pathToRead = `${RNFetchBlob.fs.dirs.DocumentDir}/personal_expense_manager.csv`;
-  console.warn(JSON.stringify(RNFetchBlob.fs.dirs));
+  const pathToRead = `${RNFetchBlob.fs.dirs.DocumentDir}/${DATABASE_FILENAME}`;
   return new Promise((resolve, reject) => {
     RNFetchBlob.fs
       .readFile(pathToRead, 'utf8')
@@ -73,4 +75,26 @@ const readFromFile = () => {
   });
 };
 
-export {writetoFile, readFromFile};
+const readCsvFromFile = () => {
+  const isPermitted = requestCameraPermission();
+  if (!isPermitted) {
+    alert('You need to enable permission to read/write to a file');
+  }
+  const pathToRead = `${RNFetchBlob.fs.dirs.DocumentDir}/${DATABASE_FILENAME}`;
+  return new Promise((resolve, reject) => {
+    RNFetchBlob.fs
+      .readFile(pathToRead, 'utf8')
+      .then((file) => {
+        resolve(file);
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+export {
+  DATABASE_FILENAME,
+  DATABASE_PATH,
+  writetoFile,
+  readFromFile,
+  readCsvFromFile,
+};

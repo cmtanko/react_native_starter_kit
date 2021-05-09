@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {readFromFile, writetoFile} from '../../utils/fileManager';
 import {addBackup, resetDatabase, addAccounts} from '../../actions';
-
+import GoogleSignInComponent from '../SocialSigninPage';
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
 import {
   SettingsContainer,
@@ -36,7 +36,6 @@ const SettingPage = (props) => {
         );
       })
       .catch((error) => {
-        console.warn('erroror==>');
         alert(error);
       });
   };
@@ -193,6 +192,7 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
+      <GoogleSignInComponent />
       <SettingsContent>
         <SettingsButton iconLeft transparent onPress={() => loadSampleData()}>
           <SettingsIcon name="download" />
