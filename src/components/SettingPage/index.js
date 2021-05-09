@@ -205,7 +205,7 @@ const SettingPage = (props) => {
           <SettingsIcon name="md-cloud-upload-sharp" />
           <SettingsTitle>Export Database</SettingsTitle>
         </SettingsButton>
-        <SettingsSubTitle></SettingsSubTitle>
+        <SettingsSubTitle />
       </SettingsContent>
     </SettingsContainer>
   );

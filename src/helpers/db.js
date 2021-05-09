@@ -59,6 +59,39 @@ export const init = () => {
         },
       );
     });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY NOT NULL, fullname TEXT, token TEXT, displaypicture TEXT)',
+        [],
+        () => {
+          console.warn('Table backup created');
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const insertUser = (fullName, displayPicture, token) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO users (fullname, displaypicture, token) VALUES (?,?,?)',
+        [fullName, displayPicture, token],
+        (_, result) => {
+          resolve(result);
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
   });
 
   return promise;

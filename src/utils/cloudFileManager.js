@@ -159,7 +159,9 @@ const download = (fileId) => {
   return new Promise((resolve, reject) => {
     const options = configureGetOptions();
     console.log(fileId);
-    if (!fileId) throw new Error("Didn't provide a valid file id.");
+    if (!fileId) {
+      throw new Error("Didn't provide a valid file id.");
+    }
     let downloadFileOptions = {
       authorization: `Bearer ${apiToken}`,
       fromUrl: `${url}/files/${fileId}?alt=media`,
@@ -196,13 +198,13 @@ const download = (fileId) => {
 const getAccountSqlQuery = (result) => {
   const accountsFromCsv = result.map((res) => {
     return {
-      id: res['PayFromId'] ? res['PayFromId'] : res['PayToId'],
-      title: res['PayFromId'] ? res['PayFromTitle'] : res['PayToTitle'],
-      type: res['PayFromId'] ? res['PayFromType'] : res['PayToType'],
-      openingBalance: res['PayFromId']
-        ? res['PayFromOpeningBalance']
-        : res['PayToOpeningBalance'],
-      icon: res['PayFromId'] ? res['PayFromIcon'] : res['PayToIcon'],
+      id: res.PayFromId ? res.PayFromId : res.PayToId,
+      title: res.PayFromId ? res.PayFromTitle : res.PayToTitle,
+      type: res.PayFromId ? res.PayFromType : res.PayToType,
+      openingBalance: res.PayFromId
+        ? res.PayFromOpeningBalance
+        : res.PayToOpeningBalance,
+      icon: res.PayFromId ? res.PayFromIcon : res.PayToIcon,
     };
   });
 
@@ -222,10 +224,10 @@ const getAccountSqlQuery = (result) => {
 const getCategorySqlQuery = (result) => {
   const categoriesFromCsv = result.map((res) => {
     return {
-      id: res['CategoryId'],
-      title: res['CategoryTitle'],
-      type: res['CategoryType'],
-      icon: res['CategoryIcon'],
+      id: res.CategoryId,
+      title: res.CategoryTitle,
+      type: res.CategoryType,
+      icon: res.CategoryIcon,
     };
   });
 
@@ -247,15 +249,15 @@ const getCategorySqlQuery = (result) => {
 const getRecordSqlQuery = (result) => {
   const recordsFromCsv = result.map((res) => {
     return {
-      id: res['RecordId'],
-      amount: res['Amount'],
-      date: res['Date'],
-      categoryId: res['CategoryId'],
-      payFrom: res['PayFromId'],
-      payTo: res['PayToId'],
-      description: res['Description'],
-      place: res['Place'],
-      camera: res['Camera'],
+      id: res.RecordId,
+      amount: res.Amount,
+      date: res.Date,
+      categoryId: res.CategoryId,
+      payFrom: res.PayFromId,
+      payTo: res.PayToId,
+      description: res.Description,
+      place: res.Place,
+      camera: res.Camera,
     };
   });
 
