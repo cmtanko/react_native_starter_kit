@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addBackup, resetDatabase, addAccounts} from '../../actions';
+import {readFromFile, writetoFile} from '../../utils/fileManager';
 
 import {
   GoogleSignin,
@@ -76,20 +77,7 @@ class SocialSigninPage extends Component {
     }
   };
 
-  uploadToGoogleDrive = async () => {
-    await this.initialGoogle();
-
-    getFile()
-      .then((fileFromGDrive) => {
-        fileFromGDrive ? upload(fileFromGDrive.id) : upload(false);
-        alert('Database exported successfully');
-      })
-      .catch((error) => {
-        alert('Error exporting database ' + error);
-      });
-  };
-
-  getDataFromGoogleDrive = async () => {
+  importDatabase = async () => {
     await this.initialGoogle();
 
     getFile()
@@ -110,7 +98,80 @@ class SocialSigninPage extends Component {
         }
       })
       .catch((error) => {
-        alert('Error exporting database ' + error);
+        alert('Error importing database ' + error);
+      });
+  };
+
+  syncDatabase = async () => {
+    // Only download if no records present in the db
+    const {records} = this.props;
+
+    if (records && records.length === 0) {
+      this.importDatabase();
+    } else {
+      this.exportDatabase();
+    }
+  };
+
+  exportDatabase = () => {
+    const {records, accounts, categories} = this.props;
+
+    const allRecordDataForExport = records.map((record) => {
+      const category = categories.find((cat) => cat.id === record.categoryId);
+
+      const accountFrom = accounts.find((acc) => acc.id === record.payFrom);
+
+      const accountTo = accounts.find((acc) => acc.id === record.payTo);
+
+      return {
+        id: record.id,
+        date: record.date,
+        description: record.description,
+        amount: record.amount,
+        place: record.place,
+        camera: record.camera,
+
+        categoryId: category.id,
+        categoryTitle: category.title,
+        categoryIcon: category.icon,
+        categoryType: category.type,
+
+        payFromId: (accountFrom && accountFrom.id) || null,
+        payFromTitle: (accountFrom && accountFrom.title) || '',
+        payFromIcon: (accountFrom && accountFrom.icon) || '',
+        payFromType: (accountFrom && accountFrom.type) || '',
+        payFromOpeningBalance: (accountFrom && accountFrom.openingBalance) || 0,
+
+        payToId: (accountTo && accountTo.id) || null,
+        payToTitle: (accountTo && accountTo.title) || '',
+        payToIcon: (accountTo && accountTo.icon) || '',
+        payToType: (accountTo && accountTo.type) || '',
+        payToOpeningBalance: (accountTo && accountTo.openingBalance) || 0,
+      };
+    });
+
+    writetoFile(allRecordDataForExport)
+      .then(() => {
+        let that = this;
+        this.props.addBackup({
+          title: 'personal_expense_manager.csv',
+          date: new Date().toISOString(),
+          callback: async function () {
+            await that.initialGoogle();
+
+            getFile()
+              .then((fileFromGDrive) => {
+                fileFromGDrive ? upload(fileFromGDrive.id) : upload(false);
+                alert('Database exported successfully');
+              })
+              .catch((error) => {
+                alert('Error exporting database ' + error);
+              });
+          },
+        });
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 
@@ -119,47 +180,58 @@ class SocialSigninPage extends Component {
       <View style={styles.container}>
         <TouchableHighlight
           style={styles.buttonGetData}
-          onPress={this.getDataFromGoogleDrive}>
-          <Text style={styles.text}>Import Database</Text>
+          onPress={this.syncDatabase}>
+          <Text style={styles.text}>Sync</Text>
         </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.buttonGetData}
-          onPress={this.uploadToGoogleDrive}>
-          <Text style={styles.text}>Export Database</Text>
-        </TouchableHighlight>
+        <Text style={{paddingLeft: 8, color: 'white'}}>
+          Last synced at: {this.props.title}
+        </Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+  container: {},
   text: {
     textAlign: 'center',
     color: '#FFFFFF',
     margin: 10,
-  },
-  textData: {
-    textAlign: 'center',
-    color: '#333333',
-    margin: 10,
+    fontWeight: 'bold',
   },
   buttonGetData: {
-    backgroundColor: '#333',
+    backgroundColor: '#346',
     padding: 10,
     margin: 10,
   },
 });
 
 const mapStateToProps = (state) => {
-  return {};
+  const {
+    record: {list: recordList},
+    account: {list: accountList},
+    category: {list: categoryList},
+    backup: {list: backupList},
+  } = state;
+
+  const records = recordList.map((val, id) => {
+    return val;
+  });
+
+  const accounts = accountList.map((val, id) => {
+    return val;
+  });
+
+  const categories = categoryList.map((val, id) => {
+    return val;
+  });
+
+  const latestBackup = backupList[backupList.length - 1];
+  return {records, accounts, categories, latestBackup};
 };
 
 export default connect(mapStateToProps, {
+  addBackup,
   resetDatabase,
+  addAccounts,
 })(SocialSigninPage);

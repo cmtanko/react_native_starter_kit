@@ -192,29 +192,20 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
-      <GoogleSignInComponent />
+      <GoogleSignInComponent
+        title={latestBackup && new Date(latestBackup.date).toDateString()}
+      />
       <SettingsContent>
         <SettingsButton iconLeft transparent onPress={() => loadSampleData()}>
           <SettingsIcon name="download" />
           <SettingsTitle>Load Sample Data</SettingsTitle>
         </SettingsButton>
 
-        <SettingsButton iconLeft transparent onPress={() => importDatabase()}>
-          <SettingsIcon name="md-cloud-download-sharp" />
-          <SettingsTitle>Import Database</SettingsTitle>
-        </SettingsButton>
-
-        <SettingsButton
-          iconLeft
-          transparent
-          onPress={() => exportDatabase(props)}>
+        <SettingsButton iconLeft transparent>
           <SettingsIcon name="md-cloud-upload-sharp" />
           <SettingsTitle>Export Database</SettingsTitle>
         </SettingsButton>
-        <SettingsSubTitle>
-          Last exported at:{' '}
-          {latestBackup && new Date(latestBackup.date).toDateString()}
-        </SettingsSubTitle>
+        <SettingsSubTitle></SettingsSubTitle>
       </SettingsContent>
     </SettingsContainer>
   );

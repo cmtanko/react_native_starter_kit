@@ -24,7 +24,7 @@ const upload = async (existingFileId) => {
   await createBody(!!existingFileId)
     .then((body) => {
       const options = configurePostOptions(body.length, !!existingFileId);
-
+      console.warn(body);
       return fetch(
         `${uploadUrl}/files${
           existingFileId ? `/${existingFileId}` : ''
@@ -36,7 +36,7 @@ const upload = async (existingFileId) => {
       ).then(parseAndHandleErrors);
     })
     .catch((err) => {
-      alert(err);
+      console.warn(err);
     });
 };
 
@@ -59,7 +59,7 @@ const createBody = (isUpdate = false) => {
         resolve(multipartBody);
       })
       .catch((error) => {
-        reject();
+        reject(error);
       });
   });
 };
@@ -80,6 +80,7 @@ const configurePostOptions = (bodyLength, isUpdate = false) => {
 };
 
 const parseAndHandleErrors = (response) => {
+  console.warn(response);
   if (response.ok) {
     return response.json();
   }
