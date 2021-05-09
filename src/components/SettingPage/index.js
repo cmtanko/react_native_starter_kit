@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {readFromFile, writetoFile} from '../../utils/fileManager';
 import {addBackup, resetDatabase, addAccounts} from '../../actions';
-
+import GoogleSignInComponent from '../SocialSigninPage';
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
 import {
   SettingsContainer,
@@ -36,7 +36,6 @@ const SettingPage = (props) => {
         );
       })
       .catch((error) => {
-        console.warn('erroror==>');
         alert(error);
       });
   };
@@ -193,28 +192,20 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
+      <GoogleSignInComponent
+        title={latestBackup && new Date(latestBackup.date).toDateString()}
+      />
       <SettingsContent>
         <SettingsButton iconLeft transparent onPress={() => loadSampleData()}>
           <SettingsIcon name="download" />
           <SettingsTitle>Load Sample Data</SettingsTitle>
         </SettingsButton>
 
-        <SettingsButton iconLeft transparent onPress={() => importDatabase()}>
-          <SettingsIcon name="md-cloud-download-sharp" />
-          <SettingsTitle>Import Database</SettingsTitle>
-        </SettingsButton>
-
-        <SettingsButton
-          iconLeft
-          transparent
-          onPress={() => exportDatabase(props)}>
+        <SettingsButton iconLeft transparent>
           <SettingsIcon name="md-cloud-upload-sharp" />
           <SettingsTitle>Export Database</SettingsTitle>
         </SettingsButton>
-        <SettingsSubTitle>
-          Last exported at:{' '}
-          {latestBackup && new Date(latestBackup.date).toDateString()}
-        </SettingsSubTitle>
+        <SettingsSubTitle></SettingsSubTitle>
       </SettingsContent>
     </SettingsContainer>
   );
