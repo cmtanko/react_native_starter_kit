@@ -62,7 +62,7 @@ export const init = () => {
 
     db.transaction((tx) => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY NOT NULL, fullname TEXT, token TEXT, displaypicture TEXT)',
+        'CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY NOT NULL, fullname TEXT, email TEXT, displaypicture TEXT, token TEXT)',
         [],
         () => {
           console.warn('Table backup created');
@@ -78,14 +78,38 @@ export const init = () => {
   return promise;
 };
 
-export const insertUser = (fullName, displayPicture, token) => {
+export const insertUser = (fullName, email, displayPicture, token) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'INSERT INTO users (fullname, displaypicture, token) VALUES (?,?,?)',
-        [fullName, displayPicture, token],
+        'INSERT INTO user (fullname, email, displaypicture, token) VALUES (?,?,?,?)',
+        [fullName, email, displayPicture, token],
         (_, result) => {
+          alert(result);
           resolve(result);
+        },
+        (err) => {
+          alert(err);
+
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const fetchUser = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM user',
+        [],
+        (_, result) => {
+          debugger;
+          console.warn(result.rows.item(0));
+          resolve(result.rows.item(0));
         },
         (err) => {
           reject(err);

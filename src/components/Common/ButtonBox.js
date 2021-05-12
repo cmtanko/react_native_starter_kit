@@ -3,7 +3,7 @@ import {Button, Text} from 'native-base';
 
 import cs from '../../styles/common';
 
-const ButtonBox = ({title, btnDelete, onChange}) => {
+const ButtonBox = ({title, color, btnDelete, onChange}) => {
   return (
     <Button
       block

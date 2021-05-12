@@ -2,95 +2,44 @@
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  TouchableHighlight,
+} from 'react-native';
+import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
 
-import {readFromFile, writetoFile} from '../../utils/fileManager';
-import {addBackup, resetDatabase, addAccounts} from '../../actions';
+import {
+  View,
+  Text,
+  Thumbnail,
+  Header,
+  Title,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+} from 'native-base';
 import GoogleSignInComponent from '../SocialSigninPage';
+import {addBackup, resetDatabase, addAccounts} from '../../actions';
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
+
+const avatar = require('../../assets/images/profile.png');
 import {
   SettingsContainer,
   SettingsContent,
   SettingsButton,
   SettingsTitle,
   SettingsIcon,
-  SettingsSubTitle,
+  ProfileTitle,
+  ProfileSubTitle,
 } from './styles';
+import styles from './styles';
 
 const SettingPage = (props) => {
   const {latestBackup} = props;
-
-  const importDatabase = () => {
-    readFromFile()
-      .then((result) => {
-        let accountSqlQuery = getAccountSqlQuery(result);
-        let categorySqlQuery = getCategorySqlQuery(result);
-        let recordSqlQuery = getRecordSqlQuery(result);
-
-        props.resetDatabase(
-          accountSqlQuery,
-          categorySqlQuery,
-          recordSqlQuery,
-          () => {
-            alert('Database Imported Successfully');
-          },
-        );
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
-
-  const exportDatabase = () => {
-    const {records, accounts, categories} = props;
-
-    const allRecordDataForExport = records.map((record) => {
-      const category = categories.find((cat) => cat.id === record.categoryId);
-
-      const accountFrom = accounts.find((acc) => acc.id === record.payFrom);
-
-      const accountTo = accounts.find((acc) => acc.id === record.payTo);
-
-      return {
-        id: record.id,
-        date: record.date,
-        description: record.description,
-        amount: record.amount,
-        place: record.place,
-        camera: record.camera,
-
-        categoryId: category.id,
-        categoryTitle: category.title,
-        categoryIcon: category.icon,
-        categoryType: category.type,
-
-        payFromId: (accountFrom && accountFrom.id) || null,
-        payFromTitle: (accountFrom && accountFrom.title) || '',
-        payFromIcon: (accountFrom && accountFrom.icon) || '',
-        payFromType: (accountFrom && accountFrom.type) || '',
-        payFromOpeningBalance: (accountFrom && accountFrom.openingBalance) || 0,
-
-        payToId: (accountTo && accountTo.id) || null,
-        payToTitle: (accountTo && accountTo.title) || '',
-        payToIcon: (accountTo && accountTo.icon) || '',
-        payToType: (accountTo && accountTo.type) || '',
-        payToOpeningBalance: (accountTo && accountTo.openingBalance) || 0,
-      };
-    });
-
-    writetoFile(allRecordDataForExport)
-      .then(() => {
-        props.addBackup({
-          title: 'personal_expense_manager.csv',
-          date: new Date().toISOString(),
-          callback: function () {
-            alert('Database Exported Successfully');
-          },
-        });
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
 
   const loadSampleData = () => {
     try {
@@ -192,24 +141,57 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
-      <GoogleSignInComponent
-        title={latestBackup && new Date(latestBackup.date).toDateString()}
-      />
-      <SettingsContent>
-        <SettingsButton iconLeft transparent onPress={() => loadSampleData()}>
-          <SettingsIcon name="download" />
-          <SettingsTitle>Load Sample Data</SettingsTitle>
-        </SettingsButton>
+      <View style={{height: 260}}>
+        <Header transparent>
+          <Left>
+            <Button transparent>
+              <Icon name="menu" style={{color: 'white'}} />
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{color: 'white', fontSize: 30}}>Profile</Title>
+          </Body>
+          <Right />
+        </Header>
+      </View>
 
-        <SettingsButton iconLeft transparent>
-          <SettingsIcon name="md-cloud-upload-sharp" />
-          <SettingsTitle>Export Database</SettingsTitle>
-        </SettingsButton>
-        <SettingsSubTitle />
-      </SettingsContent>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <Thumbnail
+          source={{uri: props.userInfo.displaypicture}}
+          style={styles.profile.avatar}
+        />
+        <ProfileTitle>{props.userInfo.fullname}</ProfileTitle>
+        <ProfileSubTitle>{props.userInfo.email}</ProfileSubTitle>
+
+        <TouchableHighlight
+          style={styles1.buttonGetData}
+          onPress={() => loadSampleData()}>
+          <Text style={styles1.text}>Load Sample Data</Text>
+        </TouchableHighlight>
+
+        <GoogleSignInComponent
+          title={latestBackup && new Date(latestBackup.date).toDateString()}
+        />
+      </View>
     </SettingsContainer>
   );
 };
+
+const styles1 = StyleSheet.create({
+  container: {},
+  text: {
+    textAlign: 'center',
+    color: '#FFFFFF',
+    margin: 10,
+    fontWeight: 'bold',
+  },
+  buttonGetData: {
+    marginTop: 200,
+    backgroundColor: '#346',
+    padding: 10,
+    margin: 10,
+  },
+});
 
 const mapStateToProps = (state) => {
   const {
@@ -217,6 +199,7 @@ const mapStateToProps = (state) => {
     account: {list: accountList},
     category: {list: categoryList},
     backup: {list: backupList},
+    user: {list: userInfo},
   } = state;
 
   const records = _.map(recordList, (val, id) => {
@@ -232,7 +215,7 @@ const mapStateToProps = (state) => {
   });
 
   const latestBackup = backupList[backupList.length - 1];
-  return {records, accounts, categories, latestBackup};
+  return {records, accounts, categories, latestBackup, userInfo};
 };
 
 export default connect(mapStateToProps, {

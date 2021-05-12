@@ -1,4 +1,10 @@
-import {insertBackup, fetchBackup, resetData} from '../../helpers/db';
+import {
+  fetchUser,
+  resetData,
+  insertUser,
+  fetchBackup,
+  insertBackup,
+} from '../../helpers/db';
 
 export const getBackup = () => {
   return async (dispatch) => {
@@ -37,6 +43,33 @@ export const resetDatabase = (accounts, categories, records, callback) => {
       const dbResult = await resetData(accounts, categories, records);
       dispatch({type: 'database_reset_success', payload: {}});
       callback();
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const addUserInfo = (fullName, email, photo, token, callback) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await insertUser(fullName, email, photo, token);
+      dispatch({type: 'user_insert_success', payload: {}});
+      callback();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+};
+
+export const getUserInfo = () => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await fetchUser();
+      dispatch({
+        type: 'user_fetch_success',
+        payload: dbResult,
+      });
     } catch (error) {
       throw error;
     }

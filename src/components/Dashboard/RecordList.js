@@ -11,7 +11,13 @@ import RecordEmpty from './RecordEmpty';
 import {CATEGORY_TYPE} from '../../constants';
 
 import cs from '../../styles/common';
-import {getRecords, getAccounts, getCategories, getBackup} from '../../actions';
+import {
+  getRecords,
+  getAccounts,
+  getCategories,
+  getBackup,
+  getUserInfo,
+} from '../../actions';
 
 class RecordList extends PureComponent {
   constructor(props) {
@@ -52,10 +58,11 @@ class RecordList extends PureComponent {
   }
 
   componentDidMount() {
+    this.props.getBackup();
     this.props.getRecords();
     this.props.getAccounts();
+    this.props.getUserInfo();
     this.props.getCategories();
-    this.props.getBackup();
   }
 
   render() {
@@ -166,6 +173,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getBackup,
+  getUserInfo,
   getRecords,
   getAccounts,
   getCategories,

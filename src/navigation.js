@@ -163,6 +163,7 @@ const SettingStack = ({navigation}) => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShown: false,
         headerTitle: 'Settings',
         headerStyle: {
           backgroundColor: COLOR_DARK_BLUE,

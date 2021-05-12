@@ -7,7 +7,12 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {addBackup, resetDatabase, addAccounts} from '../../actions';
+import {
+  addBackup,
+  resetDatabase,
+  addAccounts,
+  addUserInfo,
+} from '../../actions';
 import {readFromFile, writetoFile} from '../../utils/fileManager';
 
 import {
@@ -26,6 +31,7 @@ import {
   GOOGLE_API_SCOPES,
   GOOGLE_API_IOS_CLIENT_ID,
 } from '../../utils/cloudFileManager';
+import {Platform} from 'react-native';
 
 let apiToken = null;
 
@@ -41,32 +47,45 @@ class SocialSigninPage extends Component {
   }
 
   checkPermission = () => {
-    PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    ).then((writeGranted) => {
-      console.log('writeGranted', writeGranted);
-      if (!writeGranted) {
-        requestWriteStoragePermission();
-      }
+    if (Platform.OS === 'android') {
       PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      ).then((readGranted) => {
-        console.log('readGranted', readGranted);
-        if (!readGranted) {
-          requestReadStoragePermission();
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      ).then((writeGranted) => {
+        console.log('writeGranted', writeGranted);
+        if (!writeGranted) {
+          requestWriteStoragePermission();
         }
+        PermissionsAndroid.check(
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        ).then((readGranted) => {
+          console.log('readGranted', readGranted);
+          if (!readGranted) {
+            requestReadStoragePermission();
+          }
+        });
       });
-    });
+    }
   };
 
   initialGoogle = async () => {
     try {
+      const {userInfo} = this.props || null;
+
       await GoogleSignin.configure({
         scopes: GOOGLE_API_SCOPES,
         iosClientId: GOOGLE_API_IOS_CLIENT_ID,
       });
-      // const user = await GoogleSignin.signIn();
 
+      if (!userInfo) {
+        const user = await GoogleSignin.signIn();
+        this.props.addUserInfo(
+          user.user.name,
+          user.user.email,
+          user.user.photo,
+          user.idToken,
+          () => {},
+        );
+      }
       const {accessToken} = await GoogleSignin.getTokens();
       setApiToken(accessToken);
     } catch (error) {
@@ -183,9 +202,7 @@ class SocialSigninPage extends Component {
           onPress={this.syncDatabase}>
           <Text style={styles.text}>Sync</Text>
         </TouchableHighlight>
-        <Text style={{paddingLeft: 8, color: 'white'}}>
-          Last synced at: {this.props.title}
-        </Text>
+        <Text style={{paddingLeft: 8}}>Last synced at: {this.props.title}</Text>
       </View>
     );
   }
@@ -212,6 +229,7 @@ const mapStateToProps = (state) => {
     account: {list: accountList},
     category: {list: categoryList},
     backup: {list: backupList},
+    user: {list: userList},
   } = state;
 
   const records = recordList.map((val, id) => {
@@ -227,11 +245,14 @@ const mapStateToProps = (state) => {
   });
 
   const latestBackup = backupList[backupList.length - 1];
-  return {records, accounts, categories, latestBackup};
+
+  const userInfo = userList;
+  return {records, userInfo, accounts, categories, latestBackup};
 };
 
 export default connect(mapStateToProps, {
   addBackup,
-  resetDatabase,
+  addUserInfo,
   addAccounts,
+  resetDatabase,
 })(SocialSigninPage);
