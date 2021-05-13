@@ -85,7 +85,7 @@ const RecordForm = ({
           <FlatList
             horizontal={false}
             numColumns={4}
-            data={categories}
+            data={categories.filter((cat) => cat.type === selectedCategoryType)}
             itemDimension={50}
             keyExtractor={(item) => item.id}
             initialNumToRender={20}

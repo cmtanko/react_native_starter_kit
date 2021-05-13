@@ -7,7 +7,12 @@ import {Container, Content, View} from 'native-base';
 import RecordForm from './RecordForm';
 import SectionHeader from './SectionHeader';
 import {ButtonBox, ErrorBox} from '../Common';
-import {addRecord, editRecord, deleteRecord} from '../../actions';
+import {
+  addRecord,
+  editRecord,
+  deleteRecord,
+  selectCategoryType,
+} from '../../actions';
 
 import cs from '../../styles/common';
 
@@ -71,6 +76,7 @@ class RecordAddIncome extends Component {
         selectedCategoryType: type,
         formType: type,
       });
+      this.props.selectCategoryType(type);
     }
   }
 
@@ -201,10 +207,7 @@ const mapStateToProps = (state) => {
 
   return {
     accounts,
-    categories: _.filter(
-      categories,
-      (category) => category.type === state.selectedCategoryType,
-    ),
+    categories,
     selectedCategoryType: state.selectedCategoryType,
     error: state.account.error,
     loading: state.account.loading,
@@ -215,4 +218,5 @@ export default connect(mapStateToProps, {
   addRecord,
   editRecord,
   deleteRecord,
+  selectCategoryType,
 })(RecordAddIncome);

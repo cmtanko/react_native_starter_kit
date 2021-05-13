@@ -2,9 +2,7 @@ import App from './src/index';
 import {init} from './src/helpers/db';
 
 init()
-  .then(() => {
-    console.log('Initialized database');
-  })
+  .then(() => {})
   .catch((err) => {
     console.error(err);
   });

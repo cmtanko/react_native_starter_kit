@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1022821915779",
+    "project_id": "personal-expense-manager-a389d",
+    "storage_bucket": "personal-expense-manager-a389d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022821915779:android:9a6745b2c13208dd5d0fb6",
+        "android_client_info": {
+          "package_name": "io.newplanet.reactnativestarterkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022821915779-l7gne5nou7peka2msh3ttf2gaffol36t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.newplanet.reactnativestarterkit",
+            "certificate_hash": "a4aecbf07036b9b06761b5e3227a9418f4e0a890"
+          }
+        },
+        {
+          "client_id": "1022821915779-rtn1f7p7al6qi30g87hhjk57e8tfe4mv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4sptCp02dhcdDny9L8M3kfffoZz2HFGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022821915779-rtn1f7p7al6qi30g87hhjk57e8tfe4mv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1022821915779-c8o92t2hu4m28djiiq2rb3cdm967vj0r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.newplanet.reactnativestarterkit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -177,3 +177,6 @@ react-native run-ios
 
 This command should create a symlink to `/uer`
 `ln -s $(which node) /usr/local/bin/node`
+
+### Implementing Google signin 
+https://www.pradipdebnath.com/2020/10/06/how-to-implement-google-login-in-react-native-with-firebase/

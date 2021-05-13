@@ -139,36 +139,46 @@ const SettingPage = (props) => {
     return recordsSqlQuery.slice(0, recordsSqlQuery.length - 1);
   };
 
+  const displayProfile = () => {
+    if (props.userInfo) {
+      return (
+        <View>
+          <Thumbnail
+            source={{uri: props.userInfo && props.userInfo.displaypicture}}
+            style={styles.profile.avatar}
+          />
+          <ProfileTitle>{props.userInfo.fullname}</ProfileTitle>
+          <ProfileSubTitle>{props.userInfo.email}</ProfileSubTitle>
+        </View>
+      );
+    }
+  };
+
   return (
     <SettingsContainer>
-      <View style={{height: 260}}>
+      <View style={{height: 220, backgroundColor: '#262637'}}>
         <Header transparent>
           <Left>
-            <Button transparent>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
               <Icon name="menu" style={{color: 'white'}} />
             </Button>
           </Left>
           <Body>
-            <Title style={{color: 'white', fontSize: 30}}>Profile</Title>
+            <Title style={{color: 'white', fontSize: 30, alignItems: 'center'}}>
+              Profile
+            </Title>
           </Body>
           <Right />
         </Header>
       </View>
 
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        <Thumbnail
-          source={{uri: props.userInfo.displaypicture}}
-          style={styles.profile.avatar}
-        />
-        <ProfileTitle>{props.userInfo.fullname}</ProfileTitle>
-        <ProfileSubTitle>{props.userInfo.email}</ProfileSubTitle>
-
+        {displayProfile()}
         <TouchableHighlight
           style={styles1.buttonGetData}
           onPress={() => loadSampleData()}>
           <Text style={styles1.text}>Load Sample Data</Text>
         </TouchableHighlight>
-
         <GoogleSignInComponent
           title={latestBackup && new Date(latestBackup.date).toDateString()}
         />
@@ -186,8 +196,8 @@ const styles1 = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonGetData: {
-    marginTop: 200,
-    backgroundColor: '#346',
+    marginTop: 20,
+    backgroundColor: '#262637',
     padding: 10,
     margin: 10,
   },

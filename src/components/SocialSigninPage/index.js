@@ -19,7 +19,7 @@ import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
-} from '@react-native-google-signin/google-signin';
+} from '@react-native-community/google-signin';
 
 import {
   upload,
@@ -51,14 +51,12 @@ class SocialSigninPage extends Component {
       PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       ).then((writeGranted) => {
-        console.log('writeGranted', writeGranted);
         if (!writeGranted) {
           requestWriteStoragePermission();
         }
         PermissionsAndroid.check(
           PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
         ).then((readGranted) => {
-          console.log('readGranted', readGranted);
           if (!readGranted) {
             requestReadStoragePermission();
           }
@@ -74,6 +72,10 @@ class SocialSigninPage extends Component {
       await GoogleSignin.configure({
         scopes: GOOGLE_API_SCOPES,
         iosClientId: GOOGLE_API_IOS_CLIENT_ID,
+      });
+
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
       });
 
       if (!userInfo) {
@@ -98,7 +100,6 @@ class SocialSigninPage extends Component {
 
   importDatabase = async () => {
     await this.initialGoogle();
-
     getFile()
       .then((fileFromGDrive) => {
         if (fileFromGDrive) {
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonGetData: {
-    backgroundColor: '#346',
+    backgroundColor: '#262637',
     padding: 10,
     margin: 10,
   },

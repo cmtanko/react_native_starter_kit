@@ -23,9 +23,7 @@ const requestCameraPermission = async () => {
     } else {
       return false;
     }
-  } catch (err) {
-    console.warn(err);
-  }
+  } catch (err) {}
 };
 
 const writetoFile = (allRecordDataForExport) => {
@@ -52,7 +50,6 @@ const writetoFile = (allRecordDataForExport) => {
     RNFetchBlob.fs
       .writeFile(pathToWrite, csvString, 'utf8')
       .then(() => {
-        console.log(`wrote file ${pathToWrite}`);
         resolve();
       })
       .catch((error) => reject(error));

@@ -107,8 +107,6 @@ export const fetchUser = () => {
         'SELECT * FROM user',
         [],
         (_, result) => {
-          debugger;
-          console.warn(result.rows.item(0));
           resolve(result.rows.item(0));
         },
         (err) => {
@@ -141,10 +139,6 @@ export const insertAccount = (title, type, openingBalance, icon) => {
 };
 
 export const insertAccounts = (accounts) => {
-  console.warn(
-    'INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES ' +
-      accounts,
-  );
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -490,11 +484,9 @@ export const resetData = (accounts, categories, records) => {
         );
       },
       (error) => {
-        console.log('transaction error: ' + error.message);
         reject(error.message);
       },
       () => {
-        console.log('transaction ok');
         resolve();
       },
     );

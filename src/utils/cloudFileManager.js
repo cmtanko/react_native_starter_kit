@@ -24,7 +24,6 @@ const upload = async (existingFileId) => {
   await createBody(!!existingFileId)
     .then((body) => {
       const options = configurePostOptions(body.length, !!existingFileId);
-      console.warn(body);
       return fetch(
         `${uploadUrl}/files${
           existingFileId ? `/${existingFileId}` : ''
@@ -80,7 +79,6 @@ const configurePostOptions = (bodyLength, isUpdate = false) => {
 };
 
 const parseAndHandleErrors = (response) => {
-  console.warn(response);
   if (response.ok) {
     return response.json();
   }
@@ -158,7 +156,6 @@ const getFile = () => {
 const download = (fileId) => {
   return new Promise((resolve, reject) => {
     const options = configureGetOptions();
-    console.log(fileId);
     if (!fileId) {
       throw new Error("Didn't provide a valid file id.");
     }
@@ -167,8 +164,6 @@ const download = (fileId) => {
       fromUrl: `${url}/files/${fileId}?alt=media`,
       toFile: DATABASE_PATH,
     };
-
-    console.log('downloadFileOptions', downloadFileOptions);
 
     RNFetchBlob.fetch('GET', downloadFileOptions.fromUrl, {
       Authorization: downloadFileOptions.authorization,
@@ -185,11 +180,9 @@ const download = (fileId) => {
           resolve({accountSqlQuery, categorySqlQuery, recordSqlQuery});
         } else {
           reject('Error');
-          // handle other status codes
         }
       })
       .catch((errorMessage, statusCode) => {
-        alert(errorMessage);
         reject(errorMessage);
       });
   });

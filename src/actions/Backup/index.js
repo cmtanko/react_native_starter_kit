@@ -56,7 +56,6 @@ export const addUserInfo = (fullName, email, photo, token, callback) => {
       dispatch({type: 'user_insert_success', payload: {}});
       callback();
     } catch (error) {
-      console.error(error);
       throw error;
     }
   };
