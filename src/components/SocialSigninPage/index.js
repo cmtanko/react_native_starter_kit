@@ -91,10 +91,7 @@ class SocialSigninPage extends Component {
       const {accessToken} = await GoogleSignin.getTokens();
       setApiToken(accessToken);
     } catch (error) {
-      await GoogleSignin.signIn();
-
-      const {accessToken} = await GoogleSignin.getTokens();
-      setApiToken(accessToken);
+      alert('Unable to sync with the server');
     }
   };
 

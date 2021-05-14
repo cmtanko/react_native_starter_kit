@@ -19,7 +19,7 @@
     "prettier": "prettier --write '*.js'",
     "format-code": "yarn run prettier && yarn run lint:fix",
     "clear-cache": "rm -rf $TMPDIR/metro-cache-* && watchman watch-del-all && cd android && ./gradlew clean && cd ../ && echo 'DONE.'",
-    "reinstall": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && npm cache clean --force && npm cache verify && rm -rf ios/build && rm -rf node_modules/ && npm i"
+    "reinstall": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf ios/build && rm -rf node_modules/ && npm i"
   },
   "husky": {
     "hooks": {
@@ -37,7 +37,6 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/picker": "^1.8.1",
     "@react-native-community/viewpager": "^5.0.11",
-    "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/drawer": "^5.11.4",
     "@react-navigation/material-bottom-tabs": "^5.3.10",

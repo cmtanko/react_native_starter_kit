@@ -8,9 +8,10 @@ import {CATEGORY_TYPE} from '../../constants';
 
 import {Text} from '../Typography/Text.component';
 
-const RecordTimeLine = ({records, navigate}) => {
+const RecordTimeLine = ({records, ListHeaderComponent, navigate}) => {
   return (
     <Timeline
+      ListHeaderComponent={() => <ListHeaderComponent />}
       data={records}
       timeStyle={{color: 'white'}}
       circleColor={COLOR_LIGHT_BLUE}
@@ -39,13 +40,13 @@ const RecordTimeLine = ({records, navigate}) => {
               </View>
               <View style={{flex: 1}}>
                 {type === CATEGORY_TYPE.INCOME && (
-                  <Text variant="typeIncome">{amount}</Text>
+                  <Text variant="typeIncome">${amount}</Text>
                 )}
                 {type === CATEGORY_TYPE.EXPENSE && (
-                  <Text variant="typeExpense">- {amount}</Text>
+                  <Text variant="typeExpense">- ${amount}</Text>
                 )}
                 {type === CATEGORY_TYPE.TRANSFER && (
-                  <Text variant="typeTransfer">- {amount}</Text>
+                  <Text variant="typeTransfer">- ${amount}</Text>
                 )}
               </View>
             </View>

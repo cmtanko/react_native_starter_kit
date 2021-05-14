@@ -180,3 +180,7 @@ This command should create a symlink to `/uer`
 
 ### Implementing Google signin 
 https://www.pradipdebnath.com/2020/10/06/how-to-implement-google-login-in-react-native-with-firebase/
+
+### Update in react-native-carousel-view > carouselPager.android.js
+`import {ViewPagerAndroid} from 'react-native';` to
+`import ViewPagerAndroid from '@react-native-community/viewpager';`

@@ -6,6 +6,7 @@ import {
   Tabs,
   View,
   Icon,
+  Header,
   Container,
   ScrollableTab,
 } from 'native-base';
@@ -52,6 +53,7 @@ export default class Dashboard extends Component {
             this.tabs = c;
           }}
           tabBarPosition="top"
+          tabBarUnderlineStyle={cs.bg_light_green}
           renderTabBar={() => <ScrollableTab />}>
           {listTabs}
         </Tabs>

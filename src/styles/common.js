@@ -90,10 +90,9 @@ export default StyleSheet.create({
   },
 
   header_block: {
-    // flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
 
   header_block_right: {
@@ -143,9 +142,8 @@ export default StyleSheet.create({
 
   // summary
   summary_header: {
-    // flex: 1,
     alignSelf: 'center',
-    margin: 20,
+    margin: 8,
   },
 
   // Timeline
