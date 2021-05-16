@@ -1,12 +1,7 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import {PermissionsAndroid} from 'react-native';
 
-import {
-  readCsvFromFile,
-  writetoFile,
-  DATABASE_FILENAME,
-  DATABASE_PATH,
-} from './fileManager';
+import {readCsvFromFile, DATABASE_FILENAME, DATABASE_PATH} from './fileManager';
 
 import csvToJson from './csvToJson';
 
@@ -155,7 +150,6 @@ const getFile = () => {
 
 const download = (fileId) => {
   return new Promise((resolve, reject) => {
-    const options = configureGetOptions();
     if (!fileId) {
       throw new Error("Didn't provide a valid file id.");
     }

@@ -7,7 +7,7 @@ import React, {PureComponent} from 'react';
 import AccountRow from './AccountRow';
 import {getAccounts} from '../../actions';
 import {Text} from '../Typography/Text.component';
-
+import {selectAccounts, selectAccountLoading} from '../../selector';
 class AccountList extends PureComponent {
   componentDidMount() {
     this.props.getAccounts();
@@ -45,12 +45,10 @@ class AccountList extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const accounts = _.map(state.account.list, (val) => {
-    val.balance = val.balance || 0;
-    return val;
-  });
-  const {loading} = state.account;
-  return {accounts, loading};
+  return {
+    accounts: selectAccounts(state),
+    loading: selectAccountLoading(state),
+  };
 };
 
 export default connect(mapStateToProps, {getAccounts})(AccountList);

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Spinner, View} from 'native-base';
 import CategoryRow from './CategoryRow';
 import {getCategories} from '../../actions';
-
+import {selectCategories, selectCategoryLoading} from '../../selector';
 import {Text} from '../Typography/Text.component';
 
 class CategoryList extends Component {
@@ -53,13 +53,12 @@ class CategoryList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const categories = _.map(state.category.list, (val) => {
-    return val;
-  });
-
   const {selectedCategoryType} = state;
-  const {loading} = state.category;
-  return {categories, selectedCategoryType, loading};
+  return {
+    categories: selectCategories(state),
+    selectedCategoryType,
+    loading: selectCategoryLoading(state),
+  };
 };
 
 export default connect(mapStateToProps, {getCategories})(CategoryList);

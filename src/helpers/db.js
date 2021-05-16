@@ -85,12 +85,9 @@ export const insertUser = (fullName, email, displayPicture, token) => {
         'INSERT INTO user (fullname, email, displaypicture, token) VALUES (?,?,?,?)',
         [fullName, email, displayPicture, token],
         (_, result) => {
-          alert(result);
           resolve(result);
         },
         (err) => {
-          alert(err);
-
           reject(err);
         },
       );

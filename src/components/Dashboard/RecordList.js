@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {View, Spinner, Text, Content} from 'native-base';
 
 import RecordTimeLine from './RecordTimeLine';
+import {selectRecords, selectCategories, selectAccounts} from '../../selector';
 import RecordEmpty from './RecordEmpty';
 import {CATEGORY_TYPE} from '../../constants';
 
@@ -77,6 +78,7 @@ class RecordList extends PureComponent {
   }
 
   showList(balance, totalEarned, totalSpent) {
+    console.log('---> Here');
     const {selectedMonth} = this.props;
 
     let filteredList = _.filter(this.props.records, (record) => {
@@ -158,25 +160,11 @@ class RecordList extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const {
-    record: {list: recordList},
-    account: {list: accountList},
-    category: {list: categoryList},
-  } = state;
-
-  const records = _.map(recordList, (val, id) => {
-    return val;
-  });
-
-  const accounts = _.map(accountList, (val, id) => {
-    return val;
-  });
-
-  const categories = _.map(categoryList, (val, id) => {
-    return val;
-  });
-
-  return {records, accounts, categories};
+  return {
+    records: selectRecords(state),
+    accounts: selectAccounts(state),
+    categories: selectCategories(state),
+  };
 };
 
 export default connect(mapStateToProps, {

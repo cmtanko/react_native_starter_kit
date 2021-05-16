@@ -2,40 +2,33 @@
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  TouchableHighlight,
-} from 'react-native';
-import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
-
+import {StyleSheet, TouchableHighlight} from 'react-native';
 import {
   View,
   Text,
-  Thumbnail,
-  Header,
-  Title,
-  Button,
   Left,
-  Right,
   Body,
   Icon,
+  Right,
+  Title,
+  Header,
+  Button,
+  Thumbnail,
 } from 'native-base';
+
 import GoogleSignInComponent from '../SocialSigninPage';
+
 import {addBackup, resetDatabase, addAccounts} from '../../actions';
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
-
-const avatar = require('../../assets/images/profile.png');
 import {
-  SettingsContainer,
-  SettingsContent,
-  SettingsButton,
-  SettingsTitle,
-  SettingsIcon,
-  ProfileTitle,
-  ProfileSubTitle,
-} from './styles';
+  selectRecords,
+  selectCategories,
+  selectAccounts,
+  selectUser,
+  selectBackups,
+} from '../../selector';
+
+import {SettingsContainer, ProfileTitle, ProfileSubTitle} from './styles';
 import styles from './styles';
 
 const SettingPage = (props) => {
@@ -204,28 +197,13 @@ const styles1 = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const {
-    record: {list: recordList},
-    account: {list: accountList},
-    category: {list: categoryList},
-    backup: {list: backupList},
-    user: {list: userInfo},
-  } = state;
-
-  const records = _.map(recordList, (val, id) => {
-    return val;
-  });
-
-  const accounts = _.map(accountList, (val, id) => {
-    return val;
-  });
-
-  const categories = _.map(categoryList, (val, id) => {
-    return val;
-  });
-
-  const latestBackup = backupList[backupList.length - 1];
-  return {records, accounts, categories, latestBackup, userInfo};
+  return {
+    records: selectRecords(state),
+    accounts: selectAccounts(state),
+    categories: selectCategories(state),
+    latestBackup: selectBackups(state),
+    userInfo: selectUser(state),
+  };
 };
 
 export default connect(mapStateToProps, {

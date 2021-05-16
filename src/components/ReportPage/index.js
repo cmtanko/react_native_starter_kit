@@ -6,6 +6,7 @@ import {Container, View, Button, Segment, Text} from 'native-base';
 
 import cs from '../../styles/common';
 import {selectReportType} from '../../actions';
+import {selectRecords, selectCategories, selectAccounts} from '../../selector';
 
 import ReportDetail from './ReportDetail';
 
@@ -108,26 +109,14 @@ const ReportPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {
-    record: {list: recordList},
-    account: {list: accountList},
-    category: {list: categoryList},
+  const {selectedReportType} = state;
+
+  return {
+    records: selectRecords(state),
+    accounts: selectAccounts(state),
+    categories: selectCategories(state),
     selectedReportType,
-  } = state;
-
-  const records = recordList.map((val, id) => {
-    return val;
-  });
-
-  const accounts = accountList.map((val, id) => {
-    return val;
-  });
-
-  const categories = categoryList.map((val, id) => {
-    return val;
-  });
-
-  return {records, accounts, categories, selectedReportType};
+  };
 };
 
 export default connect(mapStateToProps, {selectReportType})(ReportPage);

@@ -8,6 +8,12 @@ import RecordForm from './RecordForm';
 import SectionHeader from './SectionHeader';
 import {ButtonBox, ErrorBox} from '../Common';
 import {
+  selectAccountLoading,
+  selectCategories,
+  selectAccounts,
+} from '../../selector';
+
+import {
   addRecord,
   editRecord,
   deleteRecord,
@@ -200,17 +206,12 @@ class RecordAddIncome extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {
-    account: {list: accounts},
-    category: {list: categories},
-  } = state;
-
   return {
-    accounts,
-    categories,
+    accounts: selectAccounts(state),
+    categories: selectCategories(state),
     selectedCategoryType: state.selectedCategoryType,
     error: state.account.error,
-    loading: state.account.loading,
+    loading: selectAccountLoading(state),
   };
 };
 

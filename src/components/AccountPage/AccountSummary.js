@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Text} from '../Typography/Text.component';
+import {selectCurrentBalance} from '../../selector';
 
 import {
   AccountSummaryContent,
@@ -26,21 +27,8 @@ const AccountSummary = ({currentBalance}) => {
 };
 
 const mapStateToProps = (state) => {
-  const accounts = _.map(state.account.list, (val) => {
-    val.openingBalance = parseFloat(val.openingBalance);
-    return val;
-  });
-
-  const currentBalance =
-    parseFloat(
-      parseFloat(_.sumBy(accounts, 'balance')) ||
-        0 + parseFloat(_.sumBy(accounts, 'openingBalance') || 0),
-    ) || 0;
-
   return {
-    currentBalance: currentBalance
-      .toFixed(2)
-      .replace(/\d(?=(\d{3})+\.)/g, '$&,'),
+    currentBalance: selectCurrentBalance(state),
   };
 };
 

@@ -7,33 +7,38 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {
-  addBackup,
-  resetDatabase,
-  addAccounts,
-  addUserInfo,
-} from '../../actions';
-import {readFromFile, writetoFile} from '../../utils/fileManager';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from '@react-native-community/google-signin';
+  addBackup,
+  getBackup,
+  addUserInfo,
+  addAccounts,
+  getRecords,
+  getAccounts,
+  getUserInfo,
+  getCategories,
+  resetDatabase,
+} from '../../actions';
+import {writetoFile} from '../../utils/fileManager';
+import {
+  selectRecords,
+  selectCategories,
+  selectAccounts,
+  selectBackups,
+} from '../../selector';
 
 import {
   upload,
   getFile,
   download,
   setApiToken,
-  requestWriteStoragePermission,
   requestReadStoragePermission,
+  requestWriteStoragePermission,
   GOOGLE_API_SCOPES,
   GOOGLE_API_IOS_CLIENT_ID,
 } from '../../utils/cloudFileManager';
 import {Platform} from 'react-native';
-
-let apiToken = null;
 
 class SocialSigninPage extends Component {
   constructor(props) {
@@ -78,16 +83,14 @@ class SocialSigninPage extends Component {
         showPlayServicesUpdateDialog: true,
       });
 
-      if (!userInfo) {
-        const user = await GoogleSignin.signIn();
-        this.props.addUserInfo(
-          user.user.name,
-          user.user.email,
-          user.user.photo,
-          user.idToken,
-          () => {},
-        );
-      }
+      const user = await GoogleSignin.signIn();
+      this.props.addUserInfo(
+        user.user.name,
+        user.user.email,
+        user.user.photo,
+        user.idToken,
+        () => {},
+      );
       const {accessToken} = await GoogleSignin.getTokens();
       setApiToken(accessToken);
     } catch (error) {
@@ -108,6 +111,11 @@ class SocialSigninPage extends Component {
               categorySqlQuery,
               recordSqlQuery,
               () => {
+                this.props.getRecords();
+                this.props.getAccounts();
+                this.props.getCategories();
+                this.props.getBackup();
+                this.props.getUserInfo();
                 alert('Database Imported Successfully');
               },
             );
@@ -123,7 +131,9 @@ class SocialSigninPage extends Component {
     // Only download if no records present in the db
     const {records} = this.props;
 
-    if (records && records.length === 0) {
+    const doesAppNeedsToImportDatabase = records && records.length === 0;
+
+    if (doesAppNeedsToImportDatabase) {
       this.importDatabase();
     } else {
       this.exportDatabase();
@@ -188,11 +198,14 @@ class SocialSigninPage extends Component {
         });
       })
       .catch((error) => {
-        alert(error);
+        alert('Error => ' + JSON.stringify(error));
       });
   };
 
   render() {
+    const {latestBackup} = this.props;
+    const lastBackupDate =
+      latestBackup && new Date(latestBackup.date).toDateString();
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -200,7 +213,7 @@ class SocialSigninPage extends Component {
           onPress={this.syncDatabase}>
           <Text style={styles.text}>Sync</Text>
         </TouchableHighlight>
-        <Text style={{paddingLeft: 8}}>Last synced at: {this.props.title}</Text>
+        <Text style={{paddingLeft: 8}}>Last synced at: {lastBackupDate}</Text>
       </View>
     );
   }
@@ -222,35 +235,22 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const {
-    record: {list: recordList},
-    account: {list: accountList},
-    category: {list: categoryList},
-    backup: {list: backupList},
-    user: {list: userList},
-  } = state;
-
-  const records = recordList.map((val, id) => {
-    return val;
-  });
-
-  const accounts = accountList.map((val, id) => {
-    return val;
-  });
-
-  const categories = categoryList.map((val, id) => {
-    return val;
-  });
-
-  const latestBackup = backupList[backupList.length - 1];
-
-  const userInfo = userList;
-  return {records, userInfo, accounts, categories, latestBackup};
+  return {
+    records: selectRecords(state),
+    accounts: selectAccounts(state),
+    categories: selectCategories(state),
+    latestBackup: selectBackups(state),
+  };
 };
 
 export default connect(mapStateToProps, {
   addBackup,
+  getBackup,
+  getRecords,
   addUserInfo,
   addAccounts,
+  getUserInfo,
+  getAccounts,
   resetDatabase,
+  getCategories,
 })(SocialSigninPage);
