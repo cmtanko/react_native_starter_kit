@@ -1,6 +1,6 @@
 {
   "name": "react_native_starter_kit",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "pod-update": "cd ios && pod install && cd ..",
@@ -52,6 +52,7 @@
     "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-bootsplash": "^3.2.3",
     "react-native-carousel-view": "^0.5.1",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-gesture-handler": "^1.9.0",

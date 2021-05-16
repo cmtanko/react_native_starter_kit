@@ -78,7 +78,6 @@ class RecordList extends PureComponent {
   }
 
   showList(balance, totalEarned, totalSpent) {
-    console.log('---> Here');
     const {selectedMonth} = this.props;
 
     let filteredList = _.filter(this.props.records, (record) => {
