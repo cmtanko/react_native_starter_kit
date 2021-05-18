@@ -1,6 +1,6 @@
 {
   "name": "react_native_starter_kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "pod-update": "cd ios && pod install && cd ..",

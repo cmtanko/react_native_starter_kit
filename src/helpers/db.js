@@ -10,6 +10,9 @@ export const init = () => {
         [],
         () => {
           console.warn('Table accounts created');
+          tx.executeSql(
+            "INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES (1,'Bank of Melboune','BANK',1400,'building'),(4,'NAB Credit Card','OTHERS',0,'credit-card'),(3,'Cash','CASH',80,'money')",
+          );
           resolve();
         },
         (err) => {
@@ -24,6 +27,9 @@ export const init = () => {
         [],
         () => {
           console.warn('Table categories created');
+          tx.executeSql(
+            "INSERT INTO categories (id, title, type, icon) VALUES (17,'Transportation','EXPENSE','car'),(6,'Phone','EXPENSE','phone'),(9,'Rent','EXPENSE','bed'),(14,'Grocery','EXPENSE','shopping-cart'),(2,'Interest','INCOME','dollar'),(8,'Electricity','EXPENSE','bolt'),(16,'Eat Out','EXPENSE','home'),(10,'Medical','EXPENSE','ambulance'),(1,'Salary','INCOME','dollar'),(4,'Dividends','INCOME','money'),(5,'Misc','INCOME','gear'),(3,'Commission','INCOME','money'),(15,'Gift','EXPENSE','gift'),(12,'House','EXPENSE','home'),(11,'Shopping','EXPENSE','amazon'),(18,'Payback to NAB','TRANSFER','credit-card'),(7,'Shares','EXPENSE','btc'),(13,'Education','EXPENSE','home')",
+          );
           resolve();
         },
         (err) => {

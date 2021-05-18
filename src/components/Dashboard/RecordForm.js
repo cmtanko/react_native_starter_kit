@@ -83,9 +83,19 @@ const RecordForm = ({
           onDismiss={hideModal}
           contentContainerStyle={containerStyle}>
           <FlatList
+            ListHeaderComponent={() => (
+              <View style={cs.padding_large}>
+                <Text
+                  style={[cs.h2, cs.center, cs.color_grey, cs.padding_large]}>
+                  Select Category
+                </Text>
+              </View>
+            )}
             horizontal={false}
             numColumns={4}
-            data={categories.filter((cat) => cat.type === selectedCategoryType)}
+            data={categories.filter(
+              (cat) => cat.type === selectedCategoryType || cat.type === '',
+            )}
             itemDimension={50}
             keyExtractor={(item) => item.id}
             initialNumToRender={20}
