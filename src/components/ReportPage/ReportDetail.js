@@ -39,7 +39,7 @@ const ReportDetail = (props) => {
               theme={VictoryTheme.material}
               colorScale={colorScale}
               innerRadius={70}
-              labelRadius={120}
+              labelRadius={160}
               width={deviceWidth - 40}
               data={myData}
               events={[]}
@@ -59,7 +59,7 @@ const ReportDetail = (props) => {
               theme={VictoryTheme.material}
               colorScale={colorScale}
               innerRadius={70}
-              labelRadius={120}
+              labelRadius={160}
               width={deviceWidth - 40}
               data={expenseData}
               events={[]}

@@ -184,3 +184,16 @@ https://www.pradipdebnath.com/2020/10/06/how-to-implement-google-login-in-react-
 ### Update in react-native-carousel-view > carouselPager.android.js
 `import {ViewPagerAndroid} from 'react-native';` to
 `import ViewPagerAndroid from '@react-native-community/viewpager';`
+
+
+### Update in react-native-timeline-flatlist
+<FlatList
+          ListHeaderComponent={<this.props.ListHeaderComponent/>}   <--- Add this line
+          style={[styles.listview, this.props.listViewStyle]}
+          contentContainerStyle={this.props.listViewContainerStyle}
+          data={this.state.data}
+          extraData={this.state}
+          renderItem={this._renderItem}
+          keyExtractor={(item, index) => index + ""}
+          {...this.props.options}
+        />
