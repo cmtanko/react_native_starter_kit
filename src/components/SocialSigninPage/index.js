@@ -1,14 +1,9 @@
-import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-  PermissionsAndroid,
-} from 'react-native';
 import {connect} from 'react-redux';
+import React, {Component} from 'react';
+import {PermissionsAndroid, Platform} from 'react-native';
 import {GoogleSignin} from '@react-native-community/google-signin';
 
+import {ListButtonBox} from '../Common';
 import {
   addBackup,
   getBackup,
@@ -38,7 +33,6 @@ import {
   GOOGLE_API_SCOPES,
   GOOGLE_API_IOS_CLIENT_ID,
 } from '../../utils/cloudFileManager';
-import {Platform} from 'react-native';
 
 class SocialSigninPage extends Component {
   constructor(props) {
@@ -205,34 +199,19 @@ class SocialSigninPage extends Component {
   render() {
     const {latestBackup} = this.props;
     const lastBackupDate =
-      latestBackup && new Date(latestBackup.date).toDateString();
+      'Last synced at: ' + latestBackup &&
+      new Date(latestBackup.date).toDateString();
     return (
-      <View style={styles.container}>
-        <TouchableHighlight
-          style={styles.buttonGetData}
-          onPress={this.syncDatabase}>
-          <Text style={styles.text}>Sync</Text>
-        </TouchableHighlight>
-        <Text style={{paddingLeft: 8}}>Last synced at: {lastBackupDate}</Text>
-      </View>
+      <ListButtonBox
+        title="Sync with gdrive"
+        icon="md-logo-google"
+        type="list"
+        selectedItem={lastBackupDate}
+        onPress={this.syncDatabase}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  text: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    margin: 10,
-    fontWeight: 'bold',
-  },
-  buttonGetData: {
-    backgroundColor: '#262637',
-    padding: 10,
-    margin: 10,
-  },
-});
 
 const mapStateToProps = (state) => {
   return {

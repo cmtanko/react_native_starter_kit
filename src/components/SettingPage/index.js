@@ -2,10 +2,8 @@
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, TouchableHighlight} from 'react-native';
 import {
   View,
-  Text,
   Left,
   Body,
   Icon,
@@ -13,13 +11,18 @@ import {
   Title,
   Header,
   Button,
+  Content,
   Thumbnail,
 } from 'native-base';
 
+import {ListButtonBox} from '../Common';
 import GoogleSignInComponent from '../SocialSigninPage';
-
-import {addBackup, resetDatabase, addAccounts} from '../../actions';
-const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
+import {
+  addBackup,
+  resetDatabase,
+  wipeDatabase,
+  addAccounts,
+} from '../../actions';
 import {
   selectRecords,
   selectCategories,
@@ -27,6 +30,8 @@ import {
   selectUser,
   selectBackups,
 } from '../../selector';
+
+const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
 
 import {SettingsContainer, ProfileTitle, ProfileSubTitle} from './styles';
 import styles from './styles';
@@ -48,6 +53,16 @@ const SettingPage = (props) => {
           alert('Database Imported Successfully');
         },
       );
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const emptyDatabase = () => {
+    try {
+      props.wipeDatabase(() => {
+        alert('Database wiped successfully');
+      });
     } catch (error) {
       alert(error);
     }
@@ -167,34 +182,46 @@ const SettingPage = (props) => {
 
       <View style={{flex: 1, backgroundColor: 'white'}}>
         {displayProfile()}
-        <TouchableHighlight
-          style={styles1.buttonGetData}
-          onPress={() => loadSampleData()}>
-          <Text style={styles1.text}>Load Sample Data</Text>
-        </TouchableHighlight>
-        <GoogleSignInComponent
-          title={latestBackup && new Date(latestBackup.date).toDateString()}
-        />
+        <Content>
+          <ListButtonBox
+            title="Security"
+            icon="lock-open"
+            type="switch"
+            isSelected={false}
+          />
+          <ListButtonBox
+            title="Notification"
+            icon="airplane"
+            type="switch"
+            isSelected={true}
+          />
+          <ListButtonBox
+            title="Currency"
+            icon="md-basket"
+            type="list"
+            selectedItem="AUD"
+          />
+          <ListButtonBox
+            title="Load sample data"
+            icon="md-basket"
+            type="button"
+            onPress={loadSampleData}
+          />
+          <ListButtonBox
+            title="Wipe all data"
+            icon="md-trash"
+            type="button"
+            onPress={emptyDatabase}
+          />
+
+          <GoogleSignInComponent
+            title={latestBackup && new Date(latestBackup.date).toDateString()}
+          />
+        </Content>
       </View>
     </SettingsContainer>
   );
 };
-
-const styles1 = StyleSheet.create({
-  container: {},
-  text: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    margin: 10,
-    fontWeight: 'bold',
-  },
-  buttonGetData: {
-    marginTop: 20,
-    backgroundColor: '#262637',
-    padding: 10,
-    margin: 10,
-  },
-});
 
 const mapStateToProps = (state) => {
   return {
@@ -208,6 +235,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   addBackup,
+  wipeDatabase,
   resetDatabase,
   addAccounts,
 })(SettingPage);

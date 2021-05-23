@@ -422,7 +422,7 @@ export const insertBackup = (text, date) => {
 };
 
 export const fetchBackup = () => {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         'SELECT * FROM backups',
@@ -445,8 +445,26 @@ export const fetchBackup = () => {
   return promise;
 };
 
+export const wipeData = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql('DELETE FROM accounts');
+        tx.executeSql('DELETE FROM categories');
+        tx.executeSql('DELETE FROM records');
+      },
+      (error) => {
+        reject(error.message);
+      },
+      () => {
+        resolve();
+      },
+    );
+  });
+};
+
 export const resetData = (accounts, categories, records) => {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         tx.executeSql('DELETE FROM accounts');
@@ -494,6 +512,4 @@ export const resetData = (accounts, categories, records) => {
       },
     );
   });
-
-  return promise;
 };

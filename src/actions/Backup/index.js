@@ -1,6 +1,7 @@
 import {
   fetchUser,
   resetData,
+  wipeData,
   insertUser,
   fetchBackup,
   insertBackup,
@@ -30,6 +31,18 @@ export const addBackup = ({title, date, callback}) => {
         date: date,
       };
       dispatch({type: 'backup_created_success', payload: backupData});
+      callback();
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const wipeDatabase = (callback) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await wipeData();
+      dispatch({type: 'database_wipe_success', payload: {}});
       callback();
     } catch (error) {
       throw error;
