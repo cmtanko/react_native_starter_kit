@@ -6,6 +6,12 @@ const accountList = (state) => state.account;
 const categoryList = (state) => state.category;
 const userList = (state) => state.user;
 const backupList = (state) => state.backup;
+const setting = (state) => state.setting;
+
+export const selectSetting = createSelector(
+  [setting],
+  (set) => set && set.preference,
+);
 
 export const selectUser = createSelector(
   [userList],

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import * as React from 'react';
-
+import React, {useState, useEffect} from 'react';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -8,6 +8,8 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Dashboard from './components/Dashboard';
+
+import LockPage from './components/LockPage';
 
 import SettingPage from './components/SettingPage';
 import ReportPage from './components/ReportPage';
@@ -24,6 +26,8 @@ import CategoryPage from './components/CategoryPage';
 import CategoryAdd from './components/CategoryPage/CategoryAdd';
 import CategoryList from './components/CategoryPage/CategoryList';
 // import {Header, Button} from 'react-native-elements';
+
+import {getSettings, setLockedState} from './actions';
 
 import {COLOR_DARK_BLUE} from './styles/common';
 
@@ -187,64 +191,101 @@ const SettingStack = ({navigation}) => {
   );
 };
 
-export default function App() {
+const LockScreen = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="LockedScreen" component={LockPage} />
+    </Stack.Navigator>
+  );
+};
+
+const HomeDrawer = ({navigation}) => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      overlayColor="transparent"
+      drawerType="slide"
+      drawerStyle={{width: '56%'}}>
+      <Drawer.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Accounts"
+        component={AccountStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="bank" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Categories"
+        component={CategoryStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="shape" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Report"
+        component={ReportStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="chart-bar"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+};
+
+function App({locked, shouldLock}) {
+  const shouldAppShowLockScreen = useSelector(
+    (state) => state.setting.preference.lockscreen,
+  );
+  const isAppUnLocked = useSelector((state) => !state.setting.locked);
+
+  const dispatch = useDispatch();
+  const addNote = (note) => dispatch(setLockedState());
+
+  const showLockScreen =
+    shouldAppShowLockScreen === 'true' ? (isAppUnLocked ? false : true) : false;
+
   return (
     <NavigationContainer>
-      <Drawer.Navigator
-        initialRouteName="Home"
-        overlayColor="transparent"
-        drawerType="slide"
-        drawerStyle={{width: '56%'}}>
-        <Drawer.Screen
-          name="Home"
-          component={HomeStack}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Accounts"
-          component={AccountStack}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="bank" color={color} size={size} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Categories"
-          component={CategoryStack}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="shape" color={color} size={size} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Report"
-          component={ReportStack}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="chart-bar"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Settings"
-          component={SettingStack}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="cog" color={color} size={size} />
-            ),
-          }}
-        />
-      </Drawer.Navigator>
+      {showLockScreen ? <LockScreen /> : <HomeDrawer />}
     </NavigationContainer>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    locked: state.backup.locked,
+    shouldLock: state.setting.preference.lockscreen,
+  };
+};
+
+export default connect(mapStateToProps, getSettings)(App);

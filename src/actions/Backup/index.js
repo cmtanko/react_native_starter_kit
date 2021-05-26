@@ -5,6 +5,9 @@ import {
   insertUser,
   fetchBackup,
   insertBackup,
+  fetchSetting,
+  insertSetting,
+  insertSettings,
 } from '../../helpers/db';
 
 export const getBackup = () => {
@@ -62,6 +65,61 @@ export const resetDatabase = (accounts, categories, records, callback) => {
   };
 };
 
+export const getUserInfo = () => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await fetchUser();
+      dispatch({
+        type: 'user_fetch_success',
+        payload: dbResult,
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getSettings = () => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await fetchSetting();
+      dispatch({type: 'setting_fetch_success', payload: dbResult});
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const setSettings = ({
+  id,
+  lockscreen,
+  notification,
+  currency,
+  callback,
+}) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await insertSetting(
+        id,
+        lockscreen,
+        notification,
+        currency,
+      );
+      dispatch({
+        type: 'setting_add_success',
+        payload: {
+          id,
+          lockscreen,
+          notification,
+          currency,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
 export const addUserInfo = (fullName, email, photo, token, callback) => {
   return async (dispatch) => {
     try {
@@ -74,13 +132,12 @@ export const addUserInfo = (fullName, email, photo, token, callback) => {
   };
 };
 
-export const getUserInfo = () => {
+export const setLockedState = (value) => {
   return async (dispatch) => {
     try {
-      const dbResult = await fetchUser();
       dispatch({
-        type: 'user_fetch_success',
-        payload: dbResult,
+        type: 'lock_insert_success',
+        payload: value,
       });
     } catch (error) {
       throw error;

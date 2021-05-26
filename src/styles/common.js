@@ -113,6 +113,15 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
+  // Views
+
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR_DARK_BLUE,
+  },
+
   // Icons
   active_icon: {
     fontSize: 35,

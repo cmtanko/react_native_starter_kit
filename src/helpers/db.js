@@ -79,9 +79,44 @@ export const init = () => {
         },
       );
     });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY NOT NULL, lockscreen TEXT, notification TEXT, currency TEXT)',
+        [],
+        () => {
+          console.warn('Table settings created');
+          tx.executeSql(
+            "INSERT INTO settings (id, lockscreen, notification, currency) VALUES (1, 'false', 'false','AUD')",
+          );
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
   });
 
   return promise;
+};
+
+export const insertSetting = (id, lockscreen, notification, currency) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          `UPDATE settings SET lockscreen="${lockscreen}", notification="${notification}", currency="${currency}" WHERE id=${id}`,
+        );
+      },
+      (error) => {
+        reject(error.message);
+      },
+      (res) => {
+        resolve(res);
+      },
+    );
+  });
 };
 
 export const insertUser = (fullName, email, displayPicture, token) => {
@@ -452,6 +487,7 @@ export const wipeData = () => {
         tx.executeSql('DELETE FROM accounts');
         tx.executeSql('DELETE FROM categories');
         tx.executeSql('DELETE FROM records');
+        tx.executeSql('DELETE FROM settings');
       },
       (error) => {
         reject(error.message);
@@ -512,4 +548,23 @@ export const resetData = (accounts, categories, records) => {
       },
     );
   });
+};
+
+export const fetchSetting = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM settings',
+        [],
+        (_, result) => {
+          resolve(result.rows.item(0));
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+  });
+
+  return promise;
 };

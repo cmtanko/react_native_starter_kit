@@ -18,6 +18,7 @@ import {
   getCategories,
   getBackup,
   getUserInfo,
+  getSettings,
 } from '../../actions';
 
 class RecordList extends PureComponent {
@@ -64,6 +65,7 @@ class RecordList extends PureComponent {
     this.props.getAccounts();
     this.props.getUserInfo();
     this.props.getCategories();
+    this.props.getSettings();
   }
 
   render() {
@@ -163,6 +165,7 @@ const mapStateToProps = (state) => {
     records: selectRecords(state),
     accounts: selectAccounts(state),
     categories: selectCategories(state),
+    settings: state.settings,
   };
 };
 
@@ -170,6 +173,7 @@ export default connect(mapStateToProps, {
   getBackup,
   getUserInfo,
   getRecords,
+  getSettings,
   getAccounts,
   getCategories,
 })(RecordList);

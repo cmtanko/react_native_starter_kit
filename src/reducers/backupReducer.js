@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
       return {...state};
     }
     case 'database_wipe_success': {
-      return {...state};
+      return {...initialState};
     }
     default:
       return state;

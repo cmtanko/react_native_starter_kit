@@ -199,8 +199,10 @@ class SocialSigninPage extends Component {
   render() {
     const {latestBackup} = this.props;
     const lastBackupDate =
-      'Last synced at: ' + latestBackup &&
-      new Date(latestBackup.date).toDateString();
+      latestBackup && latestBackup.date
+        ? new Date(latestBackup.date).toLocaleString()
+        : '';
+
     return (
       <ListButtonBox
         title="Sync with gdrive"

@@ -22,13 +22,17 @@ import {
   resetDatabase,
   wipeDatabase,
   addAccounts,
+  getSettings,
+  setSettings,
 } from '../../actions';
+
 import {
   selectRecords,
   selectCategories,
   selectAccounts,
   selectUser,
   selectBackups,
+  selectSetting,
 } from '../../selector';
 
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
@@ -187,19 +191,31 @@ const SettingPage = (props) => {
             title="Security"
             icon="lock-open"
             type="switch"
-            isSelected={false}
+            isSelected={props.settings.lockscreen === 'true'}
+            onChange={(val) => {
+              props.setSettings({
+                ...props.settings,
+                lockscreen: val.toString(),
+              });
+            }}
           />
           <ListButtonBox
             title="Notification"
             icon="airplane"
             type="switch"
-            isSelected={true}
+            isSelected={props.settings.notification === 'true'}
+            onChange={(val) => {
+              props.setSettings({
+                ...props.settings,
+                notification: val.toString(),
+              });
+            }}
           />
           <ListButtonBox
             title="Currency"
             icon="md-basket"
             type="list"
-            selectedItem="AUD"
+            selectedItem={props.settings.currency}
           />
           <ListButtonBox
             title="Load sample data"
@@ -215,7 +231,11 @@ const SettingPage = (props) => {
           />
 
           <GoogleSignInComponent
-            title={latestBackup && new Date(latestBackup.date).toDateString()}
+            title={
+              latestBackup &&
+              latestBackup.date &&
+              new Date(latestBackup.date).toDateString()
+            }
           />
         </Content>
       </View>
@@ -230,6 +250,7 @@ const mapStateToProps = (state) => {
     categories: selectCategories(state),
     latestBackup: selectBackups(state),
     userInfo: selectUser(state),
+    settings: selectSetting(state),
   };
 };
 
@@ -238,4 +259,6 @@ export default connect(mapStateToProps, {
   wipeDatabase,
   resetDatabase,
   addAccounts,
+  getSettings,
+  setSettings,
 })(SettingPage);

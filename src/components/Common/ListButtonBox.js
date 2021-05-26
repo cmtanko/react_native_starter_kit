@@ -18,10 +18,17 @@ const ListButtonBox = ({
   type,
   selectedItem,
   isSelected,
+  onChange,
   onPress,
 }) => {
   return (
-    <ListItem icon onPress={onPress}>
+    <ListItem
+      icon
+      onPress={() => {
+        if (type !== 'switch') {
+          onPress();
+        }
+      }}>
       <Left>
         <Button style={cs.bg_dark_blue}>
           <Icon active name={icon} />
@@ -31,7 +38,14 @@ const ListButtonBox = ({
         <Text>{title}</Text>
       </Body>
       <Right>
-        {type === 'switch' && <Switch value={isSelected} />}
+        {type === 'switch' && (
+          <Switch
+            value={isSelected}
+            onValueChange={(val) => {
+              onChange(val);
+            }}
+          />
+        )}
         {type === 'list' && <Text>{selectedItem}</Text>}
       </Right>
     </ListItem>
