@@ -1,0 +1,2 @@
+app_identifier("io.newplanet.reactnativestarterkit") # The bundle identifier of your app
+apple_id("suchan211@gmail.com") # Your Apple email address
