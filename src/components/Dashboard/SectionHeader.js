@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {connect} from 'react-redux';
 import {Button, Text} from 'native-base';
@@ -14,28 +15,82 @@ const SectionHeader = (props) => {
     <SegmentContainer>
       <Button
         first
-        active={selectedCategoryType === CATEGORY_TYPE.INCOME}
+        style={{
+          borderColor: '#1C2544',
+          borderBottomColor:
+            selectedCategoryType === CATEGORY_TYPE.INCOME
+              ? '#22e3c4'
+              : '#1C2544',
+          backgroundColor:
+            selectedCategoryType === CATEGORY_TYPE.INCOME
+              ? '#1C262E'
+              : '#10151D',
+        }}
         onPress={() => {
           selectCategoryType(CATEGORY_TYPE.INCOME);
         }}>
-        <Text>INCOME</Text>
+        <Text
+          style={{
+            color:
+              selectedCategoryType === CATEGORY_TYPE.INCOME
+                ? 'white'
+                : '#666666',
+          }}>
+          INCOME
+        </Text>
       </Button>
 
       <Button
-        active={selectedCategoryType === CATEGORY_TYPE.EXPENSE}
+        style={{
+          borderColor: '#1C2533',
+          borderBottomColor:
+            selectedCategoryType === CATEGORY_TYPE.EXPENSE
+              ? '#22e3c4'
+              : '#1C2544',
+          backgroundColor:
+            selectedCategoryType === CATEGORY_TYPE.EXPENSE
+              ? '#1C262E'
+              : '#10151D',
+        }}
         onPress={() => {
           selectCategoryType(CATEGORY_TYPE.EXPENSE);
         }}>
-        <Text>EXPENSE</Text>
+        <Text
+          style={{
+            color:
+              selectedCategoryType === CATEGORY_TYPE.EXPENSE
+                ? 'white'
+                : '#666666',
+          }}>
+          EXPENSE
+        </Text>
       </Button>
 
       <Button
+        style={{
+          borderColor: '#1C2533',
+          borderBottomColor:
+            selectedCategoryType === CATEGORY_TYPE.TRANSFER
+              ? '#22e3c4'
+              : '#1C2544',
+          backgroundColor:
+            selectedCategoryType === CATEGORY_TYPE.TRANSFER
+              ? '#1C262E'
+              : '#10151D',
+        }}
         last
-        active={selectedCategoryType === CATEGORY_TYPE.TRANSFER}
         onPress={() => {
           selectCategoryType(CATEGORY_TYPE.TRANSFER);
         }}>
-        <Text>TRANSFER</Text>
+        <Text
+          style={{
+            color:
+              selectedCategoryType === CATEGORY_TYPE.TRANSFER
+                ? 'white'
+                : '#666666',
+          }}>
+          TRANSFER
+        </Text>
       </Button>
     </SegmentContainer>
   );

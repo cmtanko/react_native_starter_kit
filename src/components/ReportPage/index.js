@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import _ from 'lodash';
 import React from 'react';
 import moment from 'moment';
@@ -72,28 +73,62 @@ const ReportPage = (props) => {
       <Segment style={cs.bg_dark_lightblue}>
         <Button
           first
+          style={{
+            borderColor: '#1C2544',
+            borderBottomColor:
+              selectedReportType === 'WEEKLY' ? '#22e3c4' : '#1C2544',
+            backgroundColor:
+              selectedReportType === 'WEEKLY' ? '#1C262E' : '#10151D',
+          }}
           active={selectedReportType === 'WEEKLY'}
           onPress={() => {
             selectReportType('WEEKLY');
           }}>
-          <Text>THIS WEEK</Text>
+          <Text
+            style={{
+              color: selectedReportType === 'WEEKLY' ? 'white' : '#666666',
+            }}>
+            THIS WEEK
+          </Text>
         </Button>
 
         <Button
-          active={selectedReportType === 'MONTHLY'}
+          style={{
+            borderColor: '#1C2544',
+            borderBottomColor:
+              selectedReportType === 'MONTHLY' ? '#22e3c4' : '#1C2544',
+            backgroundColor:
+              selectedReportType === 'MONTHLY' ? '#1C262E' : '#10151D',
+          }}
           onPress={() => {
             selectReportType('MONTHLY');
           }}>
-          <Text>THIS MONTH</Text>
+          <Text
+            style={{
+              color: selectedReportType === 'MONTHLY' ? 'white' : '#666666',
+            }}>
+            THIS MONTH
+          </Text>
         </Button>
 
         <Button
           last
-          active={selectedReportType === 'YEARLY'}
+          style={{
+            borderColor: '#1C2544',
+            borderBottomColor:
+              selectedReportType === 'YEARLY' ? '#22e3c4' : '#1C2544',
+            backgroundColor:
+              selectedReportType === 'YEARLY' ? '#1C262E' : '#10151D',
+          }}
           onPress={() => {
             selectReportType('YEARLY');
           }}>
-          <Text>THIS YEAR</Text>
+          <Text
+            style={{
+              color: selectedReportType === 'YEARLY' ? 'white' : '#666666',
+            }}>
+            THIS YEAR
+          </Text>
         </Button>
       </Segment>
 

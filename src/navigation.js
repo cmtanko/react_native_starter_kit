@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -29,7 +29,7 @@ import CategoryList from './components/CategoryPage/CategoryList';
 
 import {getSettings, setLockedState} from './actions';
 
-import {COLOR_DARK_BLUE} from './styles/common';
+import {COLOR_PRIMARY} from './styles/common';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -39,7 +39,7 @@ const HomeStack = ({navigation}) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
+          backgroundColor: COLOR_PRIMARY,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -75,7 +75,7 @@ const AccountStack = ({navigation}) => {
       screenOptions={{
         headerTitle: 'Accounts',
         headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
+          backgroundColor: COLOR_PRIMARY,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -108,7 +108,7 @@ const CategoryStack = ({navigation}) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
+          backgroundColor: COLOR_PRIMARY,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -142,7 +142,7 @@ const ReportStack = ({navigation}) => {
       screenOptions={{
         headerTitle: 'Reports',
         headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
+          backgroundColor: COLOR_PRIMARY,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -170,7 +170,7 @@ const SettingStack = ({navigation}) => {
         headerShown: false,
         headerTitle: 'Settings',
         headerStyle: {
-          backgroundColor: COLOR_DARK_BLUE,
+          backgroundColor: COLOR_PRIMARY,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

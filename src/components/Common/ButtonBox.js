@@ -8,7 +8,7 @@ const ButtonBox = ({title, color, btnDelete, onChange}) => {
     <Button
       block
       rounded
-      style={btnDelete ? [cs.button, {backgroundColor: '#e32246'}] : cs.button}
+      style={btnDelete ? [cs.button, cs.brandBgColorDanger] : cs.button}
       onPress={(e) => {
         onChange(e);
       }}>

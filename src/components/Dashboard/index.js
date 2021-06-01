@@ -36,9 +36,9 @@ export default class Dashboard extends Component {
         <Tab
           key={id}
           heading={val}
-          style={cs.bg_dark_lightblue}
-          tabStyle={cs.bg_dark_blue}
-          activeTabStyle={cs.bg_dark_lightblue}>
+          style={cs.brandBgColorPrimary}
+          tabStyle={cs.brandBgColorPrimary}
+          activeTabStyle={[cs.brandBgColorSecondary, cs.brandColorTertiary]}>
           <View style={cs.bg_dark_lightblue}>
             <RecordList selectedMonth={id} navigate={navigate} />
           </View>
@@ -53,7 +53,7 @@ export default class Dashboard extends Component {
             this.tabs = c;
           }}
           tabBarPosition="top"
-          tabBarUnderlineStyle={cs.bg_light_green}
+          tabBarUnderlineStyle={cs.brandBgColorTertiary}
           renderTabBar={() => <ScrollableTab />}>
           {listTabs}
         </Tabs>

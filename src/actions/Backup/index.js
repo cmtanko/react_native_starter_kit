@@ -7,7 +7,6 @@ import {
   insertBackup,
   fetchSetting,
   insertSetting,
-  insertSettings,
 } from '../../helpers/db';
 
 export const getBackup = () => {
@@ -44,7 +43,7 @@ export const addBackup = ({title, date, callback}) => {
 export const wipeDatabase = (callback) => {
   return async (dispatch) => {
     try {
-      const dbResult = await wipeData();
+      await wipeData();
       dispatch({type: 'database_wipe_success', payload: {}});
       callback();
     } catch (error) {
@@ -56,7 +55,7 @@ export const wipeDatabase = (callback) => {
 export const resetDatabase = (accounts, categories, records, callback) => {
   return async (dispatch) => {
     try {
-      const dbResult = await resetData(accounts, categories, records);
+      await resetData(accounts, categories, records);
       dispatch({type: 'database_reset_success', payload: {}});
       callback();
     } catch (error) {
@@ -99,12 +98,7 @@ export const setSettings = ({
 }) => {
   return async (dispatch) => {
     try {
-      const dbResult = await insertSetting(
-        id,
-        lockscreen,
-        notification,
-        currency,
-      );
+      await insertSetting(id, lockscreen, notification, currency);
       dispatch({
         type: 'setting_add_success',
         payload: {
@@ -123,7 +117,7 @@ export const setSettings = ({
 export const addUserInfo = (fullName, email, photo, token, callback) => {
   return async (dispatch) => {
     try {
-      const dbResult = await insertUser(fullName, email, photo, token);
+      await insertUser(fullName, email, photo, token);
       dispatch({type: 'user_insert_success', payload: {}});
       callback();
     } catch (error) {

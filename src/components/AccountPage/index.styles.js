@@ -33,7 +33,9 @@ export const AccountSummaryContent = styled(View)`
   background-color: ${(props) => props.theme.colors.ui.primary};
 `;
 
-export const SummaryCard = styled(Card)``;
+export const SummaryCard = styled(Card)`
+  border-color: ${(props) => props.theme.colors.ui.secondary};
+`;
 
 export const SummaryCardItem = styled(CardItem)`
   background-color: ${(props) => props.theme.colors.ui.primary};

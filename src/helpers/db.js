@@ -476,8 +476,6 @@ export const fetchBackup = () => {
       );
     });
   });
-
-  return promise;
 };
 
 export const wipeData = () => {
@@ -509,33 +507,33 @@ export const resetData = (accounts, categories, records) => {
 
         tx.executeSql(
           `INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES ${accounts}`,
-          (tx, resultSet) => {
+          (tx1, resultSet) => {
             console.log('resultSet.insertId: ' + resultSet.insertId);
             console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
           },
-          (tx, error) => {
+          (tx1, error) => {
             console.log('ACCOUNTS INSERT error: ' + JSON.stringify(error));
           },
         );
 
         tx.executeSql(
           `INSERT INTO categories (id, title, type, icon) VALUES ${categories}`,
-          (tx, resultSet) => {
+          (tx1, resultSet) => {
             console.log('resultSet.insertId: ' + resultSet.insertId);
             console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
           },
-          (tx, error) => {
+          (tx1, error) => {
             console.log('CATEGORIES INSERT error: ' + JSON.stringify(error));
           },
         );
 
         tx.executeSql(
           `INSERT INTO records (id, amount,date,categoryId,payFrom,payTo,description,place,camera) VALUES ${records}`,
-          (tx, resultSet) => {
+          (tx1, resultSet) => {
             console.log('resultSet.insertId: ' + resultSet.insertId);
             console.log('resultSet.rowsAffected: ' + resultSet.rowsAffected);
           },
-          (tx, error) => {
+          (tx1, error) => {
             console.log('RECORDS INSERT error: ' + JSON.stringify(error));
           },
         );

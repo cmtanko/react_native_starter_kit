@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   Text,
@@ -34,10 +35,16 @@ const ListButtonBox = ({
           <Icon active name={icon} />
         </Button>
       </Left>
-      <Body>
+      <Body
+        style={{
+          borderBottomWidth: 0,
+        }}>
         <Text>{title}</Text>
       </Body>
-      <Right>
+      <Right
+        style={{
+          borderBottomWidth: 0,
+        }}>
         {type === 'switch' && (
           <Switch
             value={isSelected}

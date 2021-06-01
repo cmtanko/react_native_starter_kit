@@ -13,8 +13,6 @@ import {
   RECORD_UPDATE,
 } from '../types';
 
-import {DEV_URL} from '../../config';
-
 export const getRecords = () => {
   return async (dispatch) => {
     try {
@@ -85,7 +83,7 @@ export const editRecord = ({
 }) => {
   return async (dispatch) => {
     try {
-      const dbResult = await updateRecord(
+      await updateRecord(
         amount,
         date,
         categoryId,

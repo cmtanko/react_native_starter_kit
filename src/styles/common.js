@@ -1,6 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
-export const COLOR_WHITE = '#ffffff';
 export const COLOR_BLACK = '#202020';
 
 export const COLOR_GRAY_LIGHT = '#e5e5e5';
@@ -9,29 +8,47 @@ export const COLOR_GRAY = '#666666';
 export const COLOR_GRAY_DARK = '#393939';
 export const COLOR_GRAY_DARK2 = '#5b5b5b';
 
-export const COLOR_LIGHT_BLUE = '#22e3c4';
-export const COLOR_DARK_BLUE = '#262637';
-export const COLOR_DARK_LIGHTBLUE = '#343449';
 export const COLOR_LIGHT_YELLOW = '#f5c223';
-export const COLOR_RED = '#e7001c';
-export const COLOR_LIGHT_RED = '#ff6269';
+export const COLOR_T_BLUE = '#2196f3';
 
-export const COLOR_LIGHT_GREEN = '#10cf9e';
+export const COLOR_PRIMARY = '#0F171E';
+export const COLOR_SECONDARY = '#131D28';
+export const COLOR_TERTIARY = '#22e3c4';
+export const COLOR_SUCCESS = '#1DDC7C';
+export const COLOR_DANGER = '#E2A3FF';
+export const COLOR_INFO = '#FFFFFF';
+export const COLOR_WARNING = '#0B1117';
 
 export default StyleSheet.create({
+  brandColorPrimary: {color: COLOR_PRIMARY},
+  brandColorSecondary: {color: COLOR_SECONDARY},
+  brandColorTertiary: {color: COLOR_TERTIARY},
+  brandColorSuccess: {color: COLOR_SUCCESS},
+  brandColorDanger: {color: COLOR_DANGER},
+  brandColorInfo: {color: COLOR_INFO},
+  brandColorWarning: {color: COLOR_WARNING},
+
+  brandBgColorPrimary: {backgroundColor: COLOR_PRIMARY},
+  brandBgColorSecondary: {backgroundColor: COLOR_SECONDARY},
+  brandBgColorTertiary: {backgroundColor: COLOR_TERTIARY},
+  brandBgColorSuccess: {backgroundColor: COLOR_SUCCESS},
+  brandBgColorDanger: {backgroundColor: COLOR_DANGER},
+  brandBgColorInfo: {backgroundColor: COLOR_INFO},
+  brandBgColorWarning: {backgroundColor: COLOR_WARNING},
+
   // BackgroundColor
-  bg_white: {backgroundColor: COLOR_WHITE},
+  bg_white: {backgroundColor: COLOR_INFO},
   bg_black: {backgroundColor: COLOR_BLACK},
-  bg_dark_blue: {backgroundColor: COLOR_DARK_BLUE},
-  bg_dark_lightblue: {backgroundColor: COLOR_DARK_LIGHTBLUE},
-  bg_light_green: {backgroundColor: COLOR_LIGHT_GREEN},
+  bg_dark_blue: {backgroundColor: COLOR_PRIMARY},
+  bg_dark_lightblue: {backgroundColor: COLOR_SECONDARY},
+  bg_light_green: {backgroundColor: COLOR_SUCCESS},
 
   // Color
-  color_white: {color: COLOR_WHITE},
+  color_white: {color: COLOR_INFO},
   color_black: {color: COLOR_BLACK},
   color_grey: {color: COLOR_GRAY},
-  color_light_red: {color: COLOR_LIGHT_RED},
-  color_light_blue: {color: COLOR_LIGHT_BLUE},
+  color_light_red: {color: COLOR_DANGER},
+  color_light_blue: {color: COLOR_TERTIARY},
 
   // Button
   button: {
@@ -42,13 +59,14 @@ export default StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
     marginTop: 20,
+    backgroundColor: COLOR_TERTIARY,
   },
 
   // Button Text
   buttonText: {
     fontSize: 16,
     fontWeight: '700',
-    color: COLOR_WHITE,
+    color: COLOR_WARNING,
   },
 
   // TextError
@@ -99,7 +117,7 @@ export default StyleSheet.create({
     padding: 10,
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
-    backgroundColor: '#262637',
+    backgroundColor: '#264D30',
     width: '36%',
     alignItems: 'center',
   },
@@ -108,7 +126,7 @@ export default StyleSheet.create({
     padding: 10,
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
-    backgroundColor: '#2c2c3f',
+    backgroundColor: '#412C4C',
     width: '36%',
     alignItems: 'center',
   },
@@ -119,7 +137,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLOR_DARK_BLUE,
+    backgroundColor: COLOR_PRIMARY,
   },
 
   // Icons
@@ -164,14 +182,14 @@ export default StyleSheet.create({
 
   timeline_amount_income: {
     fontSize: 16,
-    color: '#10cf9e',
+    color: COLOR_SUCCESS,
     textAlign: 'right',
     paddingRight: 10,
   },
 
   timeline_amount_expense: {
     fontSize: 16,
-    color: '#ff6269',
+    color: COLOR_DANGER,
     textAlign: 'right',
     paddingRight: 10,
   },

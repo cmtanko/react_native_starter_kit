@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Left, Button, ListItem, Body, Right} from 'native-base';
 
@@ -27,10 +28,16 @@ const AccountRow = (props) => {
           <AccountIcon active type="FontAwesome" name={icon} />
         </Button>
       </Left>
-      <Body>
+      <Body
+        style={{
+          borderBottomWidth: 0,
+        }}>
         <Text>{title}</Text>
       </Body>
-      <Right>
+      <Right
+        style={{
+          borderBottomWidth: 0,
+        }}>
         <Text>{totalBalance}</Text>
       </Right>
     </ListItem>

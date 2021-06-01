@@ -66,8 +66,6 @@ class SocialSigninPage extends Component {
 
   initialGoogle = async () => {
     try {
-      const {userInfo} = this.props || null;
-
       await GoogleSignin.configure({
         scopes: GOOGLE_API_SCOPES,
         iosClientId: GOOGLE_API_IOS_CLIENT_ID,

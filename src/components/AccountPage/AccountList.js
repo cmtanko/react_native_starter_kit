@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {connect} from 'react-redux';
 import {FlatList} from 'react-native';
 import {View, Spinner} from 'native-base';

@@ -1,5 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable dot-notation */
-import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {
@@ -168,7 +168,7 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
-      <View style={{height: 220, backgroundColor: '#262637'}}>
+      <View style={{height: 220, backgroundColor: '#0E131B'}}>
         <Header transparent>
           <Left>
             <Button transparent onPress={() => props.navigation.openDrawer()}>

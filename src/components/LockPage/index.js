@@ -5,7 +5,7 @@ import PINCode, {hasUserSetPinCode} from '@haskkor/react-native-pincode';
 
 import {setLockedState} from '../../actions';
 import {selectBackups, selectSetting} from '../../selector';
-import cs, {COLOR_DARK_LIGHTBLUE} from '../../styles/common';
+import cs, {COLOR_SECONDARY} from '../../styles/common';
 
 const LockPage = (props) => {
   const [status, setStatus] = useState('choose');
@@ -22,7 +22,7 @@ const LockPage = (props) => {
         touchIDDisabled={true}
         status={status}
         maxAttempts="100"
-        colorCircleButtons={COLOR_DARK_LIGHTBLUE}
+        colorCircleButtons={COLOR_SECONDARY}
         subtitleChoose={'To secure Personal Expense Manager'}
         finishProcess={(a) => {
           console.warn(a);

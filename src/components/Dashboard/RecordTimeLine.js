@@ -3,7 +3,7 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist';
 
-import {colors, COLOR_LIGHT_BLUE, COLOR_LIGHT_YELLOW} from '../../theme/colors';
+import {colors, COLOR_TERTIARY, COLOR_LIGHT_YELLOW} from '../../theme/colors';
 import {CATEGORY_TYPE} from '../../constants';
 
 import {Text} from '../Typography/Text.component';
@@ -14,7 +14,7 @@ const RecordTimeLine = ({records, ListHeaderComponent, navigate}) => {
       ListHeaderComponent={() => <ListHeaderComponent />}
       data={records}
       timeStyle={{color: 'white'}}
-      circleColor={COLOR_LIGHT_BLUE}
+      circleColor={COLOR_TERTIARY}
       lineColor={COLOR_LIGHT_YELLOW}
       descriptionStyle={{color: COLOR_LIGHT_YELLOW}}
       titleStyle={colors.text.primary}

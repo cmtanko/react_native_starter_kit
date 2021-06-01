@@ -1,4 +1,5 @@
-import _ from 'lodash';
+/* eslint-disable react-native/no-inline-styles */
+
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import {Provider} from 'react-native-paper';

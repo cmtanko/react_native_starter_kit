@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Left, Button, ListItem, Body} from 'native-base';
 
@@ -19,7 +20,10 @@ const CategoryRow = ({category, navigate}) => {
           <CategoryIcon active type="FontAwesome" name={icon} />
         </Button>
       </Left>
-      <Body>
+      <Body
+        style={{
+          borderBottomWidth: 0,
+        }}>
         <Text>{title}</Text>
       </Body>
     </ListItem>

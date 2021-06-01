@@ -120,7 +120,7 @@ export const deleteAccount = ({id, callback}) => {
 export const addAccounts = (sqlQuery) => {
   return async (dispatch) => {
     try {
-      const dbResult = await insertAccounts(sqlQuery);
+      await insertAccounts(sqlQuery);
       dispatch({type: ACCOUNT_CREATE, payload: {}});
     } catch (error) {
       throw error;

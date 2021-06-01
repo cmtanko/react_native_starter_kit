@@ -17,8 +17,8 @@ const AccountSummary = ({currentBalance}) => {
       <SummaryCard>
         <SummaryCardItem>
           <SummaryBody>
-            <Text variant="heading">Curent Balance</Text>
-            <Text>AUD {currentBalance}</Text>
+            <Text variant="subtitle">Curent Balance</Text>
+            <Text variant="heading">AUD {currentBalance}</Text>
           </SummaryBody>
         </SummaryCardItem>
       </SummaryCard>
