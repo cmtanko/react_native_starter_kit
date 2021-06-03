@@ -25,7 +25,6 @@ const LockPage = (props) => {
         colorCircleButtons={COLOR_SECONDARY}
         subtitleChoose={'To secure Personal Expense Manager'}
         finishProcess={(a) => {
-          console.warn(a);
           props.setLockedState(false);
         }}
       />

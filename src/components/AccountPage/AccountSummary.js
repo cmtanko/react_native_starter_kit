@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Text} from '../Typography/Text.component';
