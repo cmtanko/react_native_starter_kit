@@ -15,7 +15,7 @@ export const CategoryAddContainer = styled(Container)`
 
 export const CategoryForm = styled(Form)`
   margin-left: ${(props) => props.theme.space[2]};
-  margin-right: ${(props) => props.theme.space[2]};
+  margin-right: ${(props) => props.theme.space[4]};
 `;
 
 export const CategoryIcon = styled(Icon)`

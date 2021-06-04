@@ -1,8 +1,12 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {PureComponent} from 'react';
-import {Item, Label, Input, Icon, InputGroup} from 'native-base';
 
-import cs from '../../styles/common';
+import {
+  InputGroupContainer,
+  IconContainer,
+  ItemContainer,
+  LabelContainer,
+  InputContainer,
+} from './styles';
 
 export class InputBox extends PureComponent {
   render() {
@@ -17,24 +21,26 @@ export class InputBox extends PureComponent {
     } = this.props;
 
     return (
-      <InputGroup>
-        <Icon name={icon} style={[cs.color_light_blue, cs.h2, {width: 35}]} />
-        <Item stackedLabel style={{borderColor: '#00000000', width: '100%'}}>
-          <Label style={cs.label}>{title}</Label>
-          <Input
+      <InputGroupContainer>
+        <IconContainer name={icon} />
+        <ItemContainer stackedLabel>
+          <LabelContainer>{title}</LabelContainer>
+          <InputContainer
             value={value}
             placeholder={placeholder}
             autoCapitalize="none"
             autoCorrect={false}
             autoFocus={focus}
             keyboardType={numeric ? 'numeric' : 'default'}
-            style={[cs.color_light_blue, {paddingLeft: 15}]}
+            returnKeyType="done"
+            selectTextOnFocus={true}
+            maxLength={numeric ? 10 : 20}
             onChangeText={(v) => {
               onChange(v);
             }}
           />
-        </Item>
-      </InputGroup>
+        </ItemContainer>
+      </InputGroupContainer>
     );
   }
 }

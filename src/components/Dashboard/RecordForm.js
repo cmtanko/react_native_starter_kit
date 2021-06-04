@@ -139,6 +139,7 @@ const RecordForm = ({
           icon="ios-calculator"
           value={amount}
           numeric={true}
+          returnKeyType="done"
           focus
           onChange={(value) => onStateChange('amount', value)}
         />
@@ -187,7 +188,10 @@ const RecordForm = ({
           />
         )}
 
-        <InputGroup>
+        <InputGroup
+          style={{
+            borderBottomWidth: 0,
+          }}>
           <Icon name="ios-folder" style={cs.color_light_blue} />
           <Item stackedLabel style={cs.whiteBorder}>
             <Label style={cs.label}>Category</Label>

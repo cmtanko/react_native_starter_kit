@@ -35,10 +35,7 @@ const hint = (theme) => `
     font-weight: ${theme.fontWeights.regular};
     text-align: center;
 `;
-// fontSize: 16,
-// color: '#10cf9e',
-// textAlign: 'right',
-//
+
 const typeIncome = (theme) => `
     color: ${theme.colors.ui.success}
     padding-right:  ${theme.space[2]}

@@ -1,32 +1,40 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {InputGroup, Icon, Item, Label, DatePicker} from 'native-base';
+import {DatePicker} from 'native-base';
+import {Dimensions} from 'react-native';
+const {width: WIDTH} = Dimensions.get('window');
 
 import cs from '../../styles/common';
+import {
+  InputGroupContainer,
+  IconContainer,
+  ItemContainer,
+  LabelContainer,
+} from './styles';
 
 const DatePickerBox = ({title, onChange}) => {
   const today = new Date();
 
   return (
-    <InputGroup>
-      <Icon
-        name="ios-calendar"
-        style={[cs.color_light_blue, cs.h2, {width: 25}]}
-      />
-      <Item stackedLabel style={{borderColor: '#00000000'}}>
-        <Label style={cs.label}>{title}</Label>
+    <InputGroupContainer>
+      <IconContainer name="ios-calendar" />
+      <ItemContainer stackedLabel>
+        <LabelContainer>{title}</LabelContainer>
         <DatePicker
           defaultDate={today}
           modalTransparent
           animationType="fade"
           androidMode="default"
-          textStyle={cs.color_light_blue}
+          textStyle={[
+            cs.color_light_blue,
+            cs.brandBgColorPrimary,
+            {width: WIDTH * 0.82},
+          ]}
           onDateChange={(e) => {
             onChange(e);
           }}
         />
-      </Item>
-    </InputGroup>
+      </ItemContainer>
+    </InputGroupContainer>
   );
 };
 

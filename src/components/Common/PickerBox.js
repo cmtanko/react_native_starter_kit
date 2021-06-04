@@ -1,39 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Label, InputGroup, Icon, Picker, Item} from 'native-base';
-import {Dimensions} from 'react-native';
-// import {Picker} from '@react-native-community/picker';
+import {Picker} from 'native-base';
 
 import cs from '../../styles/common';
-
-const {width: WIDTH} = Dimensions.get('window');
+import {
+  InputGroupContainer,
+  IconContainer,
+  ItemContainer,
+  LabelContainer,
+  PickerContainer,
+} from './styles';
 
 const PickerBox = ({title, type, options, onChange}) => {
   return (
-    <InputGroup>
-      <Icon name="ios-card" style={[cs.color_light_blue, cs.h2, {width: 35}]} />
-      <Item
-        stackedLabel
-        style={{
-          borderColor: '#00000000',
-        }}>
-        <Label style={cs.label}>{title}</Label>
+    <InputGroupContainer>
+      <IconContainer name="ios-card" />
+      <ItemContainer stackedLabel>
+        <LabelContainer>{title}</LabelContainer>
 
-        <Picker
+        <PickerContainer
           note
           mode="dropdown"
-          style={[cs.color_light_blue, {width: WIDTH * 0.9}]}
           iosHeader="Select category type"
           placeholder="Select category type"
-          placeholderIconColor={cs.color_light_blue}
+          textStyle={cs.brandColorTertiary}
           selectedValue={type}
-          itemStyle={[
-            cs.bg_dark_blue,
-            {
-              marginLeft: 0,
-              paddingLeft: 20,
-            },
-          ]}
+          modalStyle={[cs.brandBgColorSecondary, {color: 'red'}]}
+          itemTextStyle={cs.brandColorInfo}
+          headerStyle={[cs.brandBgColorPrimary]}
+          headerTitleStyle={cs.brandColorTertiary}
+          headerBackButtonTextStyle={cs.brandColorTertiary}
           onValueChange={(e) => onChange(e)}>
           {options.map((item) => {
             return (
@@ -44,9 +40,9 @@ const PickerBox = ({title, type, options, onChange}) => {
               />
             );
           })}
-        </Picker>
-      </Item>
-    </InputGroup>
+        </PickerContainer>
+      </ItemContainer>
+    </InputGroupContainer>
   );
 };
 

@@ -1,19 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {PureComponent} from 'react';
 import {Image} from 'react-native';
-import {
-  View,
-  Item,
-  Label,
-  Input,
-  Icon,
-  InputGroup,
-  Button,
-  Text,
-} from 'native-base';
+import {View, Input, Button, Text} from 'native-base';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 import cs from '../../styles/common';
+import {
+  InputGroupContainer,
+  IconContainer,
+  ItemContainer,
+  LabelContainer,
+} from './styles';
 
 export class ImageBox extends PureComponent {
   showImage(value) {
@@ -47,7 +44,7 @@ export class ImageBox extends PureComponent {
               },
             )
           }>
-          <Text>Attach receipt</Text>
+          <Text style={cs.brandColorTertiary}>Attach receipt</Text>
         </Button>
       );
     } else {
@@ -81,10 +78,12 @@ export class ImageBox extends PureComponent {
     } = this.props;
     return (
       <View>
-        <InputGroup>
-          <Icon name={icon} style={[cs.color_light_blue, cs.h2, {width: 35}]} />
-          <Item stackedLabel style={{borderColor: '#00000000', width: '100%'}}>
-            <Label style={cs.label}>{title}</Label>
+        <InputGroupContainer>
+          <IconContainer name={icon} />
+          <ItemContainer
+            stackedLabel
+            style={{borderColor: '#00000000', width: '100%'}}>
+            <LabelContainer>{title}</LabelContainer>
             {this.showButton(
               type,
               value,
@@ -93,8 +92,8 @@ export class ImageBox extends PureComponent {
               numeric,
               onChange,
             )}
-          </Item>
-        </InputGroup>
+          </ItemContainer>
+        </InputGroupContainer>
         {this.showImage(value)}
       </View>
     );
