@@ -15,6 +15,7 @@ export const IconContainer = styled(Icon)`
   font-weight: ${(props) => props.theme.fontWeights.bold};
   width: ${(props) => props.theme.sizes[2]};
   color: ${(props) => props.theme.colors.ui.secondary};
+  padding-top: 16;
 `;
 
 export const ItemContainer = styled(Item)`
@@ -25,7 +26,7 @@ export const ItemContainer = styled(Item)`
 
 export const LabelContainer = styled(Label)`
   color: ${(props) => props.theme.colors.text.disabled};
-  padding-bottom: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[0]};
 `;
 
 export const InputContainer = styled(Input)`
@@ -33,7 +34,6 @@ export const InputContainer = styled(Input)`
   background-color: ${(props) => props.theme.colors.bg.primary};
   width: 92%;
   border-radius: 2;
-  height: 8;
 `;
 
 export const PickerContainer = styled(Picker)`
