@@ -65,6 +65,7 @@ const HomeStack = ({navigation}) => {
       <Stack.Screen name="RecordAddExpense" component={RecordAddExpense} />
       <Stack.Screen name="RecordAddTransfer" component={RecordAddTransfer} />
       <Stack.Screen name="CategoryAdd" component={CategoryAdd} />
+      <Stack.Screen name="AccountAdd" component={AccountAdd} />
     </Stack.Navigator>
   );
 };

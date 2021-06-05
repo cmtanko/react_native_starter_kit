@@ -33,6 +33,12 @@ class AccountAdd extends Component {
     const {params} = this.props.route;
 
     if (params) {
+      const {navigateBackTo} = params;
+      if (navigateBackTo) {
+        callback = () => this.props.navigation.navigate(navigateBackTo);
+        return;
+      }
+
       const {account} = params;
       const {id, icon, type, title, balance, openingBalance} = account;
 

@@ -11,7 +11,7 @@
     "install-deps": "npm run install-deps-android && npm run install-deps-ios",
     "android": "react-native run-android",
     "alpha-release": "cd android && bundle exec fastlane alpha",
-    "alpha-release-ios": "cd ios && bundle exec fastlane alpha",
+    "alpha-release-ios": "npm run bundle:ios && cd ios && bundle exec fastlane alpha",
     "build-android": "cd android && ./gradlew assembleRelease",
     "clean-android": "cd android && ./gradlew clean",
     "ios": "react-native run-ios",

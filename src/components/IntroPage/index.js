@@ -11,7 +11,7 @@ const slides = [
     title: 'Track Your Spending',
     textStyle: {color: '#22e3c4'},
     text: 'It helps you to track\n your expenses quickly and easily.',
-    image: require('../../assets/images/intro1.png'),
+    image: require('../../assets/images/1.jpg'),
     imageStyle: styles.image,
     backgroundColor: '#131D28',
   },

@@ -33,6 +33,7 @@ export const InputContainer = styled(Input)`
   color: ${(props) => props.theme.colors.text.primary};
   background-color: ${(props) => props.theme.colors.bg.primary};
   width: 92%;
+  height: ${(props) => props.theme.sizes[2]};
   border-radius: 2;
 `;
 
@@ -41,4 +42,5 @@ export const PickerContainer = styled(Picker)`
   background-color: ${(props) => props.theme.colors.bg.primary};
   border-radius: 2;
   width: ${WIDTH * 0.82};
+  height: ${(props) => props.theme.sizes[3]};
 `;

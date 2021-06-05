@@ -93,6 +93,19 @@ class RecordAddIncome extends Component {
         navigateBackTo: 'RecordAddIncome',
       });
     }
+
+    if (
+      (key === 'payTo' ||
+        key === 'payFrom' ||
+        key === 'accountTo' ||
+        key === 'accountFrom') &&
+      value === 0
+    ) {
+      this.props.navigation.navigate('AccountAdd', {
+        navigateBackTo: 'RecordAddIncome',
+      });
+    }
+
     this.setState({
       [key]: value,
     });
@@ -185,7 +198,10 @@ class RecordAddIncome extends Component {
               amount={this.state.amount}
               description={this.state.description}
               selectedCategoryType={this.props.selectedCategoryType}
-              accounts={accounts}
+              accounts={[
+                ...accounts,
+                {id: 0, title: '+ Add Accounts', icon: 'plus', type: ''},
+              ]}
               payFrom={this.state.payFrom}
               payTo={this.state.payTo}
               accountFrom={this.state.accountFrom}
