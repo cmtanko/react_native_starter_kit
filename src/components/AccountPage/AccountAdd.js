@@ -39,9 +39,14 @@ class AccountAdd extends Component {
     const {params} = this.props.route;
 
     if (params) {
-      const {navigateBackTo} = params;
-      if (navigateBackTo) {
-        callback = () => this.props.navigation.navigate(navigateBackTo);
+      const {navigateBackTo, key, updateRecordState} = params;
+
+      const isOpenedFromModalWindowShortCut = !!navigateBackTo;
+      if (isOpenedFromModalWindowShortCut) {
+        callback = (acc) => {
+          this.props.navigation.navigate(navigateBackTo);
+          updateRecordState(key, acc.id);
+        };
         return;
       }
 

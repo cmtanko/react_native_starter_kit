@@ -46,9 +46,13 @@ class CategoryAdd extends Component {
     const {categoryType} = this.props;
 
     if (params) {
-      const {navigateBackTo} = params;
-      if (navigateBackTo) {
-        callback = () => this.props.navigation.navigate(navigateBackTo);
+      const {navigateBackTo, key, updateRecordState} = params;
+      const isOpenedFromModalWindowShortCut = !!navigateBackTo;
+      if (isOpenedFromModalWindowShortCut) {
+        callback = (cat) => {
+          this.props.navigation.navigate(navigateBackTo);
+          updateRecordState(key, cat.id);
+        };
         this.onStateChange('type', categoryType);
         return;
       }

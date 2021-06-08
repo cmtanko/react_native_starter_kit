@@ -91,6 +91,8 @@ class RecordAddIncome extends Component {
     if (key === 'categoryId' && value === 0) {
       this.props.navigation.navigate('CategoryAdd', {
         navigateBackTo: 'RecordAddIncome',
+        key: key,
+        updateRecordState: this.onStateChange,
       });
     }
 
@@ -103,6 +105,8 @@ class RecordAddIncome extends Component {
     ) {
       this.props.navigation.navigate('AccountAdd', {
         navigateBackTo: 'RecordAddIncome',
+        key: key,
+        updateRecordState: this.onStateChange,
       });
     }
 

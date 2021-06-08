@@ -38,7 +38,7 @@ const RecordForm = ({
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {
-    backgroundColor: 'white',
+    backgroundColor: '#0F171E',
     alignSelf: 'center',
     height: '50%',
   };
@@ -79,6 +79,7 @@ const RecordForm = ({
     <View>
       <Portal>
         <Modal
+          animationType="slide"
           visible={visible}
           onDismiss={hideModal}
           contentContainerStyle={containerStyle}>

@@ -76,7 +76,7 @@ const IconModalBox = ({
                 <View style={cs.padding_large}>
                   <Text
                     style={[cs.h2, cs.center, cs.color_grey, cs.padding_large]}>
-                    Select Category
+                    {title}
                   </Text>
                 </View>
               )}

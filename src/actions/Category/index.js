@@ -43,7 +43,7 @@ export const addCategory = ({title, type, icon, callback}) => {
         icon: icon,
       };
       dispatch({type: CATEGORY_CREATE, payload: categoryData});
-      callback();
+      callback(categoryData);
     } catch (error) {
       throw error;
     }

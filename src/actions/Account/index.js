@@ -55,7 +55,7 @@ export const addAccount = ({title, type, openingBalance, icon, callback}) => {
         });
       } else {
         dispatch({type: ACCOUNT_CREATE, payload: accountData});
-        callback();
+        callback(accountData);
       }
     } catch (error) {
       throw error;
