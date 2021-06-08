@@ -68,7 +68,7 @@ class RecordAddIncome extends Component {
         description,
         payTo,
         place,
-        camera: attachment,
+        attachment,
       } = params.record;
       this.setState({
         id,
@@ -143,7 +143,7 @@ class RecordAddIncome extends Component {
       } else {
         this.props.addRecord({
           amount,
-          date: date.toISOString(),
+          date: new Date(date).toISOString(),
           categoryId,
           payFrom,
           payTo,

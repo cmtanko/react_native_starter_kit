@@ -31,7 +31,7 @@ const error = (theme) => `
 const hint = (theme) => `
     color: ${theme.colors.ui.gray}
     font-family: ${theme.fonts.heading};
-    font-size: ${theme.fontSizes.caption}
+    font-size: ${theme.fontSizes.body}
     font-weight: ${theme.fontWeights.regular};
     text-align: center;
 `;

@@ -2,8 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   image: {
-    width: 200,
-    height: 200,
+    margin: 24,
+    flex: 1,
+    aspectRatio: 0.5,
   },
 });
 

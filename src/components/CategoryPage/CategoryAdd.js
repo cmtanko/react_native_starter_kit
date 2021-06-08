@@ -3,7 +3,13 @@ import React, {Component} from 'react';
 import {Content, View} from 'native-base';
 
 import {CATEGORY_TYPE} from '../../constants';
-import {InputBox, ButtonBox, ErrorBox, PickerBox, IconBox} from '../Common';
+import {
+  InputBox,
+  ButtonBox,
+  ErrorBox,
+  PickerBox,
+  IconModalBox,
+} from '../Common';
 import {
   addCategory,
   editCategory,
@@ -146,8 +152,10 @@ class CategoryAdd extends Component {
               onChange={(value) => this.onStateChange('type', value)}
             />
 
-            <IconBox
-              title="Icon"
+            <IconModalBox
+              headingIcon="ios-globe"
+              headingTitle="Icon"
+              title="Select Icon"
               icons={icons}
               icon={icon}
               onChange={(value) => this.onStateChange('icon', value)}

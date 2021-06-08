@@ -52,7 +52,6 @@ export default StyleSheet.create({
 
   // Button
   button: {
-    height: 50,
     shadowOffset: {height: 0, width: 0},
     shadowOpacity: 0,
     elevation: 0,
@@ -262,5 +261,13 @@ export default StyleSheet.create({
 
   padding_large: {
     paddingTop: 8,
+  },
+
+  spacer: {
+    paddingTop: 8,
+  },
+
+  borderZero: {
+    borderBottomWidth: 0,
   },
 });

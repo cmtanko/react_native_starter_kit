@@ -16,6 +16,7 @@ const SectionHeader = (props) => {
       <Button
         first
         style={{
+          borderBottomWidth: 2,
           borderColor: '#1C2544',
           borderBottomColor:
             selectedCategoryType === CATEGORY_TYPE.INCOME
@@ -42,6 +43,7 @@ const SectionHeader = (props) => {
 
       <Button
         style={{
+          borderBottomWidth: 2,
           borderColor: '#1C2533',
           borderBottomColor:
             selectedCategoryType === CATEGORY_TYPE.EXPENSE
@@ -68,6 +70,7 @@ const SectionHeader = (props) => {
 
       <Button
         style={{
+          borderBottomWidth: 2,
           borderColor: '#1C2533',
           borderBottomColor:
             selectedCategoryType === CATEGORY_TYPE.TRANSFER

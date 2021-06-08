@@ -21,6 +21,7 @@ class AccountList extends PureComponent {
     if (filteredList.length) {
       return (
         <FlatList
+          style={{marginBottom: 96}}
           data={filteredList}
           renderItem={this.renderItem.bind(this)}
           keyExtractor={(item) => item.id.toString()}

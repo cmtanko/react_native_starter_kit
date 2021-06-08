@@ -4,6 +4,7 @@ import InputBox from './InputBox';
 import ErrorBox from './ErrorBox';
 import ButtonBox from './ButtonBox';
 import PickerBox from './PickerBox';
+import IconModalBox from './IconModalBox';
 import ListButtonBox from './ListButtonBox';
 import DatePickerBox from './DatePickerBox';
 
@@ -14,6 +15,7 @@ export {
   ButtonBox,
   ErrorBox,
   PickerBox,
+  IconModalBox,
   ListButtonBox,
   DatePickerBox,
 };

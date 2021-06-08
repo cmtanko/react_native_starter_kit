@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Picker} from 'native-base';
+import {Picker, Icon} from 'native-base';
 
 import cs from '../../styles/common';
 import {
@@ -20,12 +20,13 @@ const PickerBox = ({title, type, options, onChange}) => {
 
         <PickerContainer
           note
-          mode="dropdown"
+          iosIcon={<Icon name="caret-down" style={cs.brandColorTertiary} />}
+          mode="dialog"
           iosHeader="Select category type"
           placeholder="Select category type"
           textStyle={cs.brandColorTertiary}
           selectedValue={type}
-          modalStyle={[cs.brandBgColorSecondary, {color: 'red'}]}
+          modalStyle={[cs.brandBgColorSecondary]}
           itemTextStyle={cs.brandColorInfo}
           headerStyle={[cs.brandBgColorPrimary]}
           headerTitleStyle={cs.brandColorTertiary}

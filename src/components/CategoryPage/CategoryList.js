@@ -26,6 +26,7 @@ class CategoryList extends Component {
     if (filteredList.length > 0) {
       return (
         <FlatList
+          style={{marginBottom: 96}}
           data={filteredList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={this.renderItem.bind(this)}

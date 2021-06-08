@@ -61,11 +61,31 @@ const HomeStack = ({navigation}) => {
           ),
         }}
       />
-      <Stack.Screen name="RecordAddIncome" component={RecordAddIncome} />
-      <Stack.Screen name="RecordAddExpense" component={RecordAddExpense} />
-      <Stack.Screen name="RecordAddTransfer" component={RecordAddTransfer} />
-      <Stack.Screen name="CategoryAdd" component={CategoryAdd} />
-      <Stack.Screen name="AccountAdd" component={AccountAdd} />
+      <Stack.Screen
+        options={{title: 'Add Record'}}
+        name="RecordAddIncome"
+        component={RecordAddIncome}
+      />
+      <Stack.Screen
+        options={{title: 'Add Expense'}}
+        name="RecordAddExpense"
+        component={RecordAddExpense}
+      />
+      <Stack.Screen
+        options={{title: 'Transfer'}}
+        name="RecordAddTransfer"
+        component={RecordAddTransfer}
+      />
+      <Stack.Screen
+        options={{title: 'Add Category'}}
+        name="CategoryAdd"
+        component={CategoryAdd}
+      />
+      <Stack.Screen
+        options={{title: 'Add Account'}}
+        name="AccountAdd"
+        component={AccountAdd}
+      />
     </Stack.Navigator>
   );
 };
@@ -86,6 +106,7 @@ const AccountStack = ({navigation}) => {
       <Stack.Screen
         name="Account"
         options={{
+          title: 'Add Account',
           headerLeft: ({color, size}) => (
             <MaterialCommunityIcons
               name="menu"
@@ -98,8 +119,17 @@ const AccountStack = ({navigation}) => {
         }}
         component={AccountPage}
       />
-      <Stack.Screen name="AccountAdd" component={AccountAdd} />
-      <Stack.Screen name="AccountList" component={AccountList} />
+
+      <Stack.Screen
+        options={{title: 'Add Account'}}
+        name="AccountAdd"
+        component={AccountAdd}
+      />
+      <Stack.Screen
+        options={{title: 'Add Account'}}
+        name="AccountList"
+        component={AccountList}
+      />
     </Stack.Navigator>
   );
 };
@@ -120,6 +150,7 @@ const CategoryStack = ({navigation}) => {
         name="Category"
         component={CategoryPage}
         options={{
+          title: 'Categories',
           headerLeft: ({color, size}) => (
             <MaterialCommunityIcons
               name="menu"
@@ -131,8 +162,16 @@ const CategoryStack = ({navigation}) => {
           ),
         }}
       />
-      <Stack.Screen name="CategoryAdd" component={CategoryAdd} />
-      <Stack.Screen name="CategoryList" component={CategoryList} />
+      <Stack.Screen
+        options={{title: 'Add Category'}}
+        name="CategoryAdd"
+        component={CategoryAdd}
+      />
+      <Stack.Screen
+        options={{title: 'Add Category'}}
+        name="CategoryList"
+        component={CategoryList}
+      />
     </Stack.Navigator>
   );
 };
@@ -290,7 +329,7 @@ function App(props, {locked, shouldLock}) {
   );
 
   const dispatch = useDispatch();
-  dispatch(setLockedState());
+  const uploadLockedState = (note) => dispatch(setLockedState());
 
   const showLockScreen =
     shouldAppShowLockScreen === 'true' ? (isAppUnLocked ? false : true) : false;

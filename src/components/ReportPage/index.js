@@ -75,6 +75,7 @@ const ReportPage = (props) => {
           first
           style={{
             borderColor: '#1C2544',
+            borderBottomWidth: 2,
             borderBottomColor:
               selectedReportType === 'WEEKLY' ? '#22e3c4' : '#1C2544',
             backgroundColor:
@@ -95,6 +96,7 @@ const ReportPage = (props) => {
         <Button
           style={{
             borderColor: '#1C2544',
+            borderBottomWidth: 2,
             borderBottomColor:
               selectedReportType === 'MONTHLY' ? '#22e3c4' : '#1C2544',
             backgroundColor:
@@ -115,6 +117,7 @@ const ReportPage = (props) => {
           last
           style={{
             borderColor: '#1C2544',
+            borderBottomWidth: 2,
             borderBottomColor:
               selectedReportType === 'YEARLY' ? '#22e3c4' : '#1C2544',
             backgroundColor:

@@ -1,9 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {DatePicker} from 'native-base';
 import {Dimensions} from 'react-native';
+import DatePicker from 'react-native-datepicker';
 const {width: WIDTH} = Dimensions.get('window');
 
-import cs from '../../styles/common';
 import {
   InputGroupContainer,
   IconContainer,
@@ -11,8 +11,8 @@ import {
   LabelContainer,
 } from './styles';
 
-const DatePickerBox = ({title, onChange}) => {
-  const today = new Date();
+const DatePickerBox = ({title, value, onChange}) => {
+  const today = new Date(value) || new Date();
 
   return (
     <InputGroupContainer>
@@ -20,17 +20,30 @@ const DatePickerBox = ({title, onChange}) => {
       <ItemContainer stackedLabel>
         <LabelContainer>{title}</LabelContainer>
         <DatePicker
-          defaultDate={today}
-          modalTransparent
-          animationType="fade"
-          androidMode="default"
-          textStyle={[
-            cs.color_light_blue,
-            cs.brandBgColorPrimary,
-            {width: WIDTH * 0.82},
-          ]}
-          onDateChange={(e) => {
-            onChange(e);
+          style={{
+            width: WIDTH * 0.82,
+            backgroundColor: '#0F171E',
+            alignItems: 'flex-start',
+          }}
+          date={today}
+          mode="date"
+          showIcon={false}
+          placeholder="select date"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateInput: {
+              borderWidth: 0,
+              alignItems: 'flex-start',
+            },
+            dateText: {
+              color: '#22e3c4',
+              fontSize: 16,
+              paddingLeft: 16,
+            },
+          }}
+          onDateChange={(date) => {
+            onChange(date);
           }}
         />
       </ItemContainer>

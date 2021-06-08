@@ -21,6 +21,7 @@ export const AccountAddContainer = styled(Container)`
 export const AccountForm = styled(Form)`
   margin-left: ${(props) => props.theme.space[2]};
   margin-right: ${(props) => props.theme.space[4]};
+  margin-bottom: ${(props) => props.theme.space[4]};
 `;
 
 export const AccountIcon = styled(Icon)`
