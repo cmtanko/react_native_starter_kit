@@ -1,14 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import _ from 'lodash';
 import moment from 'moment';
-import {ScrollView} from 'react-native';
-import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {View, Spinner, Text, Content} from 'native-base';
+import Modal from 'react-native-modalbox';
+import React, {PureComponent} from 'react';
+import {View, Spinner, Text} from 'native-base';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 
+import RecordEmpty from './RecordEmpty';
 import RecordTimeLine from './RecordTimeLine';
 import {selectRecords, selectCategories, selectAccounts} from '../../selector';
-import RecordEmpty from './RecordEmpty';
+import RecordTransactionSummary from './RecordTransactionSummary';
 import {CATEGORY_TYPE} from '../../constants';
 
 import cs from '../../styles/common';
@@ -27,6 +29,7 @@ class RecordList extends PureComponent {
     this.state = {
       totalEarned: 0,
       totalSpent: 0,
+      selectedType: 'INCOME',
     };
   }
 
@@ -75,6 +78,19 @@ class RecordList extends PureComponent {
     return (
       <View style={[cs.bg_dark_lightblue, {height: '98%'}]}>
         {this.showList(balance, totalEarned, totalSpent)}
+
+        <Modal
+          style={[styles.modal, styles.modal4, cs.brandBgColorSecondary]}
+          position={'bottom'}
+          ref={'modal4'}>
+          <RecordTransactionSummary
+            records={this.props.records}
+            categories={this.props.categories}
+            accounts={this.props.accounts}
+            selectedMonth={this.props.selectedMonth}
+            type={this.state.selectedType}
+          />
+        </Modal>
       </View>
     );
   }
@@ -136,18 +152,32 @@ class RecordList extends PureComponent {
                 </View>
 
                 <View style={cs.header_block}>
-                  <View style={cs.header_block_left}>
-                    <Text style={[cs.h3, cs.color_white]}>Total Earned</Text>
-                    <Text style={[cs.color_light_blue, cs.h3]}>
-                      + $ {totalEarned.toFixed(2)}
-                    </Text>
-                  </View>
-                  <View style={cs.header_block_right}>
-                    <Text style={[cs.h3, cs.color_white]}>Total Spent</Text>
-                    <Text style={[cs.color_light_red, cs.h3]}>
-                      - $ {totalSpent.toFixed(2)}
-                    </Text>
-                  </View>
+                  <TouchableOpacity
+                    style={cs.header_block_left}
+                    onPress={() => {
+                      this.setState({selectedType: 'INCOME'});
+                      this.refs.modal4.open();
+                    }}>
+                    <View>
+                      <Text style={[cs.h3, cs.color_white]}>Total Earned</Text>
+                      <Text style={[cs.color_light_blue, cs.h3]}>
+                        + $ {totalEarned.toFixed(2)}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={cs.header_block_right}
+                    onPress={() => {
+                      this.setState({selectedType: 'EXPENSE'});
+                      this.refs.modal4.open();
+                    }}>
+                    <View>
+                      <Text style={[cs.h3, cs.color_white]}>Total Spent</Text>
+                      <Text style={[cs.color_light_red, cs.h3]}>
+                        - $ {totalSpent.toFixed(2)}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -168,6 +198,53 @@ const mapStateToProps = (state) => {
     settings: state.settings,
   };
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    paddingTop: 50,
+    flex: 1,
+  },
+
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  modal2: {
+    height: 230,
+    backgroundColor: '#3B5998',
+  },
+
+  modal3: {
+    height: 300,
+    width: 300,
+  },
+
+  modal4: {
+    height: '80%',
+  },
+
+  btn: {
+    margin: 10,
+    backgroundColor: '#3B5998',
+    color: 'white',
+    padding: 10,
+  },
+
+  btnModal: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 50,
+    height: 50,
+    backgroundColor: 'transparent',
+  },
+
+  text: {
+    color: 'black',
+    fontSize: 22,
+  },
+});
 
 export default connect(mapStateToProps, {
   getBackup,

@@ -40,7 +40,9 @@ const RecordForm = ({
   const containerStyle = {
     backgroundColor: '#0F171E',
     alignSelf: 'center',
-    height: '50%',
+    height: '64%',
+    width: '80%',
+    borderRadius: 20,
   };
 
   const accountOptions = _.map(accounts, (val) => {

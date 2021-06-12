@@ -1,7 +1,9 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {Content, View} from 'native-base';
-
+import {FlatList, View, TouchableOpacity} from 'react-native';
+import {Text, Icon, Content, Form} from 'native-base';
+import {Modal, Portal} from 'react-native-paper';
+import {Provider} from 'react-native-paper';
 import {CATEGORY_TYPE} from '../../constants';
 import {
   InputBox,
@@ -18,6 +20,7 @@ import {
 } from '../../actions';
 
 import icons from '../../iconList';
+import cs from '../../styles/common';
 
 import {CategoryAddContainer, CategoryForm} from './index.styles';
 
@@ -31,6 +34,7 @@ class CategoryAdd extends Component {
       title: '',
       icon: 'home',
       type: CATEGORY_TYPE.INCOME,
+      modalVisible: false,
     };
 
     callback = () => this.props.navigation.navigate('Category');
@@ -39,6 +43,8 @@ class CategoryAdd extends Component {
     this.editCategory = this.editCategory.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
     this.onStateChange = this.onStateChange.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +73,18 @@ class CategoryAdd extends Component {
     } else {
       this.onStateChange('type', categoryType);
     }
+  }
+
+  showModal() {
+    this.setState({
+      modalVisible: true,
+    });
+  }
+
+  hideModal() {
+    this.setState({
+      modalVisible: false,
+    });
   }
 
   onStateChange(key, value) {
@@ -126,49 +144,110 @@ class CategoryAdd extends Component {
     const {id, title, type, icon, error} = this.state;
 
     return (
-      <CategoryAddContainer>
-        <Content>
-          <CategoryForm>
-            <InputBox
-              title="Title"
-              icon="ios-clipboard"
-              value={title}
-              focus
-              onChange={(value) => this.onStateChange('title', value)}
-            />
-            <PickerBox
-              title="Type"
-              type={type}
-              options={[
-                {
-                  label: CATEGORY_TYPE.INCOME.toString(),
-                  value: CATEGORY_TYPE.INCOME,
-                },
-                {
-                  label: CATEGORY_TYPE.EXPENSE.toString(),
-                  value: CATEGORY_TYPE.EXPENSE,
-                },
-                {
-                  label: CATEGORY_TYPE.TRANSFER.toString(),
-                  value: CATEGORY_TYPE.TRANSFER,
-                },
-              ]}
-              onChange={(value) => this.onStateChange('type', value)}
-            />
+      <Provider>
+        <CategoryAddContainer>
+          <Content>
+            <Portal>
+              <Modal
+                animationType="slide"
+                visible={this.state.modalVisible}
+                onDismiss={this.hideModal}
+                contentContainerStyle={{
+                  backgroundColor: '#0F171E',
+                  alignSelf: 'center',
+                  height: '64%',
+                  borderRadius: 20,
+                  width: '80%',
+                }}>
+                <FlatList
+                  ListHeaderComponent={() => (
+                    <View style={cs.padding_large}>
+                      <Text
+                        style={[
+                          cs.h2,
+                          cs.center,
+                          cs.color_grey,
+                          cs.padding_large,
+                        ]}>
+                        Select Icon
+                      </Text>
+                    </View>
+                  )}
+                  horizontal={false}
+                  numColumns={4}
+                  data={icons}
+                  itemDimension={50}
+                  keyExtractor={(item) => item}
+                  initialNumToRender={20}
+                  renderItem={({item}) => (
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.onStateChange('icon', item);
+                        this.hideModal();
+                      }}>
+                      <View style={cs.iconContainer}>
+                        <Icon
+                          type="FontAwesome"
+                          name={item}
+                          style={
+                            icon === item ? cs.activeIcon : cs.inactiveIcon
+                          }
+                        />
+                        <Text
+                          numberOfLines={1}
+                          style={
+                            icon === item ? cs.activeText : cs.inactiveText
+                          }>
+                          {item}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+              </Modal>
+            </Portal>
+            <CategoryForm>
+              <InputBox
+                title="Title"
+                icon="ios-clipboard"
+                value={title}
+                focus
+                onChange={(value) => this.onStateChange('title', value)}
+              />
+              <PickerBox
+                title="Type"
+                type={type}
+                options={[
+                  {
+                    label: CATEGORY_TYPE.INCOME.toString(),
+                    value: CATEGORY_TYPE.INCOME,
+                  },
+                  {
+                    label: CATEGORY_TYPE.EXPENSE.toString(),
+                    value: CATEGORY_TYPE.EXPENSE,
+                  },
+                  {
+                    label: CATEGORY_TYPE.TRANSFER.toString(),
+                    value: CATEGORY_TYPE.TRANSFER,
+                  },
+                ]}
+                onChange={(value) => this.onStateChange('type', value)}
+              />
 
-            <IconModalBox
-              headingIcon="ios-globe"
-              headingTitle="Icon"
-              title="Select Icon"
-              icons={icons}
-              icon={icon}
-              onChange={(value) => this.onStateChange('icon', value)}
-            />
-          </CategoryForm>
-          {this.showError(error)}
-          {this.showButton(id)}
-        </Content>
-      </CategoryAddContainer>
+              <IconModalBox
+                headingIcon="ios-globe"
+                headingTitle="Icon"
+                title="Select Icon"
+                icons={icons}
+                icon={icon}
+                onPress={this.showModal}
+              />
+            </CategoryForm>
+            {this.showError(error)}
+            {this.showButton(id)}
+          </Content>
+        </CategoryAddContainer>
+      </Provider>
     );
   }
 }

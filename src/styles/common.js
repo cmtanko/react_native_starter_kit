@@ -233,11 +233,13 @@ export default StyleSheet.create({
 
   inactiveIcon: {
     fontSize: 30,
+    paddingRight: 8,
     color: 'gray',
   },
 
   activeText: {
     fontSize: 11,
+    paddingRight: 8,
     color: '#22e3c4',
   },
 
@@ -261,6 +263,7 @@ export default StyleSheet.create({
 
   padding_large: {
     paddingTop: 8,
+    paddingBottom: 8,
   },
 
   spacer: {

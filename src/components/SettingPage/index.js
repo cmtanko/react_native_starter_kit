@@ -216,6 +216,7 @@ const SettingPage = (props) => {
             icon="md-basket"
             type="list"
             selectedItem={props.settings.currency}
+            onPress={() => {}}
           />
           <ListButtonBox
             title="Load sample data"
