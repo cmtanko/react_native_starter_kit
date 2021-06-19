@@ -8,7 +8,9 @@ import settingReducer from './settingReducer';
 import reportReducer from './reportTypeReducer';
 import categoryReducer from './categoryReducer';
 
+import accountTypeReducer from './accountTypeReducer';
 import categoryTypeReducer from './categoryTypeReducer';
+import selectedItemReducer from './selectedItemReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   account: accountReducer,
   category: categoryReducer,
   selectedReportType: reportReducer,
+  selectedItem: selectedItemReducer,
+  selectedAccountType: accountTypeReducer,
   selectedCategoryType: categoryTypeReducer,
 });
 

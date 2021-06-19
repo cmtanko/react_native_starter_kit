@@ -4,8 +4,6 @@ import {Icon, InputGroup, Item, Label, Input, Picker} from 'native-base';
 
 const {width: WIDTH} = Dimensions.get('window');
 
-console.warn(WIDTH);
-
 export const InputGroupContainer = styled(InputGroup)`
   border-bottom-width: 0;
   padding-bottom: ${(props) => props.theme.space[0]};

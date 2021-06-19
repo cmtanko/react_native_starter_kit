@@ -76,11 +76,23 @@ class RecordList extends PureComponent {
     const balance = parseFloat(totalEarned - totalSpent).toFixed(2);
 
     return (
-      <View style={[cs.bg_dark_lightblue, {height: '98%'}]}>
+      <View style={[cs.bg_dark_lightblue, {height: '100%'}]}>
         {this.showList(balance, totalEarned, totalSpent)}
 
         <Modal
-          style={[styles.modal, styles.modal4, cs.brandBgColorSecondary]}
+          style={[
+            styles.modal,
+            styles.modal4,
+            cs.brandBgColorSecondary,
+            {
+              borderColor: 'white',
+              borderTopRightRadius: 24,
+              borderTopLeftRadius: 24,
+              borderTopColor:
+                this.state.selectedType === 'INCOME' ? '#8658A5' : '#47985D',
+              borderTopWidth: 5,
+            },
+          ]}
           position={'bottom'}
           ref={'modal4'}>
           <RecordTransactionSummary
@@ -221,7 +233,7 @@ const styles = StyleSheet.create({
   },
 
   modal4: {
-    height: '80%',
+    height: '64%',
   },
 
   btn: {

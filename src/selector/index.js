@@ -33,6 +33,22 @@ export const selectCategories = createSelector(
   (category) => category && category.list,
 );
 
+export const selectTransactions = createSelector(
+  [categoryList, accountList, recordList],
+  (category, account, record) => {
+    return record.list.map((r) => {
+      return {
+        ...r,
+        category: category.list.filter((c) => c.id === r.categoryId)[0],
+        account: {
+          payFrom: account.list.filter((a) => a.id === r.payFrom)[0],
+          payTo: account.list.filter((a) => a.id === r.payTo)[0],
+        },
+      };
+    });
+  },
+);
+
 export const selectCategoryLoading = createSelector(
   [categoryList],
   (category) => {

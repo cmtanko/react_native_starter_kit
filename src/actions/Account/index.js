@@ -35,6 +35,20 @@ export const selectAccountType = (value) => {
   };
 };
 
+export const selectAccount = (value) => {
+  return {
+    type: 'SELECT_ACCOUNT',
+    payload: value,
+  };
+};
+
+export const selectCategory = (value) => {
+  return {
+    type: 'SELECT_CATEGORY',
+    payload: value,
+  };
+};
+
 export const addAccount = ({title, type, openingBalance, icon, callback}) => {
   return async (dispatch) => {
     try {
