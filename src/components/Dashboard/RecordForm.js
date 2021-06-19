@@ -176,18 +176,18 @@ const RecordForm = ({
         {selectedCategoryType === CATEGORY_TYPE.TRANSFER && (
           <PickerBox
             title="Account From"
-            type={accountFrom}
+            type={payFrom}
             options={accountOptions}
-            onChange={(value) => onStateChange('accountFrom', value)}
+            onChange={(value) => onStateChange('payFrom', value)}
           />
         )}
 
         {selectedCategoryType === CATEGORY_TYPE.TRANSFER && (
           <PickerBox
             title="Account To"
-            type={accountTo}
+            type={payTo}
             options={accountOptions}
-            onChange={(value) => onStateChange('accountTo', value)}
+            onChange={(value) => onStateChange('payTo', value)}
           />
         )}
 

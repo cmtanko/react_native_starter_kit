@@ -22,7 +22,6 @@ import {
 import cs from '../../styles/common';
 
 import {RoundIcon, RoundBoxButton} from '../Common';
-
 const Overview = (props) => {
   useEffect(() => {
     props.getRecords();
@@ -31,11 +30,56 @@ const Overview = (props) => {
   }, []);
 
   const accounts = props.accounts;
+  const ACCOUNT_TYPE = {
+    INCOME: 'payTo',
+    EXPENSE: 'payFrom',
+    TRANSFER: 'TRANSFER',
+  };
+
+  const ACCOUNT_TYPE_VALUE = {
+    INCOME: 1,
+    EXPENSE: -1,
+    TRANSFER: 1,
+  };
+
+  const currencify = (currencyInString) => {
+    return parseFloat(currencyInString).toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+    });
+  };
+
+  const getTransactionsByAccount = (accountId) => {
+    let a = props.transactions.filter((t) => {
+      let accountType = ACCOUNT_TYPE[t.category?.type];
+
+      return accountType === 'TRANSFER'
+        ? t['payFrom'] === accountId || t['payTo'] === accountId
+        : t[accountType] === accountId;
+    });
+    return a;
+  };
+
+  const getSum = (transactions, account) => {
+    const sum = transactions.reduce(
+      (acc, record) =>
+        acc +
+        parseFloat(record.amount) *
+          (record.category.type === 'TRANSFER'
+            ? record.payFrom === account.id
+              ? -1
+              : 1
+            : ACCOUNT_TYPE_VALUE[record.category.type]),
+      parseFloat(account.openingBalance) || 0,
+    );
+    return sum;
+  };
+
   const totalAmountInAccount = props.accounts.reduce(
-    (accumulator, currentValue) =>
-      accumulator + parseFloat(currentValue.openingBalance),
+    (accumulator, account) =>
+      accumulator + getSum(getTransactionsByAccount(account.id), account),
     0,
   );
+
   return (
     <Container style={[cs.brandBgColorSecondary]}>
       <View id="topSection" style={cs.pb8}>
@@ -56,10 +100,7 @@ const Overview = (props) => {
 
         <View style={[cs.center, {height: 96}]}>
           <Text style={cs.overview_heading}>
-            ${' '}
-            {totalAmountInAccount.toLocaleString(undefined, {
-              minimumFractionDigits: 0,
-            })}
+            $ {currencify(totalAmountInAccount)}
           </Text>
           <Text style={cs.overview_subtitle}>In Total</Text>
         </View>
@@ -79,17 +120,17 @@ const Overview = (props) => {
             />
             {props.accounts.map((account) => {
               const {title, id, openingBalance} = account;
+
+              const totalBalance = currencify(
+                getSum(getTransactionsByAccount(id), account),
+              );
+
               return (
                 <RoundBoxButton
                   id={id}
                   selectedItem={props?.selectedItem?.account}
                   title={title}
-                  subtitle={parseFloat(openingBalance).toLocaleString(
-                    undefined,
-                    {
-                      minimumFractionDigits: 0,
-                    },
-                  )}
+                  subtitle={'$ ' + totalBalance}
                   onPress={() => {
                     props.selectAccount(id);
                   }}
@@ -139,9 +180,7 @@ const Overview = (props) => {
             paddingTop: 0,
           }}>
           <View style={{flexDirection: 'row', height: 24}}>
-            <Text style={[cs.overview_title, {flex: 3}]}>
-              Today's Transaction
-            </Text>
+            <Text style={[cs.overview_title, {flex: 3}]}>Transactions</Text>
             <Text
               style={{
                 flex: 1,
@@ -153,7 +192,7 @@ const Overview = (props) => {
               onPress={() => {
                 props.navigation.navigate('Home');
               }}>
-              View All
+              + ADD
             </Text>
           </View>
           <Content>
@@ -164,12 +203,15 @@ const Overview = (props) => {
                     ? t.categoryId === props.selectedItem.category
                     : true,
                 )
-                .filter((t) =>
-                  props.selectedItem.account
-                    ? t.payFrom === props.selectedItem.account ||
-                      t.payTo === props.selectedItem.account
-                    : true,
-                )
+                .filter((t) => {
+                  let accountType = ACCOUNT_TYPE[t.category?.type];
+                  return props.selectedItem.account
+                    ? accountType === 'TRANSFER'
+                      ? t['payFrom'] === props.selectedItem.account ||
+                        t['payTo'] === props.selectedItem.account
+                      : t[accountType] === props.selectedItem.account
+                    : true;
+                })
                 .map((record) => {
                   const {
                     id,
@@ -198,11 +240,25 @@ const Overview = (props) => {
                       )}
                       right={(props) => (
                         <Text style={[cs.h3, cs.color_white]}>
-                          {category.type === 'INCOME' ? '+' : '-'} ${amount}
+                          {category.type === 'INCOME'
+                            ? '+'
+                            : category.type === 'EXPENSE'
+                            ? '-'
+                            : ''}
+                          ${amount}
                         </Text>
                       )}
                       title={category.title}
                       description={description}
+                      onPress={() => {
+                        props.navigation.navigate('RecordAddIncome', {
+                          navigateBackTo: 'Overview',
+                          record: {
+                            ...record,
+                            type: category.type,
+                          },
+                        });
+                      }}
                     />
                   );
                 })}

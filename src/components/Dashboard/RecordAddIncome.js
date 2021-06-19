@@ -58,6 +58,15 @@ class RecordAddIncome extends Component {
     const {params} = this.props.route;
 
     if (params) {
+      const {navigateBackTo} = params;
+
+      const isOpenedFromOverviewWindowShortCut = !!navigateBackTo;
+      if (isOpenedFromOverviewWindowShortCut) {
+        callback = (acc) => {
+          this.props.navigation.navigate(navigateBackTo);
+        };
+      }
+
       const {
         id,
         amount,
@@ -208,8 +217,6 @@ class RecordAddIncome extends Component {
               ]}
               payFrom={this.state.payFrom}
               payTo={this.state.payTo}
-              accountFrom={this.state.accountFrom}
-              accountTo={this.state.accountTo}
               attachment={this.state.attachment}
               categories={[
                 ...categories,

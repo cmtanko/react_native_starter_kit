@@ -16,7 +16,7 @@ const RoundBoxButton = ({selectedItem, id, title, subtitle, onPress}) => {
             : cs.round_box_container
         }>
         <Text style={cs.overview_subtitle}>{title}</Text>
-        <Text style={cs.overview_title}>$ {subtitle}</Text>
+        <Text style={cs.overview_title}>{subtitle}</Text>
       </View>
     </TouchableOpacity>
   );
