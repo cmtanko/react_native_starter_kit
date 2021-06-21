@@ -31,6 +31,7 @@ import CategoryList from './components/CategoryPage/CategoryList';
 import {getSettings, getRecords, setLockedState} from './actions';
 
 import {COLOR_PRIMARY} from './styles/common';
+import {Platform} from 'react-native';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -45,6 +46,9 @@ const HomeStack = ({navigation}) => {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
       }}>
       <Stack.Screen
@@ -98,6 +102,12 @@ const OverviewStack = ({navigation}) => {
         initialRouteName: 'Home',
         headerStyle: {
           backgroundColor: COLOR_PRIMARY,
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
         headerTintColor: '#fff',
       }}>
@@ -159,6 +169,11 @@ const OverviewStack = ({navigation}) => {
         name="AccountAdd"
         component={AccountAdd}
       />
+      <Stack.Screen
+        options={{title: 'Settings'}}
+        name="Setting"
+        component={SettingPage}
+      />
     </Stack.Navigator>
   );
 };
@@ -174,6 +189,9 @@ const AccountStack = ({navigation}) => {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
       }}>
       <Stack.Screen
@@ -217,6 +235,9 @@ const CategoryStack = ({navigation}) => {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
       }}>
       <Stack.Screen
@@ -260,6 +281,9 @@ const ReportStack = ({navigation}) => {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
         headerLeft: ({color, size}) => (
           <MaterialCommunityIcons
@@ -288,6 +312,9 @@ const SettingStack = ({navigation}) => {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: Platform.OS === 'android' ? 14 : 18,
+          alignSelf: 'center',
+          marginLeft: Platform.OS === 'android' ? -52 : 0,
         },
         headerLeft: ({color, size}) => (
           <MaterialCommunityIcons
@@ -398,7 +425,7 @@ const HomeDrawer = ({navigation}) => {
 
 function App(props, {locked, shouldLock}) {
   const shouldAppShowLockScreen = useSelector(
-    (state) => state.setting.preference.lockscreen,
+    (state) => state.setting.preference?.lockscreen,
   );
 
   useEffect(() => {
@@ -433,7 +460,7 @@ function App(props, {locked, shouldLock}) {
 const mapStateToProps = (state) => {
   return {
     locked: state.backup.locked,
-    shouldLock: state.setting.preference.lockscreen,
+    shouldLock: state.setting.preference?.lockscreen || false,
     record: state.record,
     introShow: state.intro.show,
   };

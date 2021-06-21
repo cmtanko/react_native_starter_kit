@@ -95,23 +95,31 @@ class CategoryAdd extends Component {
 
   addCategory() {
     const {title, type, icon} = this.state;
-    this.props.addCategory({
-      title,
-      type,
-      icon,
-      callback,
-    });
+    if (!title.trim()) {
+      this.onStateChange('error', 'Category title cannot be empty');
+    } else {
+      this.props.addCategory({
+        title: title.trim(),
+        type,
+        icon,
+        callback,
+      });
+    }
   }
 
   editCategory() {
     const {title, type, icon, id} = this.state;
-    this.props.editCategory({
-      title,
-      type,
-      icon,
-      id,
-      callback,
-    });
+    if (!title.trim()) {
+      this.onStateChange('error', 'Category title cannot be empty');
+    } else {
+      this.props.editCategory({
+        title: title.trim(),
+        type,
+        icon,
+        id,
+        callback,
+      });
+    }
   }
 
   deleteCategory() {

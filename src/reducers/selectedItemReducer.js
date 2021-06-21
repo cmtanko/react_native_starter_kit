@@ -1,6 +1,7 @@
 const initialState = {
   account: null,
   category: null,
+  date: null,
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +15,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         category: state.category !== action.payload ? action.payload : null,
+      };
+    case 'SELECT_DATE':
+      return {
+        ...state,
+        date: state.date !== action.payload ? action.payload : null,
       };
     default:
       return state;

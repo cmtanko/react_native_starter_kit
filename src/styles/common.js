@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Platform, Dimensions} from 'react-native';
 
 export const COLOR_BLACK = '#202020';
 
@@ -130,6 +130,7 @@ export default StyleSheet.create({
     color: '#ffffff',
     fontWeight: '700',
     fontSize: 14,
+    paddingTop: 4,
   },
 
   overview_subtitle: {
@@ -138,6 +139,11 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
 
+  header_title: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: Platform.OS === 'android' ? 10 : 12,
+  },
   round_box_container: {
     backgroundColor: '#1A283B',
     height: 72,
@@ -252,7 +258,7 @@ export default StyleSheet.create({
   // Label
   label: {
     color: COLOR_GRAY,
-    paddingLeft: 8,
+    paddingLeft: 0,
   },
 
   // Drawer

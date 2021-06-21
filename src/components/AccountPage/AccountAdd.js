@@ -92,26 +92,34 @@ class AccountAdd extends Component {
 
   addAccount() {
     const {title, openingBalance, type, icon} = this.state;
-    this.props.addAccount({
-      title,
-      openingBalance,
-      type,
-      icon,
-      callback,
-    });
+    if (!title.trim()) {
+      this.onStateChange('error', 'Account name cannot be empty');
+    } else {
+      this.props.addAccount({
+        title: title.trim(),
+        openingBalance: parseFloat(openingBalance) || 0,
+        type,
+        icon,
+        callback,
+      });
+    }
   }
 
   editAccount() {
     const {id, title, openingBalance, balance, type, icon} = this.state;
-    this.props.editAccount({
-      id,
-      title,
-      openingBalance,
-      balance,
-      type,
-      icon,
-      callback,
-    });
+    if (!title.trim()) {
+      this.onStateChange('error', 'Account name cannot be empty');
+    } else {
+      this.props.editAccount({
+        id,
+        title: title.trim(),
+        openingBalance: parseFloat(openingBalance) || 0,
+        balance,
+        type,
+        icon,
+        callback,
+      });
+    }
   }
 
   deleteAccount() {

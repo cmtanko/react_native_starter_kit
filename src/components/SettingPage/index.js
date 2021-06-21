@@ -34,6 +34,7 @@ import {
   selectBackups,
   selectSetting,
 } from '../../selector';
+import cs from '../../styles/common';
 
 const sampelData = require('../../assets/sampledata/personal_expense_manager.json');
 
@@ -42,6 +43,7 @@ import styles from './styles';
 
 const SettingPage = (props) => {
   const {latestBackup} = props;
+  const {hideProfile} = props.route.params || false;
 
   const loadSampleData = () => {
     try {
@@ -152,7 +154,7 @@ const SettingPage = (props) => {
   };
 
   const displayProfile = () => {
-    if (props.userInfo) {
+    if (props.userInfo && !hideProfile) {
       return (
         <View>
           <Thumbnail
@@ -168,23 +170,25 @@ const SettingPage = (props) => {
 
   return (
     <SettingsContainer>
-      <View style={{height: 220, backgroundColor: '#0E131B'}}>
-        <Header transparent>
-          <Left>
-            <Button transparent onPress={() => props.navigation.openDrawer()}>
-              <Icon name="menu" style={{color: 'white'}} />
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{color: 'white', fontSize: 30, alignItems: 'center'}}>
-              Profile
-            </Title>
-          </Body>
-          <Right />
-        </Header>
-      </View>
-
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      {!hideProfile && (
+        <View style={[cs.brandBgColorSecondary, {height: 220}]}>
+          <Header transparent>
+            <Left>
+              <Button transparent onPress={() => props.navigation.openDrawer()}>
+                <Icon name="menu" style={{color: 'white'}} />
+              </Button>
+            </Left>
+            <Body>
+              <Title
+                style={{color: 'white', fontSize: 30, alignItems: 'center'}}>
+                Profile
+              </Title>
+            </Body>
+            <Right />
+          </Header>
+        </View>
+      )}
+      <View style={[cs.brandBgColorPrimary, {flex: 1}]}>
         {displayProfile()}
         <Content>
           <ListButtonBox

@@ -43,29 +43,32 @@ const ReportPage = (props) => {
   ];
 
   const getData = (categories, allRecords) => {
-    return categories.map((category) => {
-      let recordByCategory = allRecords.filter((record) => {
-        const todayDate = moment();
-        const recordDate = moment(record.date);
-        const dateDiff = todayDate.diff(recordDate, 'days');
+    return categories
+      .map((category) => {
+        let recordByCategory = allRecords.filter((record) => {
+          const todayDate = moment();
+          const recordDate = moment(record.date);
+          const dateDiff = todayDate.diff(recordDate, 'days');
 
-        return (
-          record.categoryId === category.id &&
-          dateDiff < WEEK_TO_DATE[selectedReportType]
-        );
-      });
+          return (
+            record.categoryId === category.id &&
+            dateDiff < WEEK_TO_DATE[selectedReportType]
+          );
+        });
 
-      let sumOfIncome = 0;
+        let sumOfIncome = 0;
 
-      _.each(recordByCategory, (record) => {
-        sumOfIncome += parseFloat(record.amount);
-      });
+        _.each(recordByCategory, (record) => {
+          sumOfIncome += parseFloat(record.amount);
+        });
 
-      return {
-        label: sumOfIncome > 0 ? category.title + '\n $' + sumOfIncome : ' ',
-        y: sumOfIncome > 0 ? parseInt(sumOfIncome, 10) : 0,
-      };
-    });
+        return {
+          name: sumOfIncome > 0 ? category.title + ' $' + sumOfIncome : ' ',
+          label: category.title,
+          y: sumOfIncome > 0 ? parseInt(sumOfIncome, 10) : 0,
+        };
+      })
+      .filter((cat) => cat.y > 0);
   };
 
   return (

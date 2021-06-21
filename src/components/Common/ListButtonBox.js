@@ -32,14 +32,14 @@ const ListButtonBox = ({
       }}>
       <Left>
         <Button style={cs.bg_dark_blue}>
-          <Icon active name={icon} />
+          <Icon active name={icon} style={cs.left_icon} />
         </Button>
       </Left>
       <Body
         style={{
           borderBottomWidth: 0,
         }}>
-        <Text>{title}</Text>
+        <Text style={cs.color_white}>{title}</Text>
       </Body>
       <Right
         style={{

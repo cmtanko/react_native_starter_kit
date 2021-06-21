@@ -49,6 +49,13 @@ export const selectCategory = (value) => {
   };
 };
 
+export const selectDate = (value) => {
+  return {
+    type: 'SELECT_DATE',
+    payload: value,
+  };
+};
+
 export const addAccount = ({title, type, openingBalance, icon, callback}) => {
   return async (dispatch) => {
     try {

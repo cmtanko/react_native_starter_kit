@@ -51,7 +51,7 @@ const RecordTransactionSummary = ({
           flexDirection: 'row',
           alignSelf: 'flex-start',
         }}>
-        <View style={{flex: 1}}></View>
+        <View style={{flex: 1}} />
 
         <View style={{flex: 6}}>
           <VictoryPie

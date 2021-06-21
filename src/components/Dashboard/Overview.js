@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
-import {Button, Title, List} from 'react-native-paper';
+import {Button, Title, List, Chip} from 'react-native-paper';
 import {Container, Content, Icon, Header, Left, Body, Right} from 'native-base';
 import {selectAccountType, selectAccount, selectCategory} from '../../actions';
 
@@ -53,7 +53,7 @@ const Overview = (props) => {
       let accountType = ACCOUNT_TYPE[t.category?.type];
 
       return accountType === 'TRANSFER'
-        ? t['payFrom'] === accountId || t['payTo'] === accountId
+        ? t.payFrom === accountId || t.payTo === accountId
         : t[accountType] === accountId;
     });
     return a;
@@ -84,18 +84,31 @@ const Overview = (props) => {
     <Container style={[cs.brandBgColorSecondary]}>
       <View id="topSection" style={cs.pb8}>
         <Header transparent>
-          <Left>
+          <Left style={{flex: 1}}>
             <Button
               transparent
               style={{marginLeft: -16}}
               onPress={() => props.navigation.openDrawer()}>
-              <Icon name="menu" style={cs.color_white} />
+              <Icon name="menu" style={[cs.color_white, {fontSize: 24}]} />
             </Button>
           </Left>
-          <Body>
-            <Title style={cs.overview_subtitle}>Your Balance</Title>
+          <Body
+            style={{
+              flex: 4,
+              alignItems: 'center',
+            }}>
+            <Title style={cs.header_title}>Your Balance</Title>
           </Body>
-          <Right />
+          <Right style={{flex: 1}}>
+            <Icon
+              name="cog"
+              type="FontAwesome"
+              onPress={() => {
+                props.navigation.navigate('Setting', {hideProfile: true});
+              }}
+              style={[cs.color_white, {fontSize: 24}]}
+            />
+          </Right>
         </Header>
 
         <View style={[cs.center, {height: 96}]}>
@@ -179,21 +192,39 @@ const Overview = (props) => {
             flex: 1,
             paddingTop: 0,
           }}>
-          <View style={{flexDirection: 'row', height: 24}}>
+          <View style={{flexDirection: 'row', height: 32}}>
             <Text style={[cs.overview_title, {flex: 3}]}>Transactions</Text>
-            <Text
+            <Chip
+              icon="folder-open"
+              selectedColor="white"
               style={{
-                flex: 1,
-                paddingRight: 8,
-                textAlign: 'right',
+                backgroundColor: '#243855',
                 color: 'white',
-                fontWeight: '700',
+                marginRight: 8,
               }}
-              onPress={() => {
-                props.navigation.navigate('Home');
-              }}>
-              + ADD
-            </Text>
+              textStyle={{
+                color: 'white',
+              }}
+              onPress={() => props.navigation.navigate('Home')}>
+              View All
+            </Chip>
+            <Chip
+              icon="plus"
+              selectedColor="white"
+              style={{
+                backgroundColor: '#243855',
+                color: 'white',
+              }}
+              textStyle={{
+                color: 'white',
+              }}
+              onPress={() =>
+                props.navigation.navigate('RecordAddIncome', {
+                  navigateBackTo: 'Overview',
+                })
+              }>
+              Add New
+            </Chip>
           </View>
           <Content>
             <List.Section>
@@ -207,8 +238,8 @@ const Overview = (props) => {
                   let accountType = ACCOUNT_TYPE[t.category?.type];
                   return props.selectedItem.account
                     ? accountType === 'TRANSFER'
-                      ? t['payFrom'] === props.selectedItem.account ||
-                        t['payTo'] === props.selectedItem.account
+                      ? t.payFrom === props.selectedItem.account ||
+                        t.payTo === props.selectedItem.account
                       : t[accountType] === props.selectedItem.account
                     : true;
                 })
@@ -221,7 +252,9 @@ const Overview = (props) => {
                     category,
                     description,
                   } = record;
-                  if (!category) return;
+                  if (!category) {
+                    return;
+                  }
                   return (
                     <List.Item
                       key={id}
@@ -241,11 +274,11 @@ const Overview = (props) => {
                       right={(props) => (
                         <Text style={[cs.h3, cs.color_white]}>
                           {category.type === 'INCOME'
-                            ? '+'
+                            ? '+ '
                             : category.type === 'EXPENSE'
-                            ? '-'
+                            ? '- '
                             : ''}
-                          ${amount}
+                          ${currencify(amount)}
                         </Text>
                       )}
                       title={category.title}

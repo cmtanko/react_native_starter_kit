@@ -11,6 +11,7 @@ import {ButtonBox, ErrorBox} from '../Common';
 import {
   selectAccountLoading,
   selectCategories,
+  selectRecords,
   selectAccounts,
 } from '../../selector';
 
@@ -19,6 +20,7 @@ import {
   editRecord,
   deleteRecord,
   selectCategoryType,
+  selectDate,
 } from '../../actions';
 
 import cs from '../../styles/common';
@@ -29,13 +31,15 @@ class RecordAddIncome extends Component {
   constructor(props) {
     super(props);
 
+    let predictedDate = props.selectedItem.date || new Date();
+
     let firstAccount =
       !!props.accounts && props.accounts[0] && props.accounts[0].id;
 
     this.state = {
       id: '',
       amount: '',
-      date: new Date(),
+      date: predictedDate,
       categoryId: '',
       payFrom: firstAccount || '',
       payTo: firstAccount || '',
@@ -44,6 +48,7 @@ class RecordAddIncome extends Component {
       attachment: '',
       formType: '',
       error: '',
+      showCategoryModal: false,
       selectedCategoryType: 'INCOME',
     };
 
@@ -65,6 +70,10 @@ class RecordAddIncome extends Component {
         callback = (acc) => {
           this.props.navigation.navigate(navigateBackTo);
         };
+      }
+
+      if (!params.record) {
+        return;
       }
 
       const {
@@ -136,10 +145,15 @@ class RecordAddIncome extends Component {
       place,
       attachment,
     } = this.state;
+
     amount = parseInt(amount, 10) || -1;
-    if (amount <= 0 || !categoryId || !payFrom) {
-      this.onStateChange('error', 'All fields are required!');
+    if (amount <= 0) {
+      this.onStateChange('error', 'Amount cannot be zero');
+    } else if (!categoryId) {
+      this.onStateChange('showCategoryModal', true);
     } else {
+      this.props.selectDate(date);
+
       if (id) {
         this.props.editRecord({
           id,
@@ -148,7 +162,7 @@ class RecordAddIncome extends Component {
           categoryId,
           payFrom,
           payTo,
-          description,
+          description: description.trim(),
           place,
           attachment,
           callback,
@@ -160,7 +174,7 @@ class RecordAddIncome extends Component {
           categoryId,
           payFrom,
           payTo,
-          description,
+          description: description.trim(),
           place,
           attachment,
           callback,
@@ -218,6 +232,7 @@ class RecordAddIncome extends Component {
               payFrom={this.state.payFrom}
               payTo={this.state.payTo}
               attachment={this.state.attachment}
+              showCategoryModal={this.state.showCategoryModal}
               categories={[
                 ...categories,
                 {id: 0, title: 'Add Category', icon: 'plus', type: ''},
@@ -237,8 +252,10 @@ const mapStateToProps = (state) => {
   return {
     accounts: selectAccounts(state),
     categories: selectCategories(state),
+    records: selectRecords(state),
     selectedCategoryType: state.selectedCategoryType,
     error: state.account.error,
+    selectedItem: state.selectedItem,
     loading: selectAccountLoading(state),
   };
 };
@@ -247,5 +264,6 @@ export default connect(mapStateToProps, {
   addRecord,
   editRecord,
   deleteRecord,
+  selectDate,
   selectCategoryType,
 })(RecordAddIncome);

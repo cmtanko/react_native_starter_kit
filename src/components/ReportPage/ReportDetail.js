@@ -1,9 +1,14 @@
 import {connect} from 'react-redux';
 import React, {useState, useEffect} from 'react';
 import Carousel from 'react-native-carousel-view';
-import {VictoryPie, VictoryBar, VictoryTheme} from 'victory-native';
+import {
+  VictoryPie,
+  VictoryBar,
+  VictoryTheme,
+  VictoryLegend,
+} from 'victory-native';
 import {Text, View, Dimensions, Platform} from 'react-native';
-
+import {Content} from 'native-base';
 import {} from 'react-native';
 import styles from './styles';
 import cs from '../../styles/common';
@@ -38,9 +43,10 @@ const ReportDetail = (props) => {
             <VictoryPie
               theme={VictoryTheme.material}
               colorScale={colorScale}
-              innerRadius={70}
-              labelRadius={160}
-              width={deviceWidth - 40}
+              innerRadius={68}
+              labelRadius={0}
+              width={300}
+              height={300}
               data={myData}
               events={[]}
               style={{
@@ -50,6 +56,19 @@ const ReportDetail = (props) => {
                 duration: 1000,
               }}
             />
+
+            <VictoryLegend
+              x={16}
+              symbolSpacer={8}
+              theme={VictoryTheme.material}
+              orientation="vertical"
+              gutter={20}
+              style={{
+                labels: {fill: 'white', fontSize: 10},
+              }}
+              colorScale={colorScale}
+              data={myData}
+            />
           </View>
           <View pointerEvents="none" style={styles.slides}>
             <Text style={[cs.h2, cs.color_light_red, cs.padding_large]}>
@@ -58,9 +77,10 @@ const ReportDetail = (props) => {
             <VictoryPie
               theme={VictoryTheme.material}
               colorScale={colorScale}
-              innerRadius={70}
-              labelRadius={160}
-              width={deviceWidth - 40}
+              innerRadius={68}
+              labelRadius={0}
+              width={300}
+              height={300}
               data={expenseData}
               events={[]}
               style={{
@@ -69,6 +89,18 @@ const ReportDetail = (props) => {
               animate={{
                 duration: 1000,
               }}
+            />
+            <VictoryLegend
+              x={16}
+              symbolSpacer={8}
+              theme={VictoryTheme.material}
+              orientation="vertical"
+              gutter={20}
+              style={{
+                labels: {fill: 'white', fontSize: 10},
+              }}
+              colorScale={colorScale}
+              data={expenseData}
             />
           </View>
 
@@ -79,7 +111,7 @@ const ReportDetail = (props) => {
             <VictoryBar
               theme={VictoryTheme.material}
               colorScale={colorScale}
-              width={deviceWidth - 40}
+              width={deviceWidth}
               data={[...expenseData, ...myData]}
               events={[]}
               style={{

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   Form,
@@ -31,12 +31,25 @@ const RecordForm = ({
   description,
   accountFrom,
   onStateChange,
+  showCategoryModal = false,
   selectedCategoryType,
 }) => {
   const [visible, setVisible] = useState(false);
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const showModal = () => {
+    setVisible(true);
+    onStateChange('showCategoryModal', true);
+  };
+
+  const hideModal = () => {
+    setVisible(false);
+    onStateChange('showCategoryModal', false);
+  };
+
+  useEffect(() => {
+    setVisible(showCategoryModal);
+  });
+
   const containerStyle = {
     backgroundColor: '#0F171E',
     alignSelf: 'center',
@@ -53,7 +66,7 @@ const RecordForm = ({
     if (!categoryId) {
       return (
         <Button transparent onPress={showModal}>
-          <Text>Select category</Text>
+          <Text style={cs.brandColorTertiary}>Select category</Text>
         </Button>
       );
     } else {

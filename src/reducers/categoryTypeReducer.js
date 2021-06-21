@@ -1,4 +1,4 @@
-const initialState = 'INCOME';
+const initialState = 'EXPENSE';
 
 export default function (state = initialState, action) {
   switch (action.type) {

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Container, View, Text, Button, Icon} from 'native-base';
 
 export const SettingsContainer = styled(Container)`
-  background-color: ${(props) => props.theme.colors.ui.primary};
+  background-color: #131d28;
 `;
 
 export const SettingsTitle = styled(Text)`
