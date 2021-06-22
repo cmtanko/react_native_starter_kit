@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
     case 'SELECT_DATE':
       return {
         ...state,
-        date: state.date !== action.payload ? action.payload : null,
+        date: action.payload ? action.payload : null,
       };
     default:
       return state;
