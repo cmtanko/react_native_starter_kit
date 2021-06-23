@@ -56,6 +56,20 @@ export const selectDate = (value) => {
   };
 };
 
+export const predictedCategoryId = (value) => {
+  return {
+    type: 'PREDICTED_CATEGORY_ID',
+    payload: value,
+  };
+};
+
+export const predictedAccountId = (value) => {
+  return {
+    type: 'PREDICTED_ACCOUNT_ID',
+    payload: value,
+  };
+};
+
 export const addAccount = ({title, type, openingBalance, icon, callback}) => {
   return async (dispatch) => {
     try {

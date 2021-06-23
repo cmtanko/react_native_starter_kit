@@ -1,6 +1,6 @@
 {
   "name": "react_native_starter_kit",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "scripts": {
     "bundle:ios": "react-native bundle  --minify --entry-file index.js --platform ios --dev false --bundle-output ./ios/main.jsbundle --assets-dest ./ios/",

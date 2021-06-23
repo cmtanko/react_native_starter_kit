@@ -21,6 +21,8 @@ import {
   deleteRecord,
   selectCategoryType,
   selectDate,
+  predictedAccountId,
+  predictedCategoryId,
 } from '../../actions';
 
 import cs from '../../styles/common';
@@ -40,9 +42,9 @@ class RecordAddIncome extends Component {
       id: '',
       amount: '',
       date: predictedDate,
-      categoryId: '',
-      payFrom: firstAccount || '',
-      payTo: firstAccount || '',
+      categoryId: props.selectedItem.predictedCategoryId || '',
+      payFrom: props.selectedItem.predictedAccountId || firstAccount || '',
+      payTo: props.selectedItem.predictedAccountId || firstAccount || '',
       description: '',
       place: '',
       attachment: '',
@@ -153,6 +155,10 @@ class RecordAddIncome extends Component {
       this.onStateChange('showCategoryModal', true);
     } else {
       this.props.selectDate(date);
+      this.props.predictedAccountId(
+        this.props.selectedCategoryType === 'INCOME' ? payTo : payFrom,
+      );
+      this.props.predictedCategoryId(categoryId);
 
       if (id) {
         this.props.editRecord({
@@ -265,5 +271,7 @@ export default connect(mapStateToProps, {
   editRecord,
   deleteRecord,
   selectDate,
+  predictedAccountId,
+  predictedCategoryId,
   selectCategoryType,
 })(RecordAddIncome);
