@@ -4,7 +4,7 @@ import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import {Button, Title, List, Chip} from 'react-native-paper';
 import {Container, Content, Icon, Header, Left, Body, Right} from 'native-base';
 import {selectAccountType, selectAccount, selectCategory} from '../../actions';
-
+import SelectableCategory from './SelectableCategory';
 import {
   selectRecords,
   selectCategories,
@@ -155,38 +155,10 @@ const Overview = (props) => {
       </View>
 
       <View id="bottomSection" style={cs.section_bottom}>
-        <View style={{paddingTop: 48}}>
-          <Text style={cs.overview_title}>View Transaction by Category</Text>
-          <View style={{height: 80, marginTop: 8}}>
-            <ScrollView
-              showsHorizontalScrollIndicator={false}
-              horizontal={true}>
-              <RoundIcon
-                title="Add"
-                id={0}
-                name="plus"
-                onPress={() => {
-                  props.navigation.navigate('Category');
-                }}
-              />
-              {props.categories.map((category) => {
-                const {title, icon, id} = category;
-                return (
-                  <RoundIcon
-                    selectedItem={props?.selectedItem?.category}
-                    id={id}
-                    title={title}
-                    name={icon}
-                    onPress={() => {
-                      props.selectCategory(id);
-                    }}
-                  />
-                );
-              })}
-            </ScrollView>
-          </View>
-        </View>
-
+        <SelectableCategory
+          navigation={props.navigation}
+          style={{paddingTop: 40}}
+        />
         <View
           style={{
             flex: 1,

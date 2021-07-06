@@ -387,4 +387,32 @@ export default StyleSheet.create({
     marginTop: -48,
     zIndex: -9999,
   },
+
+  p_t_0: {
+    paddingTop: 0,
+  },
+
+  p_t_2: {
+    paddingTop: 2,
+  },
+
+  p_t_4: {
+    paddingTop: 4,
+  },
+
+  p_t_8: {
+    paddingTop: 8,
+  },
+
+  p_t_12: {
+    paddingTop: 12,
+  },
+
+  p_t_16: {
+    paddingTop: 16,
+  },
+
+  center_item: {
+    alignItems: 'center',
+  },
 });

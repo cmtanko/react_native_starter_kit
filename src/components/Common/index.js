@@ -5,6 +5,7 @@ import ErrorBox from './ErrorBox';
 import ButtonBox from './ButtonBox';
 import PickerBox from './PickerBox';
 import RoundIcon from './RoundIcon';
+import HeaderText from './/HeaderText';
 import IconModalBox from './IconModalBox';
 import ListButtonBox from './ListButtonBox';
 import DatePickerBox from './DatePickerBox';
@@ -18,6 +19,7 @@ export {
   PickerBox,
   RoundIcon,
   ButtonBox,
+  HeaderText,
   IconModalBox,
   ListButtonBox,
   DatePickerBox,
