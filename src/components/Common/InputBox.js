@@ -11,6 +11,7 @@ import {
 export class InputBox extends PureComponent {
   render() {
     const {
+      testID,
       title,
       icon,
       value,
@@ -26,6 +27,7 @@ export class InputBox extends PureComponent {
         <ItemContainer stackedLabel>
           <LabelContainer>{title}</LabelContainer>
           <InputContainer
+            testID={testID}
             value={value}
             placeholder={placeholder}
             autoCapitalize="none"

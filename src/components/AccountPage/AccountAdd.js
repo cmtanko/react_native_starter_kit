@@ -140,12 +140,17 @@ class AccountAdd extends Component {
     if (id) {
       return (
         <View>
-          <ButtonBox title="Edit" onChange={this.editAccount} />
-          <ButtonBox title="Delete" btnDelete onChange={this.deleteAccount} />
+          <ButtonBox testID="edit" title="Edit" onChange={this.editAccount} />
+          <ButtonBox
+            testID="delete"
+            title="Delete"
+            btnDelete
+            onChange={this.deleteAccount}
+          />
         </View>
       );
     }
-    return <ButtonBox title="Add" onChange={this.addAccount} />;
+    return <ButtonBox testID="add" title="Add" onChange={this.addAccount} />;
   }
 
   render() {
@@ -217,6 +222,7 @@ class AccountAdd extends Component {
             <Form>
               <AccountForm>
                 <InputBox
+                  testID="accountName"
                   title="Account Name"
                   placeholder="Bank / Cash"
                   icon="ios-clipboard"
@@ -225,6 +231,7 @@ class AccountAdd extends Component {
                   onChange={(value) => this.onStateChange('title', value)}
                 />
                 <InputBox
+                  testID="openingBalance"
                   title="Opening Balance"
                   placeholder=""
                   numeric={true}
@@ -236,6 +243,7 @@ class AccountAdd extends Component {
                 />
 
                 <PickerBox
+                  testID="accountType"
                   title="Account Type"
                   type={type}
                   options={[
@@ -247,6 +255,7 @@ class AccountAdd extends Component {
                 />
 
                 <IconModalBox
+                  testID="icon"
                   headingIcon="ios-globe"
                   headingTitle="Icon"
                   title="Select Icon"

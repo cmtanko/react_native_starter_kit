@@ -3,9 +3,11 @@ import {Text} from 'react-native';
 
 import cs from '../../styles/common';
 
-const HeaderText = ({title = 'Header', style}) => {
+const HeaderText = ({testID, title = 'Header', style}) => {
   return (
-    <Text style={[cs.h2, cs.color_light_blue, cs.padding_large, {...style}]}>
+    <Text
+      testID={testID}
+      style={[cs.h2, cs.color_light_blue, cs.padding_large, {...style}]}>
       {title}
     </Text>
   );

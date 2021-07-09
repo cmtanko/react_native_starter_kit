@@ -23,6 +23,7 @@ const AccountPage = (props) => {
       </AccountPageContent>
       <View>
         <AccountPageFab
+          testID="accountPageFab"
           direction="up"
           position="bottomRight"
           onPress={() => navigation.navigate('AccountAdd')}>

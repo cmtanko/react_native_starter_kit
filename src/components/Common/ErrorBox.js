@@ -5,9 +5,11 @@ import {Label} from 'native-base';
 
 import cs from '../../styles/common';
 
-const ErrorBox = ({error}) => {
+const ErrorBox = ({testID, error}) => {
   return (
-    <Label style={[cs.label, {color: 'red', textAlign: 'center'}]}>
+    <Label
+      testID={testID}
+      style={[cs.label, {color: 'red', textAlign: 'center'}]}>
       {error}
     </Label>
   );

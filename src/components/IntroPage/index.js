@@ -66,6 +66,7 @@ class App extends React.Component {
   render() {
     return (
       <AppIntro
+        testID="appIntro"
         dotStyle={{backgroundColor: '#8888aa'}}
         textStyle={{color: 'red', backgroundColor: 'green'}}
         activeDotStyle={{backgroundColor: '#22e3c4'}}

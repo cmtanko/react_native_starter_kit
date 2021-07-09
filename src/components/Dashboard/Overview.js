@@ -124,6 +124,7 @@ const Overview = (props) => {
             horizontal={true}
             style={{}}>
             <RoundBoxButton
+              testID="addaccount"
               title="Add Account"
               subtitle="+"
               id={0}
@@ -141,6 +142,7 @@ const Overview = (props) => {
               return (
                 <RoundBoxButton
                   id={id}
+                  key={id}
                   selectedItem={props?.selectedItem?.account}
                   title={title}
                   subtitle={'$ ' + totalBalance}
@@ -167,6 +169,7 @@ const Overview = (props) => {
           <View style={{flexDirection: 'row', height: 32}}>
             <Text style={[cs.overview_title, {flex: 3}]}>Transactions</Text>
             <Chip
+              testID="viewAll"
               icon="folder-open"
               selectedColor="white"
               style={{
@@ -181,6 +184,7 @@ const Overview = (props) => {
               View All
             </Chip>
             <Chip
+              testID="addNewRecord"
               icon="plus"
               selectedColor="white"
               style={{

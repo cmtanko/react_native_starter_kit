@@ -4,9 +4,10 @@ import {TouchableOpacity} from 'react-native';
 
 import cs from '../../styles/common';
 
-const RoundIcon = ({selectedItem, id, title, name, onPress}) => {
+const RoundIcon = ({testID, selectedItem, id, title, name, onPress}) => {
   return (
     <TouchableOpacity
+      testID={testID}
       onPress={() => {
         onPress();
       }}>

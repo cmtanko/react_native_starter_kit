@@ -9,7 +9,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, type TEXT NOT NULL, openingBalance TEXT, icon TEXT NOT NULL)',
         [],
         () => {
-          console.warn('Table accounts created');
           tx.executeSql(
             "INSERT INTO accounts (id, title, type, openingBalance, icon) VALUES (1,'Bank','BANK',0,'bank'),(4,'NAB Credit Card','OTHERS',0,'credit-card'),(3,'Cash','CASH',0,'money')",
           );
@@ -26,7 +25,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, type TEXT NOT NULL, icon TEXT NOT NULL)',
         [],
         () => {
-          console.warn('Table categories created');
           tx.executeSql(
             "INSERT INTO categories (id, title, type, icon) VALUES (17,'Transportation','EXPENSE','car'),(6,'Phone','EXPENSE','phone'),(9,'Rent','EXPENSE','bed'),(14,'Grocery','EXPENSE','shopping-cart'),(2,'Interest','INCOME','dollar'),(8,'Electricity','EXPENSE','bolt'),(16,'Eat Out','EXPENSE','home'),(10,'Medical','EXPENSE','ambulance'),(1,'Salary','INCOME','dollar'),(4,'Dividends','INCOME','money'),(5,'Misc','INCOME','gear'),(3,'Commission','INCOME','money'),(15,'Gift','EXPENSE','gift'),(12,'House','EXPENSE','home'),(11,'Shopping','EXPENSE','amazon'),(18,'Saving Account','TRANSFER','credit-card'),(7,'Shares','TRANSFER','btc'),(13,'Education','EXPENSE','home')",
           );
@@ -43,7 +41,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY NOT NULL, amount INTEGER NOT NULL, date TEXT NOT NULL, categoryId INTEGER NOT NULL, payFrom INTEGER, payTo INTEGER, description TEXT, place TEXT, camera TEXT)',
         [],
         () => {
-          console.warn('Table records created');
           resolve();
         },
         (err) => {
@@ -57,7 +54,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS backups (id INTEGER PRIMARY KEY NOT NULL, text TEXT NOT NULL,date TEXT NOT NULL)',
         [],
         () => {
-          console.warn('Table backup created');
           resolve();
         },
         (err) => {
@@ -71,7 +67,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY NOT NULL, fullname TEXT, email TEXT, displaypicture TEXT, token TEXT)',
         [],
         () => {
-          console.warn('Table backup created');
           resolve();
         },
         (err) => {
@@ -85,7 +80,6 @@ export const init = () => {
         'CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY NOT NULL, lockscreen TEXT, notification TEXT, currency TEXT)',
         [],
         () => {
-          console.warn('Table settings created');
           tx.executeSql(
             "INSERT INTO settings (id, lockscreen, notification, currency) VALUES (1, 'false', 'false','AUD')",
           );

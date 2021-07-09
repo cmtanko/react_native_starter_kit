@@ -16,6 +16,7 @@ const CategoryPage = (props) => {
       <SectionHeader />
       <CategoryList navigate={navigation.navigate} />
       <CategoryPageFab
+        testID="categoryPageFab"
         onPress={() => navigation.navigate('CategoryAdd')}
         direction="up"
         position="bottomRight">

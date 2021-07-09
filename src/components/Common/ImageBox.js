@@ -26,10 +26,11 @@ export class ImageBox extends PureComponent {
     }
   }
 
-  showButton(type, value, placeholder, focus, numeric, onChange) {
+  showButton(testID, type, value, placeholder, focus, numeric, onChange) {
     if (type === 'camera') {
       return (
         <Button
+          testID={testID}
           transparent
           onPress={() =>
             launchImageLibrary(
@@ -50,6 +51,7 @@ export class ImageBox extends PureComponent {
     } else {
       return (
         <Input
+          testID={testID}
           value={value}
           placeholder={placeholder}
           autoCapitalize="none"
@@ -67,6 +69,7 @@ export class ImageBox extends PureComponent {
 
   render() {
     const {
+      testID,
       title,
       icon,
       value,
@@ -85,6 +88,7 @@ export class ImageBox extends PureComponent {
             style={{borderColor: '#00000000', width: '100%'}}>
             <LabelContainer>{title}</LabelContainer>
             {this.showButton(
+              testID,
               type,
               value,
               placeholder,

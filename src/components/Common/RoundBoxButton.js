@@ -3,9 +3,17 @@ import {Icon, View, Text} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 
 import cs from '../../styles/common';
-const RoundBoxButton = ({selectedItem, id, title, subtitle, onPress}) => {
+const RoundBoxButton = ({
+  id,
+  title,
+  testID,
+  subtitle,
+  selectedItem,
+  onPress,
+}) => {
   return (
     <TouchableOpacity
+      testID={testID}
       onPress={() => {
         onPress();
       }}>

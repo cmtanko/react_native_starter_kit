@@ -7,6 +7,7 @@ import {Provider} from 'react-native-paper';
 import cs from '../../styles/common';
 
 const IconModalBox = ({
+  testID,
   headingIcon = 'ios-globe',
   headingTitle = 'Icon',
   title,
@@ -23,6 +24,7 @@ const IconModalBox = ({
     } else {
       return (
         <TouchableOpacity
+          testID={testID}
           style={{marginTop: -16, marginLeft: -8}}
           onPress={onPress}>
           <View style={cs.iconContainer}>

@@ -65,14 +65,14 @@ const RecordForm = ({
   const showCategory = () => {
     if (!categoryId) {
       return (
-        <Button transparent onPress={showModal}>
+        <Button testID="recordSelectCategory" transparent onPress={showModal}>
           <Text style={cs.brandColorTertiary}>Select category</Text>
         </Button>
       );
     } else {
       let item = categories.find((cat) => cat.id === categoryId);
       return (
-        <TouchableOpacity onPress={showModal}>
+        <TouchableOpacity testID="recordSelectIcon" onPress={showModal}>
           <View style={cs.iconContainer}>
             <Icon
               type="FontAwesome"
@@ -150,6 +150,7 @@ const RecordForm = ({
         />
 
         <InputBox
+          testID="recordAmount"
           title="Amount"
           placeholder=""
           icon="ios-calculator"
@@ -161,6 +162,7 @@ const RecordForm = ({
         />
 
         <InputBox
+          testID="recordDescription"
           title="Description"
           placeholder=""
           icon="ios-document"
@@ -170,6 +172,7 @@ const RecordForm = ({
 
         {selectedCategoryType === CATEGORY_TYPE.INCOME && (
           <PickerBox
+            testID="recordDepositTo"
             title="Deposit to"
             type={payTo}
             options={accountOptions}
@@ -179,6 +182,7 @@ const RecordForm = ({
 
         {selectedCategoryType === CATEGORY_TYPE.EXPENSE && (
           <PickerBox
+            testID="recordPayFrom"
             title="Pay from"
             type={payFrom}
             options={accountOptions}
@@ -188,6 +192,7 @@ const RecordForm = ({
 
         {selectedCategoryType === CATEGORY_TYPE.TRANSFER && (
           <PickerBox
+            testID="recordAccountFrom"
             title="Account From"
             type={payFrom}
             options={accountOptions}
@@ -197,6 +202,7 @@ const RecordForm = ({
 
         {selectedCategoryType === CATEGORY_TYPE.TRANSFER && (
           <PickerBox
+            testID="recordAccountTo"
             title="Account To"
             type={payTo}
             options={accountOptions}
@@ -216,6 +222,7 @@ const RecordForm = ({
         </InputGroup>
 
         <ImageBox
+          testID="recordCamera"
           title="Camera"
           placeholder="Receipt"
           type="camera"

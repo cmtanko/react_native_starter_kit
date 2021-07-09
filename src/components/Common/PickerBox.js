@@ -11,7 +11,7 @@ import {
   PickerContainer,
 } from './styles';
 
-const PickerBox = ({title, type, options, onChange}) => {
+const PickerBox = ({testID, title, type, options, onChange}) => {
   return (
     <InputGroupContainer>
       <IconContainer name="ios-card" />
@@ -19,6 +19,7 @@ const PickerBox = ({title, type, options, onChange}) => {
         <LabelContainer>{title}</LabelContainer>
 
         <PickerContainer
+          testID={testID}
           note
           iosIcon={<Icon name="caret-down" style={cs.brandColorTertiary} />}
           mode="dialog"

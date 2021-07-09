@@ -23,6 +23,7 @@ const SelectableCategory = (props) => {
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
           {navigation && (
             <RoundIcon
+              testID="addCategory"
               title="Add"
               id={0}
               name="plus"

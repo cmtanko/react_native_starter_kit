@@ -11,7 +11,7 @@ import {
   LabelContainer,
 } from './styles';
 
-const DatePickerBox = ({title, value, onChange}) => {
+const DatePickerBox = ({testID, title, value, onChange}) => {
   const today = new Date(value) || new Date();
 
   return (
@@ -20,6 +20,7 @@ const DatePickerBox = ({title, value, onChange}) => {
       <ItemContainer stackedLabel>
         <LabelContainer>{title}</LabelContainer>
         <DatePicker
+          testID={testID}
           style={{
             width: WIDTH * 0.82,
             backgroundColor: '#0F171E',
@@ -37,7 +38,6 @@ const DatePickerBox = ({title, value, onChange}) => {
               alignItems: 'flex-start',
             },
             dateText: {
-              color: '#22e3c4',
               fontSize: 16,
               paddingLeft: 16,
             },

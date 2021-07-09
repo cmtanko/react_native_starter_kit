@@ -79,8 +79,6 @@ npm run install-deps
 
 # Build 
 
-TL;DR
-
 ```bash
 # In terminal 1
 npm run start
@@ -126,6 +124,18 @@ npm run alpha-release
 npm run reinstall
 
 ``` 
+
+# Running Test 
+
+Test is implemented through detox and jest
+
+```bash
+# In terminal 1
+npm run test
+
+# In terminal 2
+npm run test-v
+```
 
 # Common setup issues
 

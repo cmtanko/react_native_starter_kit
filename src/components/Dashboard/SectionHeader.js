@@ -14,6 +14,7 @@ const SectionHeader = (props) => {
   return (
     <SegmentContainer>
       <Button
+        testID="incomeHeader"
         first
         style={{
           borderBottomWidth: 2,
@@ -42,6 +43,7 @@ const SectionHeader = (props) => {
       </Button>
 
       <Button
+        testID="expenseHeader"
         style={{
           borderBottomWidth: 2,
           borderColor: '#1C2533',
@@ -69,6 +71,7 @@ const SectionHeader = (props) => {
       </Button>
 
       <Button
+        testID="transferHeader"
         style={{
           borderBottomWidth: 2,
           borderColor: '#1C2533',

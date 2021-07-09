@@ -140,12 +140,17 @@ class CategoryAdd extends Component {
     if (id) {
       return (
         <View>
-          <ButtonBox title="Edit" onChange={this.editCategory} />
-          <ButtonBox title="Delete" btnDelete onChange={this.deleteCategory} />
+          <ButtonBox testID="edit" title="Edit" onChange={this.editCategory} />
+          <ButtonBox
+            testID="delete"
+            title="Delete"
+            btnDelete
+            onChange={this.deleteCategory}
+          />
         </View>
       );
     }
-    return <ButtonBox title="Add" onChange={this.addCategory} />;
+    return <ButtonBox testID="add" title="Add" onChange={this.addCategory} />;
   }
 
   render() {
@@ -216,6 +221,7 @@ class CategoryAdd extends Component {
             </Portal>
             <CategoryForm>
               <InputBox
+                testID="categoryName"
                 title="Title"
                 icon="ios-clipboard"
                 value={title}
@@ -223,6 +229,7 @@ class CategoryAdd extends Component {
                 onChange={(value) => this.onStateChange('title', value)}
               />
               <PickerBox
+                testID="categoryType"
                 title="Type"
                 type={type}
                 options={[
@@ -243,6 +250,7 @@ class CategoryAdd extends Component {
               />
 
               <IconModalBox
+                testID="categoryIcon"
                 headingIcon="ios-globe"
                 headingTitle="Icon"
                 title="Select Icon"

@@ -208,12 +208,17 @@ class RecordAddIncome extends Component {
     if (id) {
       return (
         <View>
-          <ButtonBox title="Edit" onChange={this.addMyRecord} />
-          <ButtonBox title="Delete" btnDelete onChange={this.deleteRecord} />
+          <ButtonBox testID="edit" title="Edit" onChange={this.addMyRecord} />
+          <ButtonBox
+            testID="delete"
+            title="Delete"
+            btnDelete
+            onChange={this.deleteRecord}
+          />
         </View>
       );
     }
-    return <ButtonBox title="Add" onChange={this.addMyRecord} />;
+    return <ButtonBox testID="add" title="Add" onChange={this.addMyRecord} />;
   }
 
   render() {
