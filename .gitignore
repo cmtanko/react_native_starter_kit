@@ -62,3 +62,4 @@ android/secure
 ios
 .env
 google-services.json
+GoogleService-Info.plist
