@@ -1,6 +1,6 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import {PermissionsAndroid} from 'react-native';
-
+import {CLIENT_ID} from '@env';
 import {readCsvFromFile, DATABASE_FILENAME, DATABASE_PATH} from './fileManager';
 
 import csvToJson from './csvToJson';
@@ -10,8 +10,7 @@ const url = 'https://www.googleapis.com/drive/v3';
 const uploadUrl = 'https://www.googleapis.com/upload/drive/v3';
 
 const GOOGLE_API_SCOPES = ['https://www.googleapis.com/auth/drive.file'];
-const GOOGLE_API_IOS_CLIENT_ID =
-  '1022821915779-c8o92t2hu4m28djiiq2rb3cdm967vj0r.apps.googleusercontent.com';
+const GOOGLE_API_IOS_CLIENT_ID = CLIENT_ID;
 
 let apiToken = null;
 

@@ -6,6 +6,10 @@ Your Personal Expense Manager helps manage your financial records quickly and ef
 
 It helps you track all your incomes and total savings as well. Your data is stored in your local phone and can be synced to your own google drive. Use this tool to keep track of all your day-to-day expenses.
 
+## APP Link
+- [App Store] (https://apps.apple.com/au/app/your-personal-expense-manager/id1569814201)
+- [Play Store] (https://play.google.com/store/apps/details?id=io.newplanet.reactnativestarterkit)
+
 ## Features:
 - [x] Quickly add your incomes/expenses.
 - [x] Filter by Account, Category, expense type, and dates.
@@ -113,6 +117,10 @@ npm run build-ios
 npm run build-android
 ```
 
+### iOS
+```
+  Rename .env.example to .env , and fill with appropriate keys
+```
 ### Android
 Make sure your .keystore file is named react-native-starter-kit.keystore and inside ./android/secure folder
 ```

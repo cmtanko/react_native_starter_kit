@@ -9,7 +9,6 @@ export default function configureStore() {
   const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(thunk, logger)),
-    // composeEnhancers(applyMiddleware(ReduxThunk), offline(editedOfflineConfig)),
   );
   return store;
 }
