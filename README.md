@@ -1,3 +1,5 @@
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cmtanko)
+
 # Your Personal Expense Manager
 
 Your Personal Expense Manager helps manage your financial records quickly and effectively. It includes analytic charts to better understand your spending habits.
