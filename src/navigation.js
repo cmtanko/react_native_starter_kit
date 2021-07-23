@@ -9,6 +9,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import Dashboard from './components/Dashboard';
 
+import ElementsPage from './components/__Elements/Elements';
+
 import LockPage from './components/LockPage';
 import IntroPage from './components/IntroPage';
 
@@ -447,11 +449,11 @@ function App(props, {locked, shouldLock}) {
   return (
     <NavigationContainer>
       {showLockScreen ? (
-        <LockScreen />
+        <ElementsPage />
       ) : isAppPreviouslyUsed || !props.introShow ? (
-        <HomeDrawer />
+        <ElementsPage />
       ) : (
-        <IntroScreen />
+        <ElementsPage />
       )}
     </NavigationContainer>
   );

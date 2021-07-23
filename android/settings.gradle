@@ -1,4 +1,4 @@
-rootProject.name = 'react_native_starter_kit'
+rootProject.name = 'AlphaReactNativeStarterKit'
 include ':@react-native-community_async-storage'
 project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 include ':react-native-svg'
