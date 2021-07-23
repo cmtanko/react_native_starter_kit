@@ -25,7 +25,7 @@
     "prettier": "prettier --write '*.js'",
     "format-code": "yarn run prettier && yarn run lint:fix",
     "clear-cache": "rm -rf $TMPDIR/metro-cache-* && watchman watch-del-all && cd android && ./gradlew clean && cd ../ && echo 'DONE.'",
-    "reinstall": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf ios/build && rm -rf node_modules/ && npm i"
+    "reinstall": "rm -rf ./ios/Build && rm -rf ./ios/DerivedData && rm -rf $TMPDIR/react-* && rm -rf package.json.lock && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf ios/build && rm -rf node_modules/ && npm i"
   },
   "husky": {
     "hooks": {
