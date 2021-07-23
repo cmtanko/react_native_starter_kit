@@ -1,1 +1,1 @@
-Personal Expense Manager
+React Native Starter Kit

@@ -1,4 +1,4 @@
-Your Personal Expense Manager helps manage your financial records quickly and effectively. It includes analytic charts to better understand your spending habits. It helps you track all your incomes and total savings as well. Your data is stored in your local phone and can be synced to your own google drive.Use this tool to keep track of all your day to day expenses. Manage your accounts, organize by categories and view by dates.
+Your React Native Starter Kit helps manage your financial records quickly and effectively. It includes analytic charts to better understand your spending habits. It helps you track all your incomes and total savings as well. Your data is stored in your local phone and can be synced to your own google drive.Use this tool to keep track of all your day to day expenses. Manage your accounts, organize by categories and view by dates.
 
 Features:
 - Quickly add your incomes/expense.

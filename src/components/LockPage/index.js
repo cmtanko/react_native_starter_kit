@@ -23,7 +23,7 @@ const LockPage = (props) => {
         status={status}
         maxAttempts="100"
         colorCircleButtons={COLOR_SECONDARY}
-        subtitleChoose={'To secure Personal Expense Manager'}
+        subtitleChoose={'To secure React Native Starter Kit'}
         finishProcess={(a) => {
           props.setLockedState(false);
         }}
