@@ -264,3 +264,18 @@ https://www.pradipdebnath.com/2020/10/06/how-to-implement-google-login-in-react-
   {...this.props.options}
 />
 ```
+
+
+### Adding Google Map
+#### iOS
+```
+Add your google map key in AppDelegate.m inside 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+[GMSServices provideAPIKey:@"AIzaSyDuGTbmdIuD9V_bEcR3M5ZyCEYKvZqmd0k"];  <---- Add this line
+...
+```
+
+#### Google Map Static API
+```
+https://developers.google.com/maps/documentation/maps-static/overview
+```

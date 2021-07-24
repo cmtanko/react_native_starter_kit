@@ -23,6 +23,7 @@ import {
   DatePicker,
   TimePicker,
   RadioButton,
+  GeoLocation,
 } from './index';
 
 import cs from '../../styles/common';
@@ -40,6 +41,18 @@ const ElementsPage = () => {
       <Content>
         <View style={{padding: 10}}>
           <Text style={[cs.h1]}>Elements</Text>
+          <GeoLocation
+            testID="geolocationField"
+            title="Geo Location"
+            subtitle="Your address"
+            placeholder="Location"
+            value={[10, 20]}
+            disabled={disabled}
+            required={required}
+            onChange={(value) => {
+              console.warn(JSON.stringify(value));
+            }}
+          />
           <Signature
             testID="textField"
             title="Signature"

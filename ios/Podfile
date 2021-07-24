@@ -17,6 +17,10 @@ target 'AlphaReactNativeStarterKit' do
   pod 'react-native-signature-capture', :path => '../node_modules/react-native-signature-capture'
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'react-native-maps', path: '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', path: '../node_modules/react-native-maps'
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
 
   target 'AlphaReactNativeStarterKitTests' do
     inherit! :complete
@@ -25,6 +29,11 @@ target 'AlphaReactNativeStarterKit' do
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
+      if target.name == 'react-native-google-maps'
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+        end
+      end
      target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
      end
