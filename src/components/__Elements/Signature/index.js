@@ -4,13 +4,13 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableHighlight,
 } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
 
 import Label from '../Label';
 import styles from '../index.styles';
-import Geolocation from '@react-native-community/geolocation';
 
 const Signature = (props) => {
   const {
@@ -22,12 +22,10 @@ const Signature = (props) => {
     required = false,
     onChange,
   } = props;
-  Geolocation.getCurrentPosition((info) => console.log(info));
 
   return (
     <SafeAreaView>
       <Label title={title} subtitle={subtitle} required={required} />
-
       {!disabled ? (
         <SignatureCapture
           testID={testID}

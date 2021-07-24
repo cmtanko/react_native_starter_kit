@@ -184,4 +184,39 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  geolocation_field: {
+    width: '100%',
+    height: 200,
+    marginBottom: theme.space[3],
+  },
+
+  geolocation_header: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    height: 76,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: theme.colors.ui.disabled,
+    marginBottom: theme.space[2],
+    padding: 16,
+  },
+
+  geolocation_header_info: {
+    flex: 4,
+    justifyContent: 'center',
+  },
+
+  geolocation_header_text: {
+    color: theme.colors.text.primary,
+    fontSize: theme.fontSizes.title,
+    marginBottom: theme.space[1],
+  },
+
+  geolocation_header_button: {
+    flex: 3,
+    top: 8,
+    justifyContent: 'center',
+  },
 });
