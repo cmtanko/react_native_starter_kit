@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight,
-} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
 
 import Label from '../Label';

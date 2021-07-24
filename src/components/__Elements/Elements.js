@@ -46,7 +46,7 @@ const ElementsPage = () => {
             title="Geo Location"
             subtitle="Your address"
             placeholder="Location"
-            value={[null, null]}
+            value={[10, 20]}
             disabled={disabled}
             required={required}
             onChange={(value) => {
