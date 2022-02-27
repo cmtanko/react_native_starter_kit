@@ -59,7 +59,7 @@
     "moment": "^2.29.1",
     "native-base": "^2.13.14",
     "react": "16.13.1",
-    "react-native": "0.63.3",
+    "react-native": "0.64.0",
     "react-native-app-intro": "^1.1.5",
     "react-native-bootsplash": "^3.2.3",
     "react-native-carousel-view": "^0.5.1",

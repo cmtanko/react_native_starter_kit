@@ -7,10 +7,12 @@ Your Personal Expense Manager helps manage your financial records quickly and ef
 It helps you track all your incomes and total savings as well. Your data is stored in your local phone and can be synced to your own google drive. Use this tool to keep track of all your day-to-day expenses.
 
 ## APP Link
+
 - [App Store] (https://apps.apple.com/au/app/your-personal-expense-manager/id1569814201)
 - [Play Store] (https://play.google.com/store/apps/details?id=io.newplanet.reactnativestarterkit)
 
 ## Features:
+
 - [x] Quickly add your incomes/expenses.
 - [x] Filter by Account, Category, expense type, and dates.
 - [x] Secure and password protected
@@ -21,12 +23,12 @@ It helps you track all your incomes and total savings as well. Your data is stor
 - [ ] Add a budget to each category
 - [ ] Add recurring transaction option
 
-
 ## Screenshots
 
 <img src="screenshots/overview.JPG">
 
 ## Environment Versions
+
 - Node: 10.15.3
 - React Native : 0.63.3
 - Cocopod: 1.10.1
@@ -36,29 +38,32 @@ It helps you track all your incomes and total savings as well. Your data is stor
 ### Ruby & Fastlane
 
 #### Install rvm
+
 Install rvm and select Ruby version
 
-``` bash
+```bash
 # Install RVM
 curl -sSL https://get.rvm.io | bash -s stable --ruby
- 
+
 # Install the version used by Fastlane
 rvm install ruby-$(cat .ruby-version)
 
 ```
 
 #### Install Fastlane
+
 So that we can build like cool humans, we use [Fastlane](https://fastlane.tools/)
 
 ```bash
 gem install fastlane -NV
 ```
- 
+
 ### Node
 
-Node versions are managed via nvm. 
+Node versions are managed via nvm.
 
 #### nvm
+
 To install
 
 ```
@@ -79,8 +84,8 @@ brew install watchman
 npm install -g react-native-cli
 ```
 
-
 #### Platform specific dependencies
+
 ```
 npm run install-deps
 ```
@@ -93,13 +98,13 @@ npm run install-deps
 - Android Sdk platform-tools 28.0.0
 - Android sdk tools 26.1.1
 - Android support repository 47.0.0
-- Google repository 58 
+- Google repository 58
 
 #### Xcode
 
 12.X
 
-## Build 
+## Build
 
 ```bash
 # In terminal 1
@@ -112,17 +117,22 @@ npm run start-ios #switch npm run start-android
 ## Targeting specific platforms
 
 You can build out for a particular platform via the appropriate npm command
+
 ```bash
 npm run build-ios
 npm run build-android
 ```
 
 ### iOS
+
 ```
   Rename .env.example to .env , and fill with appropriate keys
 ```
+
 ### Android
+
 Make sure your .keystore file is named react-native-starter-kit.keystore and inside ./android/secure folder
+
 ```
 export MY_RELEASE_STORE_FILE=YOUR_PATH
 export My_RELEASE_STORE_PASSWORD=YOUR_STORE_PASSWORD
@@ -135,8 +145,6 @@ export ANDROID_NDK=YOUR_PATH_TO_Library/Android/sdk/ndk/21.3.6528147
 # Deployment
 
 ## Generating artefacts
-
-
 
 ## Scripts
 
@@ -160,9 +168,9 @@ npm run alpha-release
 
 npm run reinstall
 
-``` 
+```
 
-# Running Test 
+# Running Test
 
 Test is implemented through detox and jest
 
@@ -176,13 +184,13 @@ npm run test-v
 
 # Common setup issues
 
-## iOS 
+## iOS
 
 You may receive errors about Podfile not matching Podfile.lock being out of date
 or Gemfile being out of date Gemfile.lock
 
 ```
-cd ios  
+cd ios
 pod update
 pod install
 gem update
@@ -203,6 +211,14 @@ follow these steps
 
 `ln -s $(which node) /usr/local/bin/node`
 
+## If you have problem upgrading to the latest React Native version , make sure to do a clean install
+
+`watchman watch-del-all && rm -rf yarn.lock package-lock.json node_modules ios/Pods ios/Podfile.lock android/app/build && npm install && cd ios && pod update && cd .. && npm start -- --reset-cache`
+
+## The following build commands failed: PhaseScriptExecution ...
+
+`pod install --repo-update`
+`NODE_BINARY=/usr/local/bin/node npx react-native run-ios`
 
 ### White screen
 
@@ -210,30 +226,31 @@ disable CORS `open -a Google\ Chrome --args --disable-web-security --user-data-d
 
 if http://some_stuff/debugger-ui/ Change to http://localhost:8081/debugger-ui/
 
-### 
+###
 
 ### The simulator IOS is crashing without any error message
 
 rm -rf ./ios/build
 watchman watch-del-al
-rm -rf $TMPDIR/react-*
+rm -rf $TMPDIR/react-\*
 lsof -ti :8081 | xargs kill -9
 cd ios/ && pod install
 react-native run-ios
 
-
 This command should create a symlink to `/uer`
 `ln -s $(which node) /usr/local/bin/node`
 
-### Implementing Google signin 
+### Implementing Google signin
+
 https://www.pradipdebnath.com/2020/10/06/how-to-implement-google-login-in-react-native-with-firebase/
 
 ### Update in react-native-carousel-view > carouselPager.android.js
+
 `import {ViewPagerAndroid} from 'react-native';` to
 `import ViewPagerAndroid from '@react-native-community/viewpager';`
 
-
 ### Update in react-native-timeline-flatlist
+
 ```
 <FlatList
   ListHeaderComponent={<this.props.ListHeaderComponent/>}   <--- Add this line

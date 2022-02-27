@@ -12,7 +12,8 @@ target 'react_native_starter_kit' do
   pod 'GoogleSignIn', '~> 5.0.2'
   pod 'Firebase/Analytics'
   
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+  # pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+  # pod 'ReactCommon/callinvoker', :path => "../node_modules/react-native/ReactCommon"
 
   target 'react_native_starter_kitTests' do
     inherit! :complete
