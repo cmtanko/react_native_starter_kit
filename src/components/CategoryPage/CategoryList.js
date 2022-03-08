@@ -4,11 +4,14 @@ import {FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {Spinner, View} from 'native-base';
 import CategoryRow from './CategoryRow';
-import {getCategories} from '../../actions';
+import {editCategory, getCategories} from '../../actions';
 import {selectCategories, selectCategoryLoading} from '../../selector';
 import {Text} from '../Typography/Text.component';
-
 class CategoryList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     this.props.getCategories();
   }
@@ -44,6 +47,14 @@ class CategoryList extends Component {
         id={item.id}
         category={item}
         navigate={this.props.navigate}
+        onToggleFavorite={(newCategory) => {
+          this.props.editCategory({
+            ...newCategory,
+            callback: () => {
+              this.props.getCategories();
+            },
+          });
+        }}
       />
     );
   }
@@ -62,4 +73,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {getCategories})(CategoryList);
+export default connect(mapStateToProps, {editCategory, getCategories})(
+  CategoryList,
+);

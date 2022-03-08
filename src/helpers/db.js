@@ -90,6 +90,32 @@ export const init = () => {
         },
       );
     });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'ALTER TABLE categories ADD COLUMN isFavorite INTEGER',
+        [],
+        () => {
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'ALTER TABLE accounts ADD COLUMN isFavorite INTEGER',
+        [],
+        () => {
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
   });
 
   return promise;
@@ -155,8 +181,8 @@ export const insertAccount = (title, type, openingBalance, icon) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'INSERT INTO accounts (title, type, openingBalance, icon) VALUES (?,?,?,?)',
-        [title, type, openingBalance, icon],
+        'INSERT INTO accounts (title, type, openingBalance, icon, isFavorite) VALUES (?,?,?,?,?)',
+        [title, type, openingBalance, icon, 0],
         (_, result) => {
           resolve(result);
         },
@@ -231,12 +257,19 @@ export const removeAccount = (id) => {
   return promise;
 };
 
-export const updateAccount = (id, title, type, openingBalance, icon) => {
+export const updateAccount = (
+  id,
+  title,
+  type,
+  openingBalance,
+  icon,
+  isFavorite,
+) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'UPDATE accounts SET title=?, type=?, openingBalance=?, icon=? WHERE id=?',
-        [title, type, openingBalance, icon, id],
+        'UPDATE accounts SET title=?, type=?, openingBalance=?, icon=?, isFavorite=? WHERE id=?',
+        [title, type, openingBalance, icon, isFavorite, id],
         (_, result) => {
           resolve(result);
         },
@@ -254,8 +287,8 @@ export const insertCategory = (title, type, icon) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'INSERT INTO categories (title, type, icon) VALUES (?,?,?)',
-        [title, type, icon],
+        'INSERT INTO categories (title, type, icon, isFavorite) VALUES (?,?,?,?)',
+        [title, type, icon, 0],
         (_, result) => {
           resolve(result);
         },
@@ -312,12 +345,12 @@ export const removeCategory = (id) => {
   return promise;
 };
 
-export const updateCategory = (id, title, type, icon) => {
+export const updateCategory = (id, title, type, icon, isFavorite = false) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'UPDATE categories SET title=?, type=?, icon=? WHERE id=?',
-        [title, type, icon, id],
+        'UPDATE categories SET title=?, type=?, icon=?, isFavorite=? WHERE id=?',
+        [title, type, icon, isFavorite, id],
         (_, result) => {
           resolve(result);
         },

@@ -1,6 +1,6 @@
 {
   "name": "react_native_starter_kit",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "bundle:ios": "react-native bundle  --minify --entry-file index.js --platform ios --dev false --bundle-output ./ios/main.jsbundle --assets-dest ./ios/",
@@ -59,10 +59,12 @@
     "moment": "^2.29.1",
     "native-base": "^2.13.14",
     "react": "16.13.1",
-    "react-native": "0.64.0",
+    "react-native": "0.63.3",
+    "react-native-app-auth": "^6.4.3",
     "react-native-app-intro": "^1.1.5",
     "react-native-bootsplash": "^3.2.3",
     "react-native-carousel-view": "^0.5.1",
+    "react-native-codegen": "0.0.13",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-gesture-handler": "^1.9.0",

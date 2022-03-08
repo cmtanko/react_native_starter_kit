@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Left, Button, ListItem, Body} from 'native-base';
+import {Left, Right, Button, ListItem, Body} from 'native-base';
 
 import {Text} from '../Typography/Text.component';
 
 import {CategoryIcon} from './index.styles';
 
-const CategoryRow = ({category, navigate}) => {
-  const {id, title, icon} = category;
+const CategoryRow = ({category, navigate, onToggleFavorite}) => {
+  const {id, type, title, icon, isFavorite} = category;
   return (
     <ListItem
       key={id}
@@ -26,6 +26,25 @@ const CategoryRow = ({category, navigate}) => {
         }}>
         <Text>{title}</Text>
       </Body>
+      <Right
+        style={{
+          borderBottomWidth: 0,
+        }}>
+        <CategoryIcon
+          active
+          type="FontAwesome"
+          name={isFavorite ? 'star' : 'star-o'}
+          onPress={() => {
+            onToggleFavorite({
+              title: title.trim(),
+              type,
+              icon,
+              id,
+              isFavorite: isFavorite ? 0 : 1,
+            });
+          }}
+        />
+      </Right>
     </ListItem>
   );
 };

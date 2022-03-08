@@ -20,7 +20,9 @@ export const getAccounts = () => {
       const dbResult = await fetchAccount();
       dispatch({
         type: ACCOUNT_FETCH_SUCCESS,
-        payload: dbResult,
+        payload: dbResult.sort((a, b) => {
+          return b.isFavorite - a.isFavorite;
+        }),
       });
     } catch (error) {
       throw error;
@@ -105,6 +107,7 @@ export const editAccount = ({
   balance,
   type,
   icon,
+  isFavorite,
   callback,
 }) => {
   return async (dispatch) => {
@@ -114,6 +117,7 @@ export const editAccount = ({
         icon: icon,
         openingBalance: parseFloat(openingBalance),
         title: title,
+        isFavorite: isFavorite,
         type: type,
       };
 
@@ -123,7 +127,15 @@ export const editAccount = ({
           payload: 'Account title is required!',
         });
       } else {
-        await updateAccount(id, title, type, openingBalance, icon, callback);
+        await updateAccount(
+          id,
+          title,
+          type,
+          openingBalance,
+          icon,
+          isFavorite,
+          callback,
+        );
         dispatch({
           type: ACCOUNT_UPDATE,
           payload: accountData,

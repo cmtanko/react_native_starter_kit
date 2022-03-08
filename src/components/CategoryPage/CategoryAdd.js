@@ -35,6 +35,7 @@ class CategoryAdd extends Component {
       icon: 'home',
       type: CATEGORY_TYPE.INCOME,
       modalVisible: false,
+      isFavorite: false,
     };
 
     callback = () => this.props.navigation.navigate('Category');
@@ -108,7 +109,7 @@ class CategoryAdd extends Component {
   }
 
   editCategory() {
-    const {title, type, icon, id} = this.state;
+    const {title, type, icon, id, isFavorite} = this.state;
     if (!title.trim()) {
       this.onStateChange('error', 'Category title cannot be empty');
     } else {
@@ -117,6 +118,7 @@ class CategoryAdd extends Component {
         type,
         icon,
         id,
+        isFavorite,
         callback,
       });
     }
