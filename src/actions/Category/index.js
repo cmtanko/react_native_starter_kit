@@ -17,7 +17,9 @@ export const getCategories = () => {
       const dbResult = await fetchCategory();
       dispatch({
         type: CATEGORY_FETCH_SUCCESS,
-        payload: dbResult,
+        payload: dbResult.sort((a, b) => {
+          return b.isFavorite - a.isFavorite;
+        }),
       });
     } catch (error) {
       throw error;
@@ -50,7 +52,14 @@ export const addCategory = ({title, type, icon, callback}) => {
   };
 };
 
-export const editCategory = ({title, type, icon, id, callback}) => {
+export const editCategory = ({
+  title,
+  type,
+  icon,
+  id,
+  isFavorite = false,
+  callback,
+}) => {
   return async (dispatch) => {
     try {
       let categoryData = {
@@ -58,6 +67,7 @@ export const editCategory = ({title, type, icon, id, callback}) => {
         icon: icon,
         title: title,
         type: type,
+        isFavorite: isFavorite,
       };
 
       if (title === '') {
@@ -66,7 +76,7 @@ export const editCategory = ({title, type, icon, id, callback}) => {
           payload: 'Category title is required!',
         });
       } else {
-        await updateCategory(id, title, type, icon, callback);
+        await updateCategory(id, title, type, icon, isFavorite, callback);
 
         dispatch({
           type: CATEGORY_UPDATE,

@@ -1,6 +1,6 @@
 {
-  "name": "AlphaReactNativeStarterKit",
-  "version": "1.1.1",
+  "name": "react_native_starter_kit",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "bundle:ios": "react-native bundle  --minify --entry-file index.js --platform ios --dev false --bundle-output ./ios/main.jsbundle --assets-dest ./ios/",
@@ -25,7 +25,7 @@
     "prettier": "prettier --write '*.js'",
     "format-code": "yarn run prettier && yarn run lint:fix",
     "clear-cache": "rm -rf $TMPDIR/metro-cache-* && watchman watch-del-all && cd android && ./gradlew clean && cd ../ && echo 'DONE.'",
-    "reinstall": "rm -rf ./ios/Build && rm -rf ./ios/DerivedData && rm -rf $TMPDIR/react-* && rm -rf package.json.lock && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf ios/build && rm -rf node_modules/ && npm i"
+    "reinstall": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf ios/build && rm -rf node_modules/ && npm i"
   },
   "husky": {
     "hooks": {
@@ -41,7 +41,6 @@
   "dependencies": {
     "@haskkor/react-native-pincode": "^1.22.6",
     "@react-native-community/async-storage": "^1.12.1",
-    "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/picker": "^1.8.1",
@@ -60,25 +59,24 @@
     "moment": "^2.29.1",
     "native-base": "^2.13.14",
     "react": "16.13.1",
-    "react-native": "0.64.0",
+    "react-native": "0.63.3",
+    "react-native-app-auth": "^6.4.3",
     "react-native-app-intro": "^1.1.5",
     "react-native-bootsplash": "^3.2.3",
     "react-native-carousel-view": "^0.5.1",
+    "react-native-codegen": "0.0.13",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.0.0-alpha.1",
-    "react-native-geolocation-service": "^5.3.0-beta.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-get-random-values": "^1.5.0",
     "react-native-google-drive-api-wrapper": "^1.4.0",
     "react-native-image-picker": "^3.3.2",
     "react-native-keychain": "^7.0.0",
-    "react-native-maps": "^0.28.0",
     "react-native-modalbox": "^2.0.2",
     "react-native-paper": "^4.4.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.0",
-    "react-native-signature-capture": "^0.4.12",
     "react-native-sqlite-storage": "^5.0.0",
     "react-native-super-grid": "^4.0.3",
     "react-native-svg": "^12.1.0",

@@ -68,10 +68,10 @@ To install
 
 ```
 # Install NVM
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.0/install.sh | bash
 
 # Install Required Node version
-nvm install
+nvm install 11.10.0
 
 # Select node version
 nvm use

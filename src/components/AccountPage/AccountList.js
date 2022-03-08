@@ -4,7 +4,7 @@ import {View, Spinner} from 'native-base';
 import React, {PureComponent} from 'react';
 
 import AccountRow from './AccountRow';
-import {getAccounts} from '../../actions';
+import {getAccounts, editAccount} from '../../actions';
 import {Text} from '../Typography/Text.component';
 import {selectAccounts, selectAccountLoading} from '../../selector';
 class AccountList extends PureComponent {
@@ -35,7 +35,19 @@ class AccountList extends PureComponent {
 
   renderItem({item}) {
     return (
-      <AccountRow id={item.id} account={item} navigate={this.props.navigate} />
+      <AccountRow
+        id={item.id}
+        account={item}
+        navigate={this.props.navigate}
+        onToggleFavorite={(newAccount) => {
+          this.props.editAccount({
+            ...newAccount,
+            callback: () => {
+              this.props.getAccounts();
+            },
+          });
+        }}
+      />
     );
   }
 
@@ -51,4 +63,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {getAccounts})(AccountList);
+export default connect(mapStateToProps, {getAccounts, editAccount})(
+  AccountList,
+);

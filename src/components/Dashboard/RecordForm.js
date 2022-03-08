@@ -109,9 +109,13 @@ const RecordForm = ({
             )}
             horizontal={false}
             numColumns={4}
-            data={categories.filter(
-              (cat) => cat.type === selectedCategoryType || cat.type === '',
-            )}
+            data={categories
+              .filter(
+                (cat) => cat.type === selectedCategoryType || cat.type === '',
+              )
+              .sort((a, b) => {
+                return b.isFavorite - a.isFavorite;
+              })}
             itemDimension={50}
             keyExtractor={(item) => item.id}
             initialNumToRender={20}
