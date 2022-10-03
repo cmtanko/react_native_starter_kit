@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
