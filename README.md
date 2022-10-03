@@ -37,8 +37,8 @@ It helps you track all your incomes and total savings as well. Your data is stor
 
 ### Ruby & Fastlane
 
-#### Install rvm
 
+#### Install rvm
 Install rvm and select Ruby version
 
 ```bash
