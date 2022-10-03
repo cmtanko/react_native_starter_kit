@@ -175,6 +175,7 @@ export const selectTransactions = createSelector(
     return record.list.map((r) => {
       return {
         ...r,
+        month: moment(r.date).format('MMMM, YYYY'),
         category: category.list.filter((c) => c.id === r.categoryId)[0],
         account: {
           payFrom: account.list.filter((a) => a.id === r.payFrom)[0],

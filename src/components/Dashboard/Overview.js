@@ -231,44 +231,66 @@ const Overview = (props) => {
                   if (!category) {
                     return;
                   }
+
+                  // Group record by month
+                  const groupedRecords = _.groupBy(
+                    props.transactions,
+                    (record) => record.month,
+                  );
+                  
+                  let showHeader = props.selectedItem.category ? groupedRecords[record.month].filter(
+                        (r) => r.categoryId === props.selectedItem.category,
+                      ).indexOf(record) === 0 : groupedRecords[record.month].indexOf(record) === 0;
                   return (
-                    <List.Item
-                      key={id}
-                      titleStyle={[
-                        cs.color_white,
-                        cs.h3,
-                        {fontWeight: '700', marginTop: -8},
-                      ]}
-                      descriptionStyle={[cs.color_white]}
-                      left={() => (
-                        <Icon
-                          type="FontAwesome"
-                          name={category.icon}
-                          style={[cs.left_icon]}
-                        />
+                    <React.Fragment key={record.id}>
+                      {showHeader && (
+                        <List.Subheader
+                          style={[
+                            cs.brandColorDanger,
+                            cs.h2,
+                            {fontWeight: '700', marginTop: -8},
+                          ]}>
+                          {record.month}
+                        </List.Subheader>
                       )}
-                      right={(props) => (
-                        <Text style={[cs.h3, cs.color_white]}>
-                          {category.type === 'INCOME'
-                            ? '+ '
-                            : category.type === 'EXPENSE'
-                            ? '- '
-                            : ''}
-                          ${currencify(amount)}
-                        </Text>
-                      )}
-                      title={category.title}
-                      description={description}
-                      onPress={() => {
-                        props.navigation.navigate('RecordAddIncome', {
-                          navigateBackTo: 'Overview',
-                          record: {
-                            ...record,
-                            type: category.type,
-                          },
-                        });
-                      }}
-                    />
+                      <List.Item
+                        key={id}
+                        titleStyle={[
+                          cs.color_white,
+                          cs.h3,
+                          {fontWeight: '700', marginTop: -8},
+                        ]}
+                        descriptionStyle={[cs.color_white]}
+                        left={() => (
+                          <Icon
+                            type="FontAwesome"
+                            name={category.icon}
+                            style={[cs.left_icon]}
+                          />
+                        )}
+                        right={(props) => (
+                          <Text style={[cs.h3, cs.color_white]}>
+                            {category.type === 'INCOME'
+                              ? '+ '
+                              : category.type === 'EXPENSE'
+                              ? '- '
+                              : ''}
+                            ${currencify(amount)}
+                          </Text>
+                        )}
+                        title={category.title}
+                        description={description}
+                        onPress={() => {
+                          props.navigation.navigate('RecordAddIncome', {
+                            navigateBackTo: 'Overview',
+                            record: {
+                              ...record,
+                              type: category.type,
+                            },
+                          });
+                        }}
+                      />
+                    </React.Fragment>
                   );
                 })}
             </List.Section>
