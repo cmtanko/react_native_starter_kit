@@ -20,6 +20,7 @@ It helps you track all your incomes and total savings as well. Your data is stor
 - [x] Easy to search for items.
 - [x] Charts to easily view your incomes and expenses
 - [x] Everything works offline.
+- [x] View overall transactions grouped by month.
 - [ ] Add a budget to each category
 - [ ] Add recurring transaction option
 
