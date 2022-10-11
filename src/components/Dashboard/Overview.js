@@ -133,26 +133,30 @@ const Overview = (props) => {
                 props.navigation.navigate('Account');
               }}
             />
-            {props.accounts.map((account) => {
-              const {title, id, openingBalance} = account;
+            {props.accounts
+              .filter((item) => {
+                return item.isDeleted !== 1;
+              })
+              .map((account) => {
+                const {title, id, openingBalance} = account;
 
-              const totalBalance = currencify(
-                getSum(getTransactionsByAccount(id), account),
-              );
+                const totalBalance = currencify(
+                  getSum(getTransactionsByAccount(id), account),
+                );
 
-              return (
-                <RoundBoxButton
-                  id={id}
-                  key={id}
-                  selectedItem={props?.selectedItem?.account}
-                  title={title}
-                  subtitle={'$ ' + totalBalance}
-                  onPress={() => {
-                    props.selectAccount(id);
-                  }}
-                />
-              );
-            })}
+                return (
+                  <RoundBoxButton
+                    id={id}
+                    key={id}
+                    selectedItem={props?.selectedItem?.account}
+                    title={title}
+                    subtitle={'$ ' + totalBalance}
+                    onPress={() => {
+                      props.selectAccount(id);
+                    }}
+                  />
+                );
+              })}
           </ScrollView>
         </View>
       </View>
@@ -238,10 +242,14 @@ const Overview = (props) => {
                     props.transactions,
                     (record) => record.month,
                   );
-                  
-                  let showHeader = props.selectedItem.category ? groupedRecords[record.month].filter(
-                        (r) => r.categoryId === props.selectedItem.category,
-                      ).indexOf(record) === 0 : groupedRecords[record.month].indexOf(record) === 0;
+
+                  let showHeader = props.selectedItem.category
+                    ? groupedRecords[record.month]
+                        .filter(
+                          (r) => r.categoryId === props.selectedItem.category,
+                        )
+                        .indexOf(record) === 0
+                    : groupedRecords[record.month].indexOf(record) === 0;
                   return (
                     <React.Fragment key={record.id}>
                       {showHeader && (

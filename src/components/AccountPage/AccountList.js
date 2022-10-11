@@ -13,7 +13,9 @@ class AccountList extends PureComponent {
   }
 
   showList() {
-    const filteredList = this.props.accounts;
+    const filteredList = this.props.accounts.filter((item) => {
+      return item.isDeleted !== 1;
+    });
 
     if (this.props.loading) {
       return <Spinner />;

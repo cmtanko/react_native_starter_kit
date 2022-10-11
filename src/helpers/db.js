@@ -116,6 +116,19 @@ export const init = () => {
         },
       );
     });
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'ALTER TABLE accounts ADD COLUMN isDeleted INTEGER',
+        [],
+        () => {
+          resolve();
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    });
   });
 
   return promise;
@@ -242,7 +255,7 @@ export const removeAccount = (id) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'DELETE FROM accounts where id = (?)',
+        'UPDATE accounts SET isDeleted=1 WHERE id=?',
         [id],
         (_, result) => {
           resolve(result);
